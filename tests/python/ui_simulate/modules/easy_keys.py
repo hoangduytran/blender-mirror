@@ -16,6 +16,12 @@ event_types_alias = {
     "ctrl": "left_ctrl",
     "shift": "left_shift",
     "alt": "left_alt",
+    "wheelup": "wheelupmouse",
+    "wheeldown": "wheeldownmouse",
+    "wheelin": "wheelinmouse",
+    "wheelout": "wheeloutmouse",
+    "wheelleft": "wheelleftmouse",
+    "wheelright": "wheelrightmouse",
 
     # Collides with Python keywords.
     "delete": "del",

@@ -1295,6 +1295,25 @@ struct SetConsoleCursor {
   int sel_init;
 };
 
+static int console_select_existing_anchor(const int sel_start,
+                                          const int sel_end,
+                                          const int pos)
+{
+  BLI_assert(sel_start <= sel_end);
+
+  if (pos <= sel_start) {
+    return sel_end;
+  }
+  if (pos >= sel_end) {
+    return sel_start;
+  }
+
+  /* Keep the farthest edge fixed when continuing selection from inside the range. */
+  const int distance_to_start = pos - sel_start;
+  const int distance_to_end = sel_end - pos;
+  return distance_to_start <= distance_to_end ? sel_end : sel_start;
+}
+
 static void console_cursor_set_to_pos(SpaceConsole *sc,
                                       ARegion *region,
                                       SetConsoleCursor *scu,
@@ -1390,7 +1409,15 @@ static wmOperatorStatus console_select_set_invoke(bContext *C,
   scu->sel_old[0] = sc->sel_start;
   scu->sel_old[1] = sc->sel_end;
 
-  scu->sel_init = INT_MAX;
+  const bool has_selection = scu->sel_old[0] != scu->sel_old[1];
+  const bool extend_selection = has_selection && (event->modifier & KM_SHIFT);
+  if (extend_selection) {
+    const int pos = console_char_pick(sc, region, event->mval);
+    scu->sel_init = console_select_existing_anchor(scu->sel_old[0], scu->sel_old[1], pos);
+  }
+  else {
+    scu->sel_init = INT_MAX;
+  }
 
   WM_event_add_modal_handler(C, op);
 
