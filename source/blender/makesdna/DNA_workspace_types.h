@@ -148,6 +148,14 @@ enum eWorkSpaceFlags : int {
 };
 ENUM_OPERATORS(eWorkSpaceFlags)
 
+/** Saved translation eligibility of the base ID name, independent of custom label edits. */
+enum eWorkSpaceLabelSource : int {
+  /** Preserve arbitrary and legacy names literally; also the zero-initialized default. */
+  WORKSPACE_LABEL_LITERAL = 0,
+  /** Explicitly marked bundled default whose base is a workspace translation key. */
+  WORKSPACE_LABEL_CANONICAL = 1,
+};
+
 struct WorkSpace {
 #ifdef __cplusplus
   /** See #ID_Type comment for why this is here. */
@@ -195,6 +203,12 @@ struct WorkSpace {
    * spreadsheet and viewport do this).
    */
   ViewerPath viewer_path;
+
+  /** Literal user label, separate from the ID name; empty restores #label_source behavior. */
+  char custom_display_name[/* MAX_ID_NAME - 2 */ 256] = "";
+  /** #eWorkSpaceLabelSource, stored as a byte for DNA and asset tooling. */
+  char label_source = WORKSPACE_LABEL_LITERAL;
+  char _pad_label[7] = {};
 };
 
 /**

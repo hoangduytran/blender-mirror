@@ -17,6 +17,7 @@
 #include "BKE_main.hh"
 #include "BKE_main_invariants.hh"
 #include "BKE_packedFile.hh"
+#include "BKE_workspace.hh"
 
 #include "BLI_listbase.hh"
 #include "BLI_string_search.hh"
@@ -1463,12 +1464,16 @@ static void template_ID_tabs(const bContext *C,
   const uiStyle *style = style_get_dpi();
 
   for (ID *id : BKE_id_ordered_list(template_id.idlb)) {
-    const int name_width = fontstyle_string_width(&style->widget, id->name + 2);
+    const bool is_workspace = id->id_type() == ID_WS;
+    const char *name = is_workspace ? BKE_workspace_display_name_get(*id_cast<WorkSpace *>(id)) :
+                                      id->name + 2;
+    /* Measure and draw the same resolved label, keeping interaction bound to the ID. */
+    const int name_width = fontstyle_string_width(&style->widget, name);
     const int but_width = name_width + UI_UNIT_X;
 
     ButtonTab *tab = static_cast<ButtonTab *>(uiDefButR_prop(block,
                                                              ButtonType::Tab,
-                                                             id->name + 2,
+                                                             name,
                                                              0,
                                                              0,
                                                              but_width,
@@ -1486,6 +1491,10 @@ static void template_ID_tabs(const bContext *C,
     tab->custom_data = static_cast<void *>(id);
     tab->menu = mt;
 
+    if (is_workspace) {
+      /* Keep the label unselected so typing appends at the initial end caret. */
+      button_flag_enable(tab, BUT_ACTIVATE_ON_INIT_NO_SELECT);
+    }
     button_drawflag_enable(tab, but_align);
   }
 

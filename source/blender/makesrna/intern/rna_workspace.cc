@@ -17,7 +17,11 @@
 
 #include "DNA_workspace_types.h"
 
+#include "BKE_workspace.hh"
+
 #ifdef RNA_RUNTIME
+
+#  include <cstring>
 
 #  include "BLI_listbase.hh"
 #  include "BLI_string.hh"
@@ -26,7 +30,8 @@
 #  include "BKE_paint.hh"
 #  include "BKE_paint_types.hh"
 #  include "BKE_report.hh"
-#  include "BKE_workspace.hh"
+
+#  include "BLT_translation.hh"
 
 #  include "DNA_screen_types.h"
 #  include "DNA_space_types.h"
@@ -44,6 +49,33 @@ namespace blender {
 static void rna_window_update_all(Main * /*bmain*/, Scene * /*scene*/, PointerRNA * /*ptr*/)
 {
   WM_main_add_notifier(NC_WINDOW, nullptr);
+}
+
+static void rna_WorkSpace_custom_display_name_set(PointerRNA *ptr, const char *value)
+{
+  /* Editing the label must not rename the workspace ID. */
+  WorkSpace &workspace = *static_cast<WorkSpace *>(ptr->data);
+  BKE_workspace_custom_name_set(workspace, value);
+}
+
+static int rna_WorkSpace_display_mode_get(PointerRNA *ptr)
+{
+  const WorkSpace &workspace = *static_cast<WorkSpace *>(ptr->data);
+  const bool translate_interface = BLT_translate_iface();
+  return int(BKE_workspace_label_mode_get(workspace, translate_interface));
+}
+
+static void rna_WorkSpace_display_name_get(PointerRNA *ptr, char *value)
+{
+  const WorkSpace &workspace = *static_cast<WorkSpace *>(ptr->data);
+  /* RNA allocates the buffer using the matching length callback. */
+  std::strcpy(value, BKE_workspace_display_name_get(workspace));
+}
+
+static int rna_WorkSpace_display_name_length(PointerRNA *ptr)
+{
+  const WorkSpace &workspace = *static_cast<WorkSpace *>(ptr->data);
+  return int(std::strlen(BKE_workspace_display_name_get(workspace)));
 }
 
 void rna_workspace_screens_begin(CollectionPropertyIterator *iter, PointerRNA *ptr)
@@ -446,6 +478,62 @@ static void rna_def_workspace(BlenderRNA *brna)
       srna, "Workspace", "Workspace data-block, defining the working environment for the user");
   /* TODO: real icon, just to show something */
   RNA_def_struct_ui_icon(srna, ICON_WORKSPACE);
+
+  static const EnumPropertyItem source_items[] = {
+      {WORKSPACE_LABEL_LITERAL, "LITERAL", 0, "Literal Base", "Display the base name literally"},
+      {WORKSPACE_LABEL_CANONICAL,
+       "CANONICAL",
+       0,
+       "Factory Default",
+       "Canonical base eligible for interface translation"},
+      {0, nullptr, 0, nullptr, nullptr},
+  };
+  static const EnumPropertyItem mode_items[] = {
+      {int(WorkspaceLabelMode::USE_DEFAULT), "USE_DEFAULT", 0, "Default", "Use the base name"},
+      {int(WorkspaceLabelMode::USE_TRANSLATED),
+       "USE_TRANSLATED",
+       0,
+       "Translated",
+       "Translate the base name, falling back to it when no translation exists"},
+      {int(WorkspaceLabelMode::USE_USERDEFINED),
+       "USE_USERDEFINED",
+       0,
+       "User Defined",
+       "Use the custom label without translation"},
+      {0, nullptr, 0, nullptr, nullptr},
+  };
+
+  prop = RNA_def_property(srna, "custom_display_name", PROP_STRING, PROP_NONE);
+  RNA_def_property_string_sdna(prop, nullptr, "custom_display_name");
+  RNA_def_property_string_funcs(prop, nullptr, nullptr, "rna_WorkSpace_custom_display_name_set");
+  RNA_def_property_string_maxlength(prop, MAX_ID_NAME - 2);
+  RNA_def_property_clear_flag(prop, PROP_ANIMATABLE);
+  RNA_def_property_ui_text(
+      prop, "Custom Label", "Literal label override; empty restores the workspace base label");
+  RNA_def_property_update(prop, 0, "rna_window_update_all");
+
+  /* Saved provenance is inspectable, but custom edits must not change it. */
+  prop = RNA_def_property(srna, "label_source", PROP_ENUM, PROP_NONE);
+  RNA_def_property_enum_sdna(prop, nullptr, "label_source");
+  RNA_def_property_enum_items(prop, source_items);
+  RNA_def_property_clear_flag(prop, PROP_EDITABLE | PROP_ANIMATABLE);
+  RNA_def_property_ui_text(
+      prop, "Label Source", "Whether the base name is literal or an explicitly marked default");
+
+  /* Resolve presentation on access; do not store results tied to a particular language. */
+  prop = RNA_def_property(srna, "display_mode", PROP_ENUM, PROP_NONE);
+  RNA_def_property_enum_items(prop, mode_items);
+  RNA_def_property_enum_funcs(prop, "rna_WorkSpace_display_mode_get", nullptr, nullptr);
+  RNA_def_property_clear_flag(prop, PROP_EDITABLE | PROP_ANIMATABLE);
+  RNA_def_property_ui_text(
+      prop, "Display Mode", "Label mode resolved from the saved label and current preferences");
+
+  prop = RNA_def_property(srna, "display_name", PROP_STRING, PROP_NONE);
+  RNA_def_property_string_funcs(
+      prop, "rna_WorkSpace_display_name_get", "rna_WorkSpace_display_name_length", nullptr);
+  RNA_def_property_clear_flag(prop, PROP_EDITABLE | PROP_ANIMATABLE);
+  RNA_def_property_ui_text(
+      prop, "Display Name", "Workspace label resolved for the current language");
 
   prop = RNA_def_property(srna, "screens", PROP_COLLECTION, PROP_NONE);
   RNA_def_property_collection_sdna(prop, nullptr, "layouts", nullptr);

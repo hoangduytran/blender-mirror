@@ -13827,12 +13827,16 @@ std::optional<int2> try_activate_rna_button(bContext *C,
     return std::nullopt;
   }
 
-  if (state == BUTTON_STATE_TEXT_EDITING && ELEM(button->type,
-                                                 ButtonType::Text,
-                                                 ButtonType::Num,
-                                                 ButtonType::NumSlider,
-                                                 ButtonType::SearchMenu))
-  {
+  /* Match the editable-tab conditions in do_but_TAB for direct test activation. */
+  const bool is_editable_tab = button->type == ButtonType::Tab && button->rnaprop &&
+                               button->custom_data &&
+                               ELEM(RNA_property_type(button->rnaprop), PROP_POINTER, PROP_STRING);
+  const bool supports_text_editing = is_editable_tab || ELEM(button->type,
+                                                             ButtonType::Text,
+                                                             ButtonType::Num,
+                                                             ButtonType::NumSlider,
+                                                             ButtonType::SearchMenu);
+  if (state == BUTTON_STATE_TEXT_EDITING && supports_text_editing) {
     button_activate_state(C, button, BUTTON_STATE_TEXT_EDITING);
   }
 

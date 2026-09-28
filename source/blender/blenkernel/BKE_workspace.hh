@@ -42,6 +42,34 @@ struct WorkSpaceRuntime {
 }  // namespace bke
 
 /* -------------------------------------------------------------------- */
+/** \name Display Labels
+ * \{ */
+
+/** Derived presentation mode; recomputed from saved label data and translation preferences. */
+enum class WorkspaceLabelMode {
+  /** Display the base ID name literally. */
+  USE_DEFAULT,
+  /** Translate the canonical base, falling back to it when no translation exists. */
+  USE_TRANSLATED,
+  /** Display the custom label without translation. */
+  USE_USERDEFINED,
+};
+
+/** Custom labels take precedence over base-name translation. */
+WorkspaceLabelMode BKE_workspace_label_mode_get(const WorkSpace &workspace,
+                                               bool translate_interface);
+/** Resolve using current interface preferences; do not cache across language changes. */
+const char *BKE_workspace_display_name_get(const WorkSpace &workspace);
+/** Start editing the current display label; unchanged confirmation must not create an override. */
+const char *BKE_workspace_label_edit_name_get(const WorkSpace &workspace);
+/** Set or clear the override without changing the base ID name or its label source. */
+void BKE_workspace_custom_name_set(WorkSpace &workspace, const char *value);
+/** Sanitize stored label data without changing the base ID name. */
+void BKE_workspace_label_validate(WorkSpace &workspace);
+
+/** \} */
+
+/* -------------------------------------------------------------------- */
 /** \name Create, Delete, Initialize
  * \{ */
 

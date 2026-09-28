@@ -216,6 +216,7 @@ const IDFilterEnumPropertyItem rna_enum_id_type_filter_items[] = {
 #ifdef RNA_RUNTIME
 
 #  include "DNA_anim_types.h"
+#  include "DNA_workspace_types.h"
 
 #  include "BLI_listbase.hh"
 #  include "BLI_math_base_c.hh"
@@ -237,7 +238,9 @@ const IDFilterEnumPropertyItem rna_enum_id_type_filter_items[] = {
 #  include "BKE_main_invariants.hh"
 #  include "BKE_material.hh"
 #  include "BKE_preview_image.hh"
+#  include "BKE_report.hh"
 #  include "BKE_vfont.hh"
+#  include "BKE_workspace.hh"
 
 #  include "DEG_depsgraph.hh"
 #  include "DEG_depsgraph_build.hh"
@@ -322,8 +325,20 @@ int rna_ID_name_length(PointerRNA *ptr)
   return strlen(id->name + 2);
 }
 
-static int rna_ID_rename(ID *self, Main *bmain, const char *new_name, const int mode)
+static int rna_ID_rename(
+    ID *self, Main *bmain, ReportList *reports, const char *new_name, const int mode)
 {
+  const bool is_workspace = self->id_type() == ID_WS;
+  if (is_workspace) {
+    /* Reject before collision handling can rename this workspace or another one. */
+    const bool can_report_error = reports != nullptr;
+    if (can_report_error) {
+      BKE_report(
+          reports, RPT_ERROR, "Workspace ID names are read-only; set custom_display_name instead");
+    }
+    return int(IDNewNameResult::Action::UNCHANGED);
+  }
+
   IDNewNameResult result = BKE_id_rename(*bmain, *self, new_name, IDNewNameMode(mode));
   return int(result.action);
 }
@@ -332,12 +347,22 @@ void rna_ID_name_set(PointerRNA *ptr, const char *value)
 {
   ID *id = static_cast<ID *>(ptr->data);
 
-  rna_ID_rename(id, G_MAIN, value, int(IDNewNameMode::RenameExistingNever));
+  rna_ID_rename(id, G_MAIN, nullptr, value, int(IDNewNameMode::RenameExistingNever));
 }
 
 static int rna_ID_name_editable(const PointerRNA *ptr, const char **r_info)
 {
   ID *id = static_cast<ID *>(ptr->data);
+
+  /* Workspace label editing uses custom_display_name, not the base ID name. */
+  const bool is_workspace = id->id_type() == ID_WS;
+  if (is_workspace) {
+    const bool can_return_reason = r_info != nullptr;
+    if (can_return_reason) {
+      *r_info = N_("Workspace ID names are read-only; edit the custom display name");
+    }
+    return 0;
+  }
 
   /* NOTE: For the time being, allow rename of local liboverrides from the RNA API.
    *       While this is not allowed from the UI, this should work with modern liboverride code,
@@ -759,7 +784,15 @@ static ID *rna_ID_copy(ID *id, Main *bmain)
 {
   ID *newid = BKE_id_copy_for_use_in_bmain(bmain, id);
 
-  if (newid != nullptr) {
+  const bool has_copy = newid != nullptr;
+  if (has_copy) {
+    const bool is_workspace_copy = newid->id_type() == ID_WS;
+    if (is_workspace_copy) {
+      /* Match user duplication without changing which ID types can be copied. */
+      WorkSpace &workspace = *id_cast<WorkSpace *>(newid);
+      workspace.label_source = WORKSPACE_LABEL_LITERAL;
+      BKE_workspace_label_validate(workspace);
+    }
     id_us_min(newid);
     BKE_main_ensure_invariants(*bmain, *newid);
   }
@@ -2584,8 +2617,10 @@ static void rna_def_ID(BlenderRNA *brna)
   /* functions */
   func = RNA_def_function(srna, "rename", "rna_ID_rename");
   RNA_def_function_ui_description(
-      func, "More refined handling in case the new name collides with another ID's name");
-  RNA_def_function_flag(func, FUNC_USE_MAIN);
+      func,
+      "More refined handling in case the new name collides with another ID's name. "
+      "Workspace ID names are read-only; use custom_display_name instead");
+  RNA_def_function_flag(func, FUNC_USE_MAIN | FUNC_USE_REPORTS);
   parm = RNA_def_string(func,
                         "name",
                         nullptr,

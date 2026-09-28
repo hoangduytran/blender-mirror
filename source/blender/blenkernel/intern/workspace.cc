@@ -14,6 +14,7 @@
 
 #include "BLI_listbase.hh"
 #include "BLI_string.hh"
+#include "BLI_string_utf8.hh"
 #include "BLI_string_utils.hh"
 #include "BLI_utildefines.hh"
 
@@ -42,10 +43,101 @@
 namespace blender {
 
 /* -------------------------------------------------------------------- */
+/** \name Display Labels
+ * \{ */
+
+static bool workspace_has_custom_label(const WorkSpace &workspace)
+{
+  /* Bound the terminator search before exposing stored text to string functions. */
+  const bool has_custom_text = workspace.custom_display_name[0] != '\0';
+  const bool has_valid_custom_label = has_custom_text &&
+                                      std::memchr(workspace.custom_display_name,
+                                                  '\0',
+                                                  sizeof(workspace.custom_display_name)) !=
+                                          nullptr;
+  return has_valid_custom_label;
+}
+
+WorkspaceLabelMode BKE_workspace_label_mode_get(const WorkSpace &workspace,
+                                                const bool translate_interface)
+{
+  const bool has_custom_label = workspace_has_custom_label(workspace);
+  if (has_custom_label) {
+    return WorkspaceLabelMode::USE_USERDEFINED;
+  }
+
+  const bool has_canonical_base = workspace.label_source == WORKSPACE_LABEL_CANONICAL;
+  const bool should_translate_base = has_canonical_base && translate_interface;
+  if (should_translate_base) {
+    return WorkspaceLabelMode::USE_TRANSLATED;
+  }
+  return WorkspaceLabelMode::USE_DEFAULT;
+}
+
+const char *BKE_workspace_display_name_get(const WorkSpace &workspace)
+{
+  const char *base = workspace.id.name + 2;
+  /* Resolve automatic translations at read time without changing either stored label. */
+  switch (BKE_workspace_label_mode_get(workspace, BLT_translate_iface())) {
+    case WorkspaceLabelMode::USE_DEFAULT:
+      return base;
+    case WorkspaceLabelMode::USE_TRANSLATED:
+      return CTX_IFACE_(BLT_I18NCONTEXT_ID_WORKSPACE, base);
+    case WorkspaceLabelMode::USE_USERDEFINED:
+      return workspace.custom_display_name;
+  }
+  BLI_assert_unreachable();
+  return base;
+}
+
+const char *BKE_workspace_label_edit_name_get(const WorkSpace &workspace)
+{
+  /* Start editing the visible label without storing its translation as an override. */
+  return BKE_workspace_display_name_get(workspace);
+}
+
+void BKE_workspace_custom_name_set(WorkSpace &workspace, const char *value)
+{
+  /* A temporary also permits assigning the current custom label to itself. */
+  char text[sizeof(workspace.custom_display_name)] = {};
+  BLI_strncpy_utf8(text, value, sizeof(text));
+  BLI_str_utf8_invalid_strip(text, std::strlen(text));
+  std::memcpy(workspace.custom_display_name, text, sizeof(text));
+}
+
+void BKE_workspace_label_validate(WorkSpace &workspace)
+{
+  const bool has_valid_label_source = ELEM(
+      workspace.label_source, WORKSPACE_LABEL_LITERAL, WORKSPACE_LABEL_CANONICAL);
+  if (!has_valid_label_source) {
+    workspace.label_source = WORKSPACE_LABEL_LITERAL;
+  }
+
+  const bool is_custom_label_terminated = std::memchr(workspace.custom_display_name,
+                                                      '\0',
+                                                      sizeof(workspace.custom_display_name)) !=
+                                          nullptr;
+  if (!is_custom_label_terminated) {
+    /* Reject malformed stored text without touching the base name. */
+    std::memset(workspace.custom_display_name, 0, sizeof(workspace.custom_display_name));
+  }
+  else {
+    BLI_str_utf8_invalid_strip(workspace.custom_display_name,
+                               std::strlen(workspace.custom_display_name));
+  }
+}
+
+/** \} */
+
+/* -------------------------------------------------------------------- */
 
 static void workspace_init_data(ID *id)
 {
   WorkSpace *workspace = id_cast<WorkSpace *>(id);
+
+  /* Ordinary creation does not establish bundled-default provenance. */
+  workspace->label_source = WORKSPACE_LABEL_LITERAL;
+  BKE_workspace_custom_name_set(*workspace, "");
 
   workspace->runtime = MEM_new<bke::WorkSpaceRuntime>(__func__);
 
@@ -80,6 +172,13 @@ static void workspace_copy_data(
 
   WorkSpace *workspace_dst = id_cast<WorkSpace *>(id_dst);
   const WorkSpace *workspace_src = id_cast<const WorkSpace *>(id_src);
+
+  BKE_workspace_label_validate(*workspace_dst);
+  const bool has_same_base_name = STREQ(workspace_dst->id.name + 2, workspace_src->id.name + 2);
+  if (!has_same_base_name) {
+    /* A unique copy loses canonical status, but keeps any custom label. */
+    workspace_dst->label_source = WORKSPACE_LABEL_LITERAL;
+  }
 
   workspace_dst->runtime = MEM_new<bke::WorkSpaceRuntime>(__func__);
   BKE_asset_library_reference_init_default(&workspace_dst->asset_library_ref);
@@ -151,6 +250,8 @@ static void workspace_blend_read_data(BlendDataReader *reader, ID *id)
 {
   WorkSpace *workspace = id_cast<WorkSpace *>(id);
 
+  BKE_workspace_label_validate(*workspace);
+
   BLO_read_struct_list(reader, WorkSpaceLayout, &workspace->layouts);
   BLO_read_struct_list(reader, WorkSpaceDataRelation, &workspace->hook_layout_relations);
   BLO_read_struct_list(reader, wmOwnerID, &workspace->owner_ids);
@@ -188,6 +289,8 @@ static void workspace_blend_read_data(BlendDataReader *reader, ID *id)
 static void workspace_blend_read_after_liblink(BlendLibReader *reader, ID *id)
 {
   WorkSpace *workspace = reinterpret_cast<WorkSpace *>(id);
+  BKE_workspace_label_validate(*workspace);
+
   Main *bmain = BLO_read_lib_get_main(reader);
 
   /* Restore proper 'parent' pointers to relevant data, and clean up unused/invalid entries. */

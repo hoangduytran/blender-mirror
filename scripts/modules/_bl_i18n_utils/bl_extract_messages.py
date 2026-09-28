@@ -948,6 +948,10 @@ def dump_template_messages(msgs, reports, settings):
         template = os.path.basename(template)
         bpy.ops.wm.read_homefile(use_factory_startup=True, app_template=template)
         for ws in bpy.data.workspaces:
+            # Extract canonical bases, never literal or custom display labels.
+            is_canonical_label = ws.label_source == 'CANONICAL'
+            if not is_canonical_label:
+                continue
             names = workspace_names.setdefault(ws.name, [])
             names.append(template or "General")
 

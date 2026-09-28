@@ -1,0 +1,38 @@
+{
+  "producer_version": "4.5.9 LTS",
+  "producer_hash": "8bf95cbd38d1",
+  "fixtures": [
+    {
+      "path": "legacy_english.blend",
+      "workspace_names": [
+        "Animation",
+        "Compositing",
+        "Geometry Nodes",
+        "Layout",
+        "Modeling",
+        "Rendering",
+        "Scripting",
+        "Sculpting",
+        "Shading",
+        "Texture Paint",
+        "UV Editing"
+      ]
+    },
+    {
+      "path": "legacy_localized.blend",
+      "workspace_names": [
+        "Animation",
+        "B\u1ed1 c\u1ee5c.001",
+        "Compositing",
+        "Geometry Nodes",
+        "Rendering",
+        "Scripting",
+        "Sculpting",
+        "Shading",
+        "Texture Paint",
+        "T\u00f9y ch\u1ec9nh",
+        "UV Editing"
+      ]
+    }
+  ]
+}

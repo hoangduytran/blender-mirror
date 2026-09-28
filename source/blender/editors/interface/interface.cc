@@ -23,6 +23,7 @@
 #include "DNA_scene_types.h"
 #include "DNA_screen_types.h"
 #include "DNA_userdef_types.h"
+#include "DNA_workspace_types.h"
 
 #include "BLI_listbase.hh"
 #include "BLI_rect.hh"
@@ -40,6 +41,7 @@
 #include "BKE_scene.hh"
 #include "BKE_screen.hh"
 #include "BKE_unit.hh"
+#include "BKE_workspace.hh"
 
 #include "GPU_matrix.hh"
 #include "GPU_state.hh"
@@ -62,6 +64,7 @@
 
 #include "RNA_access.hh"
 #include "RNA_enum_types.hh"
+#include "RNA_prototypes.hh"
 
 #ifdef WITH_PYTHON
 #  include "BPY_extern_run.hh"
@@ -3217,6 +3220,13 @@ void button_string_get_ex(Button *but,
        * Button.rnapoin/prop store an active value (e.g. active workspace). */
       PointerRNA ptr = RNA_pointer_create_discrete(
           but->rnapoin.owner_id, ptr_type, but->custom_data);
+      const bool is_workspace_tab = RNA_struct_is_a(ptr.type, RNA_WorkSpace);
+      if (is_workspace_tab) {
+        /* Edit the visible label while keeping the canonical ID name separate. */
+        const WorkSpace &workspace = *static_cast<WorkSpace *>(ptr.data);
+        BLI_strncpy_utf8(str, BKE_workspace_label_edit_name_get(workspace), str_maxncpy);
+        return;
+      }
       buf = RNA_struct_name_get_alloc(&ptr, str, str_maxncpy, &buf_len);
     }
     else if (type == PROP_STRING) {
@@ -3584,6 +3594,27 @@ bool button_string_set(bContext *C, Button *but, const char *str)
        * Button.rnapoin/prop store an active value (e.g. active workspace). */
       PointerRNA ptr = RNA_pointer_create_discrete(
           but->rnapoin.owner_id, ptr_type, but->custom_data);
+      const bool is_workspace_tab = RNA_struct_is_a(ptr.type, RNA_WorkSpace);
+      if (is_workspace_tab) {
+        WorkSpace &workspace = *static_cast<WorkSpace *>(ptr.data);
+        const bool is_label_unchanged = STREQ(str, BKE_workspace_label_edit_name_get(workspace));
+        if (is_label_unchanged) {
+          /* Confirming the displayed label unchanged must not create a literal override. */
+          return true;
+        }
+
+        PropertyRNA *custom_prop = RNA_struct_find_property(&ptr, "custom_display_name");
+        const bool can_edit_custom_label = custom_prop != nullptr &&
+                                           RNA_property_editable(&ptr, custom_prop);
+        if (!can_edit_custom_label) {
+          return false;
+        }
+
+        /* Empty text clears the override; the RNA update redraws labels in all windows. */
+        RNA_property_string_set(&ptr, custom_prop, str);
+        RNA_property_update(C, &ptr, custom_prop);
+        return true;
+      }
       prop = RNA_struct_name_property(ptr_type);
       if (RNA_property_editable(&ptr, prop)) {
         RNA_property_string_set(&ptr, prop, str);

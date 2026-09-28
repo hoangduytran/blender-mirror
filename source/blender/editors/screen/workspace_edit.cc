@@ -243,6 +243,10 @@ WorkSpace *ED_workspace_duplicate(WorkSpace *workspace_old, Main *bmain, wmWindo
   WorkSpaceLayout *layout_active_old = BKE_workspace_active_layout_get(win->workspace_hook);
   WorkSpace *workspace_new = id_cast<WorkSpace *>(BKE_id_copy(bmain, &workspace_old->id));
 
+  /* A user duplicate is not a canonical default; retain its copied custom label. */
+  workspace_new->label_source = WORKSPACE_LABEL_LITERAL;
+  BKE_workspace_label_validate(*workspace_new);
+
   /* Try to keep active the layout from the new workspace matching the current active one from
    * the old workspace. */
   WorkSpaceLayout *layout_old = workspace_old->layouts.first();
@@ -429,11 +433,8 @@ static wmOperatorStatus workspace_append_activate_exec(bContext *C, wmOperator *
   }
 
   if (appended_workspace) {
-    /* Translate workspace name, unless it was taken from current blendfile. */
-    if (BLT_translate_new_dataname()) {
-      BKE_libblock_rename(
-          *bmain, appended_workspace->id, CTX_DATA_(BLT_I18NCONTEXT_ID_WORKSPACE, idname));
-    }
+    /* Validate label metadata without translating the stored ID name. */
+    BKE_workspace_label_validate(*appended_workspace);
 
     /* Set defaults. */
     BLO_update_defaults_workspace(appended_workspace, nullptr);
@@ -527,8 +528,9 @@ static void workspace_append_button(ui::Layout &layout,
   BLI_assert(STREQ(ot_append->idname, "WORKSPACE_OT_append_activate"));
 
   PointerRNA opptr;
+  /* Resolve the visible label, but keep the stored ID name for the append operation. */
   opptr = layout.op(ot_append,
-                    CTX_DATA_(BLT_I18NCONTEXT_ID_WORKSPACE, workspace->id.name + 2),
+                    BKE_workspace_display_name_get(*workspace),
                     ICON_NONE,
                     wm::OpCallContext::ExecDefault,
                     UI_ITEM_NONE);

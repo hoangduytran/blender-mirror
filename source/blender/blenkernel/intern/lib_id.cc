@@ -1996,6 +1996,15 @@ void id_sort_by_name(ListBaseT<ID> *lb, ID *id, ID *id_sorting_hint)
 #undef ID_SORT_STEP_SIZE
 }
 
+static void id_workspace_label_source_demote(ID &id)
+{
+  const bool is_workspace = id.id_type() == ID_WS;
+  if (is_workspace) {
+    /* A changed base is no longer a canonical translation key. Preserve custom text. */
+    id_cast<WorkSpace *>(&id)->label_source = WORKSPACE_LABEL_LITERAL;
+  }
+}
+
 IDNewNameResult BKE_id_new_name_validate(Main &bmain,
                                          ListBaseT<ID> &lb,
                                          ID &id,
@@ -2061,12 +2070,14 @@ IDNewNameResult BKE_id_new_name_validate(Main &bmain,
         (mode == IDNewNameMode::RenameExistingSameRoot && STREQ(prev_name_root, new_name_root)))
     {
       BLI_strncpy(id_other->name + 2, name, sizeof(id_other->name) - 2);
+      id_workspace_label_source_demote(*id_other);
       id_sort_by_name(&lb, id_other, nullptr);
 
       const bool is_idname_changed = !STREQ(BKE_id_name(id), orig_name);
       IDNewNameResult result = {IDNewNameResult::Action::UNCHANGED_COLLISION, id_other};
       if (is_idname_changed) {
         BLI_strncpy(id.name + 2, orig_name, sizeof(id.name) - 2);
+        id_workspace_label_source_demote(id);
         result.action = IDNewNameResult::Action::RENAMED_COLLISION_FORCED;
       }
       id_sort_by_name(&lb, &id, nullptr);
@@ -2084,6 +2095,7 @@ IDNewNameResult BKE_id_new_name_validate(Main &bmain,
   IDNewNameResult result = {IDNewNameResult::Action::UNCHANGED, nullptr};
   if (is_idname_changed) {
     BLI_strncpy(id.name + 2, name, sizeof(id.name) - 2);
+    id_workspace_label_source_demote(id);
     result.action = had_name_collision ? IDNewNameResult::Action::RENAMED_COLLISION_ADJUSTED :
                                          IDNewNameResult::Action::RENAMED_NO_COLLISION;
   }

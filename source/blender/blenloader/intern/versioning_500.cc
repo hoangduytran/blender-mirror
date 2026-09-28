@@ -64,6 +64,7 @@
 #include "BKE_paint.hh"
 #include "BKE_pointcache.h"
 #include "BKE_report.hh"
+#include "BKE_workspace.hh"
 
 #include "RNA_path.hh"
 
@@ -3302,6 +3303,20 @@ static void do_version_texture_gradient_clamp(bNodeTree *node_tree)
 
 void blo_do_versions_500(FileData *fd, Library * /*lib*/, Main *bmain)
 {
+  /* DNA member lookup includes array dimensions. */
+  const bool has_custom_label_field = DNA_struct_member_exists(
+      fd->filesdna, "WorkSpace", "char", "custom_display_name[256]");
+  const bool has_label_source_field = DNA_struct_member_exists(
+      fd->filesdna, "WorkSpace", "char", "label_source");
+  const bool needs_label_defaults = !has_custom_label_field || !has_label_source_field;
+  if (needs_label_defaults) {
+    /* Old names may be localized or user-defined; preserve them without guessing provenance. */
+    for (WorkSpace &workspace : bmain->workspaces) {
+      workspace.label_source = WORKSPACE_LABEL_LITERAL;
+      BKE_workspace_custom_name_set(workspace, "");
+    }
+  }
+
   if (!MAIN_VERSION_FILE_ATLEAST(bmain, 500, 1)) {
     for (Mesh &mesh : bmain->meshes) {
       bke::mesh_sculpt_mask_to_generic(mesh);

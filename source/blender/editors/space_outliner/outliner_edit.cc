@@ -328,6 +328,17 @@ static void do_item_rename(ARegion *region,
                            TreeStoreElem *tselem,
                            ReportList *reports)
 {
+  const bool is_workspace_id = TSE_IS_REAL_ID(tselem) && tselem->id != nullptr &&
+                               tselem->id->id_type() == ID_WS;
+  if (is_workspace_id) {
+    /* The Outliner edits ID names directly, bypassing RNA's read-only workspace name. */
+    BKE_report(reports,
+               RPT_INFO,
+               "Workspace ID names are read-only; edit the custom label in the workspace tab "
+               "if you need to change it");
+    return;
+  }
+
   bool add_textbut = false;
 
   /* FIXME: These info messages are often useless, they should be either reworded to be more

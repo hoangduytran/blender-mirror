@@ -763,14 +763,6 @@ static void wm_file_read_post(bContext *C,
     }
   }
 
-  if (is_factory_startup && BLT_translate_new_dataname()) {
-    /* Translate workspace names. */
-    for (WorkSpace &workspace : bmain->workspaces.items_mutable()) {
-      BKE_libblock_rename(
-          *bmain, workspace.id, CTX_DATA_(BLT_I18NCONTEXT_ID_WORKSPACE, workspace.id.name + 2));
-    }
-  }
-
   if (use_data) {
     /* Important to do before nulling the context. */
     BKE_callback_exec_null(bmain, BKE_CB_EVT_VERSION_UPDATE);

@@ -332,6 +332,12 @@ add_blender_test(
   --python ${CMAKE_CURRENT_LIST_DIR}/bl_pyapi_idprop.py
 )
 
+# Workspace rename rejection intentionally emits an error report.
+add_blender_test_allow_error(
+  script_workspace_labels
+  --python ${CMAKE_CURRENT_LIST_DIR}/bl_workspace_labels.py
+)
+
 add_blender_test(
   script_pyapi_idprop_datablock
   --python ${CMAKE_CURRENT_LIST_DIR}/bl_pyapi_idprop_datablock.py
@@ -1794,6 +1800,9 @@ if(WITH_UI_TESTS)
     test_workspace.sanity_check_storyboarding
     test_workspace.sanity_check_vfx
     test_workspace.sanity_check_video_editing
+    test_workspace.label_modes_follow_language
+    test_workspace.label_tab_editing
+    test_workspace.label_copy_and_append
     test_fullscreen.wm_toggle_fullscreen
     test_fullscreen.wm_toggle_stacked_fullscreen_file_browser
     test_fullscreen.wm_toggle_stacked_fullscreens
