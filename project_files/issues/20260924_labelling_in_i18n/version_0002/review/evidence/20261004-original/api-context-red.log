@@ -1,0 +1,27 @@
+E...E.00:00.518  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/blender_ui_name_z0pc485w/marked.blend"
+....
+======================================================================
+ERROR: test_brush_and_node_group_use_shared_rule (__main__.IDUINameTest.test_brush_and_node_group_use_shared_rule)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_id_ui_name.py", line 96, in test_brush_and_node_group_use_shared_rule
+    self.assertEqual(brush.ui_name_translation_context, bpy.app.translations.contexts.id_brush)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Brush' object has no attribute 'ui_name_translation_context'. Did you mean: 'ui_name_translation_clear'?
+
+======================================================================
+ERROR: test_mark_clear_and_readonly_display_properties (__main__.IDUINameTest.test_mark_clear_and_readonly_display_properties)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_id_ui_name.py", line 64, in test_mark_clear_and_readonly_display_properties
+    self.assertEqual(item.ui_name_translation_context, bpy.app.translations.contexts.id_object)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'Object' object has no attribute 'ui_name_translation_context'. Did you mean: 'ui_name_translation_clear'?
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.127s
+
+FAILED (errors=2)
+Blender 5.3.0 Alpha (hash 2384b2052627 built 2026-10-04 00:26:08)
+Info: Saved as "marked.blend"
+Info: Saved copy as "workspace.blend"

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="1" failures="0" disabled="0" errors="0" time="0.183" timestamp="2026-10-04T12:08:13.668" name="AllTests">
+  <testsuite name="RegisteredNodeToolDisplayNameTest" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0.047" timestamp="2026-10-04T12:08:13.803">
+    <testcase name="ExternalFileListColdAndWarmTranslatedSearch" file="source/blender/windowmanager/intern/wm_operator_type_test.cc" line="306" status="run" result="completed" time="0.047" timestamp="2026-10-04T12:08:13.803" classname="RegisteredNodeToolDisplayNameTest" />
+  </testsuite>
+</testsuites>

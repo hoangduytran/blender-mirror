@@ -1,0 +1,103 @@
+ ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()
+ Function: Arch_ValidateAssumptions
+     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp
+     Line: 140
+Note: Google Test filter = IDPropertyTest.*:LibRemapTest.*:BrushTest.*:AssetLibraryTest.*:AssetLibraryServiceTest.*
+[==========] Running 35 tests from 5 test suites.
+[----------] Global test environment set-up.
+[----------] 9 tests from AssetLibraryServiceTest
+[ RUN      ] AssetLibraryServiceTest.get_destroy
+[       OK ] AssetLibraryServiceTest.get_destroy (0 ms)
+[ RUN      ] AssetLibraryServiceTest.library_pointers
+[       OK ] AssetLibraryServiceTest.library_pointers (0 ms)
+[ RUN      ] AssetLibraryServiceTest.library_from_reference
+[       OK ] AssetLibraryServiceTest.library_from_reference (0 ms)
+[ RUN      ] AssetLibraryServiceTest.library_path_trailing_slashes
+[       OK ] AssetLibraryServiceTest.library_path_trailing_slashes (0 ms)
+[ RUN      ] AssetLibraryServiceTest.catalogs_loaded
+[       OK ] AssetLibraryServiceTest.catalogs_loaded (0 ms)
+[ RUN      ] AssetLibraryServiceTest.has_any_unsaved_catalogs
+[       OK ] AssetLibraryServiceTest.has_any_unsaved_catalogs (0 ms)
+[ RUN      ] AssetLibraryServiceTest.has_any_unsaved_catalogs_after_write
+[       OK ] AssetLibraryServiceTest.has_any_unsaved_catalogs_after_write (0 ms)
+[ RUN      ] AssetLibraryServiceTest.move_runtime_current_file_into_on_disk_library__empty_directory
+[       OK ] AssetLibraryServiceTest.move_runtime_current_file_into_on_disk_library__empty_directory (0 ms)
+[ RUN      ] AssetLibraryServiceTest.move_runtime_current_file_into_on_disk_library__directory_with_catalogs
+[       OK ] AssetLibraryServiceTest.move_runtime_current_file_into_on_disk_library__directory_with_catalogs (0 ms)
+[----------] 9 tests from AssetLibraryServiceTest (1 ms total)
+
+[----------] 2 tests from AssetLibraryTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] AssetLibraryTest.AS_asset_library_load_from_directory
+[       OK ] AssetLibraryTest.AS_asset_library_load_from_directory (0 ms)
+[ RUN      ] AssetLibraryTest.load_nonexistent_directory
+[       OK ] AssetLibraryTest.load_nonexistent_directory (0 ms)
+[----------] 2 tests from AssetLibraryTest (0 ms total)
+
+[----------] 2 tests from BrushTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] BrushTest.deep_copy
+[       OK ] BrushTest.deep_copy (0 ms)
+[ RUN      ] BrushTest.deep_copy_grease_pencil_brush
+[       OK ] BrushTest.deep_copy_grease_pencil_brush (0 ms)
+[----------] 2 tests from BrushTest (0 ms total)
+
+[----------] 11 tests from IDPropertyTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] IDPropertyTest.NewStringMaxSizeUtf8Truncate
+[       OK ] IDPropertyTest.NewStringMaxSizeUtf8Truncate (0 ms)
+[ RUN      ] IDPropertyTest.AssignStringMaxSizeUtf8Truncate
+[       OK ] IDPropertyTest.AssignStringMaxSizeUtf8Truncate (0 ms)
+[ RUN      ] IDPropertyTest.AssignStringMaxSizeBytesIgnoreUtf8
+[       OK ] IDPropertyTest.AssignStringMaxSizeBytesIgnoreUtf8 (0 ms)
+[ RUN      ] IDPropertyTest.CreateGroup
+[       OK ] IDPropertyTest.CreateGroup (0 ms)
+[ RUN      ] IDPropertyTest.AddToGroup
+[       OK ] IDPropertyTest.AddToGroup (0 ms)
+[ RUN      ] IDPropertyTest.ReplaceInGroup
+[       OK ] IDPropertyTest.ReplaceInGroup (0 ms)
+[ RUN      ] IDPropertyTest.RemoveFromGroup
+[       OK ] IDPropertyTest.RemoveFromGroup (0 ms)
+[ RUN      ] IDPropertyTest.ReplaceGroupInGroup
+[       OK ] IDPropertyTest.ReplaceGroupInGroup (0 ms)
+[ RUN      ] IDPropertyTest.SyncGroupValues
+[       OK ] IDPropertyTest.SyncGroupValues (0 ms)
+[ RUN      ] IDPropertyTest.GroupLookupFloatArray
+[       OK ] IDPropertyTest.GroupLookupFloatArray (0 ms)
+[ RUN      ] IDPropertyTest.ReprGroup
+[       OK ] IDPropertyTest.ReprGroup (0 ms)
+[----------] 11 tests from IDPropertyTest (0 ms total)
+
+[----------] 11 tests from LibRemapTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] LibRemapTest.embedded_ids_can_not_be_remapped
+[       OK ] LibRemapTest.embedded_ids_can_not_be_remapped (0 ms)
+[ RUN      ] LibRemapTest.embedded_ids_can_not_be_deleted
+[       OK ] LibRemapTest.embedded_ids_can_not_be_deleted (0 ms)
+[ RUN      ] LibRemapTest.delete_when_remap_to_self_not_allowed
+[       OK ] LibRemapTest.delete_when_remap_to_self_not_allowed (0 ms)
+[ RUN      ] LibRemapTest.users_are_decreased_when_not_skipping_never_null
+[       OK ] LibRemapTest.users_are_decreased_when_not_skipping_never_null (0 ms)
+[ RUN      ] LibRemapTest.users_are_same_when_skipping_never_null
+[       OK ] LibRemapTest.users_are_same_when_skipping_never_null (0 ms)
+[ RUN      ] LibRemapTest.do_not_delete_when_cannot_unset
+[       OK ] LibRemapTest.do_not_delete_when_cannot_unset (0 ms)
+[ RUN      ] LibRemapTest.force_never_null_usage
+[       OK ] LibRemapTest.force_never_null_usage (0 ms)
+[ RUN      ] LibRemapTest.never_null_usage_flag_not_requested_on_delete
+[       OK ] LibRemapTest.never_null_usage_flag_not_requested_on_delete (0 ms)
+[ RUN      ] LibRemapTest.never_null_usage_storage_requested_on_delete
+[       OK ] LibRemapTest.never_null_usage_storage_requested_on_delete (0 ms)
+[ RUN      ] LibRemapTest.never_null_usage_flag_not_requested_on_remap
+[       OK ] LibRemapTest.never_null_usage_flag_not_requested_on_remap (0 ms)
+[ RUN      ] LibRemapTest.never_null_usage_storage_requested_on_remap
+[       OK ] LibRemapTest.never_null_usage_storage_requested_on_remap (0 ms)
+[----------] 11 tests from LibRemapTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 35 tests from 5 test suites ran. (136 ms total)
+[  PASSED  ] 35 tests.

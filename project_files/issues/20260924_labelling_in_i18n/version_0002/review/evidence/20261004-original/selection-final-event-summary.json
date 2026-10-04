@@ -1,0 +1,25 @@
+{
+  "passed": true,
+  "returncode": 0,
+  "command": [
+    "../build_darwin_full/bin/Blender.app/Contents/MacOS/Blender",
+    "--factory-startup",
+    "--gpu-backend",
+    "metal",
+    "--no-native-pixels",
+    "--no-window-frame",
+    "-p",
+    "0",
+    "0",
+    "800",
+    "600",
+    "--enable-event-simulate",
+    "--python",
+    "tests/python/ui_simulate/run_blender_setup.py",
+    "--",
+    "--tests",
+    "test_workspace.ui_name_editing_space_appends"
+  ],
+  "resources": "/private/tmp/ui-name-final-events-root-rusct82v/resources",
+  "log": "/private/tmp/ui-name-final-events-root-rusct82v/test.log"
+}

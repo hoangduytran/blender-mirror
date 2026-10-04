@@ -1,0 +1,154 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "bl_node_copy_operators",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-locale-edit-original-regressions-p1zltxbf/bl_node_copy_operators/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_node_copy_operators.py",
+        "--",
+        "--testdir",
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group"
+      ]
+    },
+    {
+      "name": "bl_node_group_compat",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-locale-edit-original-regressions-p1zltxbf/bl_node_group_compat/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_node_group_compat.py",
+        "--",
+        "--testdir",
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group"
+      ]
+    },
+    {
+      "name": "bl_node_group_interface",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-locale-edit-original-regressions-p1zltxbf/bl_node_group_interface/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_node_group_interface.py",
+        "--",
+        "--testdir",
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group"
+      ]
+    },
+    {
+      "name": "blendfile_library_overrides",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-locale-edit-original-regressions-p1zltxbf/blendfile_library_overrides/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_blendfile_library_overrides.py",
+        "--",
+        "--output-dir",
+        "/private/tmp/ui-name-locale-edit-original-regressions-p1zltxbf/blendfile_library_overrides/files",
+        "--test-dir",
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/libraries_and_linking"
+      ]
+    },
+    {
+      "name": "id_management",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-locale-edit-original-regressions-p1zltxbf/id_management/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_id_management.py"
+      ]
+    },
+    {
+      "name": "script_pyapi_idprop",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-locale-edit-original-regressions-p1zltxbf/script_pyapi_idprop/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop.py"
+      ]
+    },
+    {
+      "name": "script_pyapi_idprop_datablock",
+      "returncode": 0,
+      "log": "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui-name-space-root-idprop-lamkm8xg/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop_datablock.py"
+      ],
+      "passed": true
+    }
+  ],
+  "rerun_note": "The final helper uses the unchanged configured command in the root session; the independent tester could not write a thumbnail."
+}

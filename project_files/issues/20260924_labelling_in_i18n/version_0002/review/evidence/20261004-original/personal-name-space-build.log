@@ -1,0 +1,110 @@
+[0/1] Re-running CMake...
+-- Detected OS X 26.5 and Command Line Tools 26.6 at /Library/Developer/CommandLineTools
+-- SDKs Directory: /Library/Developer/CommandLineTools/SDKs
+-- Detected OSX_SYSROOT: /Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk
+-- Found OpenPGL: /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/lib/macos_arm64/openpgl/lib/libopenpgl.a
+-- Found required Ceres dependency: absl version 20250814 in /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/lib/macos_arm64/abseil/lib/cmake/absl
+-- Found required Ceres dependency: Eigen version 5.0.1 in /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/lib/macos_arm64/eigen/share/eigen3/cmake
+-- Found Ceres version: 2.3.0 installed in: /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/lib/macos_arm64/ceres with components: [EigenSparse, SparseLinearAlgebraLibrary, LAPACK, AccelerateSparse, SchurSpecializations]
+CMake Warning at build_files/cmake/platform/platform_apple.cmake:464 (message):
+  Ccache NOT found, disabling WITH_COMPILER_CCACHE
+Call Stack (most recent call first):
+  CMakeLists.txt:1578 (include)
+
+
+-- Using NINJA_POOL_JOBS:
+--   NINJA_MAX_NUM_PARALLEL_LINK_JOBS: max concurrent linking jobs (computed): 2
+--   NINJA_MAX_NUM_PARALLEL_COMPILE_HEAVY_JOBS: max concurrent heavy compile jobs (computed): 8
+--   NINJA_MAX_NUM_PARALLEL_COMPILE_JOBS: max concurrent regular compile jobs (computed): 7
+-- Found Metal: /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Metal.framework
+-- Configuring done (1.6s)
+-- Generating done (2.4s)
+-- Build files have been written to: /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full
+[1/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/eyedroppers/eyedropper_colorband.cc.o
+[2/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/buttons/interface_label.cc.o
+[3/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/eyedroppers/eyedropper_bone.cc.o
+[4/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/buttons/interface_textbox.cc.o
+[5/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/eyedroppers/eyedropper_color.cc.o
+[6/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/buttons/interface_label_markdown.cc.o
+[7/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/eyedroppers/eyedropper_datablock.cc.o
+[8/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/eyedroppers/eyedropper_driver.cc.o
+[9/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/eyedroppers/eyedropper_depth.cc.o
+[10/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/eyedroppers/interface_eyedropper.cc.o
+[11/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/eyedroppers/eyedropper_grease_pencil_color.cc.o
+[12/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_anim.cc.o
+[13/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_align.cc.o
+[14/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_button_group.cc.o
+[15/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_button_sections.cc.o
+[16/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_drag.cc.o
+[17/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface.cc.o
+[18/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_context_menu.cc.o
+[19/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_draw.cc.o
+[20/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_icons_event.cc.o
+[21/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_icons.cc.o
+[22/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_ops_color.cc.o
+[23/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_handlers.cc.o
+[24/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_ops.cc.o
+[25/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_layout.cc.o
+[26/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_panel.cc.o
+[27/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_query.cc.o
+[28/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/regions/interface_region_color_picker.cc.o
+[29/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/regions/interface_region_hud.cc.o
+[30/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/regions/interface_region_menu_pie.cc.o
+[31/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/regions/interface_region_menu_popup.cc.o
+[32/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/regions/interface_region_popover.cc.o
+[33/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_style.cc.o
+[34/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/regions/interface_region_search.cc.o
+[35/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/regions/interface_region_popup.cc.o
+[36/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_asset_shelf_popover.cc.o
+[37/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/regions/interface_region_tooltip.cc.o
+[38/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_cache_file.cc.o
+[39/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_color_picker.cc.o
+[40/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_component_menu.cc.o
+[41/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_color_ramp.cc.o
+[42/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_constraint.cc.o
+[43/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_icon.cc.o
+[44/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_event.cc.o
+[45/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_curve_profile.cc.o
+[46/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_curve_mapping.cc.o
+[47/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_layers.cc.o
+[48/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_keymap.cc.o
+[49/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_id.cc.o
+[50/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_matrix.cc.o
+[51/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_list.cc.o
+[52/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_recent_files.cc.o
+[53/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_operator_property.cc.o
+[54/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_search.cc.o
+[55/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_running_jobs.cc.o
+[56/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_search_operator.cc.o
+[57/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_undo.cc.o
+[58/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_status.cc.o
+[59/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_templates.cc.o
+[60/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/templates/interface_template_search_menu.cc.o
+[61/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_utils.cc.o
+[62/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/views/abstract_view.cc.o
+[63/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/views/abstract_view_item.cc.o
+[64/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/resources.cc.o
+[65/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/interface_widgets.cc.o
+[66/81] Generating buildinfo.h_fake, buildinfo.h
+[67/81] Building C object source/creator/CMakeFiles/buildinfoobj.dir/buildinfo.c.o
+[68/81] Building C object source/creator/CMakeFiles/blender.dir/buildinfo.c.o
+[69/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/views/grid_view.cc.o
+[70/81] Linking CXX executable bin/blender-thumbnailer.appex/Contents/MacOS/blender-thumbnailer
+ld: warning: search path '/usr/local/opt/tcl-tk/lib' not found
+/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/blender-thumbnailer.appex: replacing existing signature
+[71/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/views/interface_view.cc.o
+[72/81] Building CXX object source/blender/editors/interface/CMakeFiles/bf_editor_interface.dir/views/tree_view.cc.o
+[73/81] Building CXX object source/blender/editors/interface/CMakeFiles/interface_tests.dir/interface_ops_test.cc.o
+[74/81] Linking CXX static library lib/libbf_editor_interface.a
+[75/81] Linking CXX static library lib/libinterface_tests.a
+[76/81] Building CXX object source/blender/windowmanager/CMakeFiles/bf_windowmanager.dir/xr/intern/wm_xr_location_scouting.cc.o
+[77/81] Linking CXX static library lib/libbf_windowmanager.a
+[78/81] Linking CXX executable bin/tests/blender_test
+ld: warning: search path '/usr/local/opt/tcl-tk/lib' not found
+[79/81] Linking CXX executable bin/Blender.app/Contents/MacOS/Blender
+ld: warning: search path '/usr/local/opt/tcl-tk/lib' not found
+Run: "ninja install" to copy runtime files and scripts to: /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin//Blender.app/Contents/Resources/5.3
+[79/81] Install the project...
+-- Install configuration: "Release"
+-- Installing: /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/PlugIns/blender-thumbnailer.appex/Contents/_CodeSignature/CodeResources
+-- Installing: /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/PlugIns/blender-thumbnailer.appex/Contents/MacOS/blender-thumbnailer

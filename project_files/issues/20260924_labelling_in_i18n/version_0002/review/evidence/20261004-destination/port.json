@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "source_branch": "feature/generic-ui-name-translation",
+  "destination_branch": "feature/generic-ui-name-review",
+  "feature_files_compared": 60,
+  "differences": [],
+  "original_binary_hash": "8f8b6bc8c04d",
+  "destination_binary_hash": "814a60056e09",
+  "destination_build_log": "/private/tmp/ui-name-destination-final-build.log",
+  "destination_build_exit_code": 0,
+  "commits": {
+    "9dc1494d566": "9bb2b7e8920",
+    "8f8b6bc8c04": "814a60056e0",
+    "939068fa793": "59dbedcb0cc",
+    "01140a95237": "7382e0b61aa"
+  },
+  "gui_status": "User screenshot verifies original Sculpt/header/shelf tooltip and workspace Vietnamese; user confirms OFF/ON; other visible gates pending."
+}

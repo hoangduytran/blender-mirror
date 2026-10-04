@@ -1,0 +1,10 @@
+flowchart LR
+    A[Factory workspace or appended workspace] --> B{Translate New Data?}
+    B -->|Yes| C[Replace saved name with translated text]
+    B -->|No| D[Keep original name]
+    C --> E[Save language-specific data name]
+    D --> F[Tab shows saved name]
+    E --> F
+    G[Change interface language] --> H[Tell the interface to update]
+    H --> F
+    F --> I[Stored text stays in earlier language]

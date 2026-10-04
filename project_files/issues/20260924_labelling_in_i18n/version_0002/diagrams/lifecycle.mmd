@@ -1,0 +1,15 @@
+stateDiagram-v2
+    state "Name stays as written" as Literal
+    state "Name may be translated" as Eligible
+    [*] --> Literal: Open old file or create own item
+    Literal --> Eligible: Author adds translation note
+    Eligible --> Eligible: Change language or save
+    Eligible --> Eligible: Cancel or confirm unchanged displayed text
+    Eligible --> Literal: User edits display, even to source spelling
+    Eligible --> Literal: Rename or add a number to avoid a name clash
+    Eligible --> Literal: User duplicate
+    Literal --> Literal: Rename back to original spelling
+    Eligible --> Eligible: Temporary copy of same item
+    Literal --> Eligible: Undo restores the name and note
+    Eligible --> Literal: Redo restores the personal name
+    Literal --> Eligible: Author adds note again

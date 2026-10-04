@@ -1,0 +1,41 @@
+Arguments: ["/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender", "--background", "--factory-startup", "--python-exit-code", "1", "--python", "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_id_ui_name_factory.py"]
+.00:00.380  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/brushes/essentials_brushes-mesh_sculpt.blend"
+00:00.445  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/brushes/essentials_brushes-gp_weight.blend"
+00:00.463  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/brushes/essentials_brushes-mesh_weight.blend"
+00:00.481  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/brushes/essentials_brushes-curve_sculpt.blend"
+00:00.502  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/brushes/essentials_brushes-gp_sculpt.blend"
+00:00.520  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/brushes/essentials_brushes-gp_vertex.blend"
+00:00.535  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/brushes/essentials_brushes-gp_draw.blend"
+00:00.555  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/brushes/essentials_brushes-mesh_texture.blend"
+00:00.579  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/brushes/essentials_brushes-mesh_vertex.blend"
+00:00.599  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/nodes/compositing_nodes_essentials.blend"
+00:00.631  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/nodes/shading_nodes_essentials.blend"
+00:00.646  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/nodes/principal_components.blend"
+00:00.670  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/nodes/geometry_nodes_dynamics_assets.blend"
+00:00.734  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/nodes/geometry_nodes_essentials.blend"
+00:00.803  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/nodes/procedural_hair_node_assets.blend"
+.00:00.846  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/brushes/essentials_brushes-curve_sculpt.blend"
+00:00.871  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/brushes/essentials_brushes-gp_draw.blend"
+00:00.893  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/brushes/essentials_brushes-gp_sculpt.blend"
+00:00.913  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/brushes/essentials_brushes-gp_vertex.blend"
+00:00.930  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/brushes/essentials_brushes-gp_weight.blend"
+00:00.947  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/brushes/essentials_brushes-mesh_sculpt.blend"
+00:00.984  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/brushes/essentials_brushes-mesh_texture.blend"
+00:01.011  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/brushes/essentials_brushes-mesh_vertex.blend"
+00:01.030  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/brushes/essentials_brushes-mesh_weight.blend"
+00:01.072  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/nodes/compositing_nodes_essentials.blend"
+00:01.103  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/nodes/geometry_nodes_dynamics_assets.blend"
+00:01.173  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/nodes/geometry_nodes_essentials.blend"
+00:01.207  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/nodes/principal_components.blend"
+00:01.222  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/nodes/procedural_hair_node_assets.blend"
+00:01.258  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/nodes/shading_nodes_essentials.blend"
+.
+----------------------------------------------------------------------
+Ran 3 tests in 0.986s
+
+OK
+Blender 5.3.0 Alpha (hash 4041af919a44 built 2026-10-04 02:09:02)
+Info: Read library: '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/nodes/geometry_nodes_essentials.blend', '//geometry_nodes_essentials.blend', parent '<direct>'
+Info: Read library: '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3/datafiles/assets/nodes/procedural_hair_node_assets.blend', '//procedural_hair_node_assets.blend', parent '<direct>'
+Info: Read library: '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/nodes/geometry_nodes_essentials.blend', '//geometry_nodes_essentials.blend', parent '<direct>'
+Info: Read library: '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/assets/nodes/procedural_hair_node_assets.blend', '//procedural_hair_node_assets.blend', parent '<direct>'

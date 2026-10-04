@@ -1,0 +1,50 @@
+{
+  "presentation_examples": [
+    {
+      "kind": "workspace",
+      "stored_name": "Layout",
+      "English": "Layout",
+      "Vietnamese": "Bố Trí",
+      "translation_off": "Layout",
+      "context": "WorkSpace",
+      "eligible": true,
+      "catalog": "installed Blender"
+    },
+    {
+      "kind": "Sculpt brush",
+      "stored_name": "Smooth",
+      "English": "Smooth",
+      "Vietnamese": "Làm Mịn",
+      "translation_off": "Smooth",
+      "context": "Brush",
+      "eligible": true,
+      "catalog": "installed Blender"
+    },
+    {
+      "kind": "node tool",
+      "stored_name": "Round",
+      "English": "Round",
+      "Vietnamese": "Làm Tròn Số",
+      "translation_off": "Round",
+      "context": "NodeTree",
+      "eligible": true,
+      "catalog": "installed Blender"
+    },
+    {
+      "kind": "asset",
+      "stored_name": "Review reusable object",
+      "English": "Review reusable object",
+      "Vietnamese": "Vật thể dùng lại thử nghiệm",
+      "translation_off": "Review reusable object",
+      "context": "Object",
+      "eligible": true,
+      "catalog": "supplied test entry"
+    }
+  ],
+  "asset_rename_back": "Review reusable object",
+  "rename_back_eligible": false,
+  "visible_screen_check": false
+}
+Blender 5.3.0 Alpha (hash 814a60056e09 built 2026-10-04 00:36:38)
+
+Blender quit

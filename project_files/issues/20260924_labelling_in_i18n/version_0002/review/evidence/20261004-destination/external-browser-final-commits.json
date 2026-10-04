@@ -1,0 +1,182 @@
+{
+  "passed": true,
+  "through_original": "89dd827b459c72c3b1eac1e2268a6de53d82850e",
+  "through_destination": "4ab17c1537a358662807d505affd6f203b03402a",
+  "commits": [
+    {
+      "original": "89dd827b459c72c3b1eac1e2268a6de53d82850e",
+      "destination": "4ab17c1537a358662807d505affd6f203b03402a",
+      "subject": "Docs: record real external browser checks and cold-warm test coverage"
+    },
+    {
+      "original": "417738b68c117a22a728c50283def9e55fc5dbb9",
+      "destination": "a305c75630ccb1bdfee55cc1ac3b5a79eb037170",
+      "subject": "Tests: verify external asset browser scanning, cache and translated search"
+    },
+    {
+      "original": "04a7620d8eb4f5433c295d4b49ee56fe12fe18f5",
+      "destination": "07aa16c1be543366cc42142b4bbe78439101cbde",
+      "subject": "Docs: record verified external browser and selection checks"
+    },
+    {
+      "original": "ce6c8676b887a6f13c3d25d0fffb288105483cfc",
+      "destination": "17c7ec2f496d6dcdf247a1db3af2409f62199e5e",
+      "subject": "Docs: save UI name review state at user requested pause"
+    },
+    {
+      "original": "c02ec921455aa326f9950690bd63ab64562adc82",
+      "destination": "06d98ecfa15cd7939e5242bcedbf9135c0bb7860",
+      "subject": "Docs: retain passing final checks from both Blender checkouts"
+    },
+    {
+      "original": "9e03ec5de8237123c31a2f44f63cf3b070f9ff4b",
+      "destination": "ec9a9b566ef9d5f94681c44ef213e0fb04c025a3",
+      "subject": "Docs: align workspace editing, highlight and final original checks"
+    },
+    {
+      "original": "cc681e66a7e2bc87a3306a3c60764a6751397cde",
+      "destination": "386044ce9238f2177558bbbd080b833ae2b1b4bf",
+      "subject": "UI: preserve workspace text at the caret and show tab selections"
+    },
+    {
+      "original": "fe15573fee39089f71357fe49b08f4d43f0b6080",
+      "destination": "3aa32cb2ca06ea27b8e501dfc1f8a622e4ac1cbc",
+      "subject": "Docs: record personal workspace caret and selection correction"
+    },
+    {
+      "original": "4041af919a44275fa38b2c440e9ef89d74fdee02",
+      "destination": "aa31e1c5786174354cfca8603cfbf747876822db",
+      "subject": "Docs: Record audit of committed editor and direct application checks"
+    },
+    {
+      "original": "8d4ce0b999e44a725b6dd66079b737ef652abf76",
+      "destination": "e4de151097b829e5187b1403979f82196ef06a87",
+      "subject": "Docs: Align selected-language editing and retain real typing regression evidence"
+    },
+    {
+      "original": "beb4c53bced2e13f8cf5135e054fd2370fbbf164",
+      "destination": "585edf02050e3e57d8fc32335b7edb3e1f710f6a",
+      "subject": "Tests: Register translated editor events only in translation-enabled builds"
+    },
+    {
+      "original": "3bfa127c7def9029b4099db2d6329a384d3904d1",
+      "destination": "0fdd210d53413a532c38d336d50c8c4219712345",
+      "subject": "UI: Edit eligible names in the selected language without selecting the label"
+    },
+    {
+      "original": "b43c61281799cf27f1f99e80553e279eb307b8ae",
+      "destination": "c659834527e4f91fc090f4eb8359b91a9865d57b",
+      "subject": "chore(chat-history): record selected-language editing and caret correction"
+    },
+    {
+      "original": "83039fabd7fe1622c2fc10151675c55ce9a6e709",
+      "destination": "99586a8b0c18986d7fbeac6b6559198ce1f4dc98",
+      "subject": "chore(chat-history): record asset search language refresh"
+    },
+    {
+      "original": "250a0bf01414847b7b66c7f3676d0d745fda3fcd",
+      "destination": "e34f62724f232eafd270662dfb68925a4e0cbb27",
+      "subject": "Docs: Record actual asset presentation and both-name search"
+    },
+    {
+      "original": "ac1940ee892206a300ac481344d34c1fad77022e",
+      "destination": "7ac470cd138402f6d688089843801ad463b04fe9",
+      "subject": "chore(chat-history): record visible asset labels and search"
+    },
+    {
+      "original": "86aa58a56a5fb6a57705abf42af60daf3d9f9ff7",
+      "destination": "5ba8af97aefea06102c33d97bc141e4c92cf33de",
+      "subject": "Docs: Retain visible save reopen and stored-name evidence"
+    },
+    {
+      "original": "5fda86f791401dd12017006c7db8a143264df0a2",
+      "destination": "fd2eaf76a8e202bb5baa784f25798e155f7a466e",
+      "subject": "chore(chat-history): record visible name save reopen check"
+    },
+    {
+      "original": "f864d01bacfc1a76a457cd7e569a8cb1ed8d2177",
+      "destination": "bd61a20bd89e682ea2bdea754acd75706dee26f3",
+      "subject": "Tests: Distinguish saved names from idle presentation in review panel"
+    },
+    {
+      "original": "40ac1aab133ca8135168f29b07ebfb230ffe5295",
+      "destination": "32b5f27d048431de76959befb673e8b34d0b61c8",
+      "subject": "chore(chat-history): record review saved-name clarification"
+    },
+    {
+      "original": "58326530d47522835612471ec6e22b4d415e312f",
+      "destination": "279d643c517902770bb26cc397028cb0d15bebc6",
+      "subject": "Docs: Record visible rename-back and undo redo results"
+    },
+    {
+      "original": "3d93693d7d9bf93596233f7fc0a07cf14a2c260e",
+      "destination": "4603213d17bc857c149ba994625ef2eb55814d5f",
+      "subject": "chore(chat-history): record manual node-tool rename and undo"
+    },
+    {
+      "original": "7af74347c285d2293d19749efd4d65fd3cd74550",
+      "destination": "ebe978c847584aa63427bceedf019616ec337d50",
+      "subject": "Docs: Record user-verified node-tool presentation and source search"
+    },
+    {
+      "original": "b8f69bc00ab0ebd916afd396abbb250a7fd2ed2b",
+      "destination": "2764de40d08a76889dd1829cfa2f99319b59db0d",
+      "subject": "chore(chat-history): record user node-tool language check"
+    },
+    {
+      "original": "eaf5dbfef177ba8cb01af0acf1cc8850dc0104e5",
+      "destination": "ae92cd28ecd7a1ade57ab682b845f2813d671932",
+      "subject": "Docs: Record source-name asset search and defer Vietnamese input issue"
+    },
+    {
+      "original": "0fd8145ae69412dea63c8986abd038982c9a1feb",
+      "destination": "0312593811f9f4e6df82f864679ada5ea0e95ce0",
+      "subject": "Docs: Record destination verification and user-confirmed Sculpt presentation"
+    },
+    {
+      "original": "557b97d0acaf2913d15270f8498bd144497530fb",
+      "destination": "b733553ef1954711c100c93ea182cce02c511501",
+      "subject": "chore(chat-history): record port and manual name checks (Start: 01:35:41 End: 01:50:29)"
+    },
+    {
+      "original": "01140a9523741eafd0b44a9b255e3a887b9ef363",
+      "destination": "7382e0b61aa98d6f51c4740361cc29419fccc953",
+      "subject": "Tests: Enable the review node tool in Object Mode"
+    },
+    {
+      "original": "939068fa7938abafcad47e23efc2ef77f6987dd8",
+      "destination": "59dbedcb0ccc473d97fda83cd3e96b0db5bcff68",
+      "subject": "Tests: Make factory and node-tool review demonstrations reproducible"
+    },
+    {
+      "original": "8f8b6bc8c04d272672673c4c3af76f15073eef2b",
+      "destination": "814a60056e097c9fdef695a52877f979cd8bf96f",
+      "subject": "Docs: Align shared-name design and retain final original review evidence"
+    },
+    {
+      "original": "9dc1494d5660a0def51176ec5226028c4e7565a9",
+      "destination": "9bb2b7e892019829c9579120bc31eb9c9b7d08da",
+      "subject": "UI: Extend generic name translation to authored tools and assets"
+    },
+    {
+      "original": "2384b2052627b86261c34709a026dbff97b905bf",
+      "destination": "167028a64350d8d3ebb71345e6c74a5c7e69dac4",
+      "subject": "Docs: Add verified examples for other authored names"
+    },
+    {
+      "original": "4dbdfcd63097ed1fb854dbc86df40f2b7c18ddc3",
+      "destination": "db35146b3314fd3d3601d69b46f4fa29f074b406",
+      "subject": "Docs: Add verified node rename and node-group example"
+    },
+    {
+      "original": "c0af9eb65d696548fda6b32431c3ad17ded99294",
+      "destination": "59bb431219046c73303d33b6333658282ca07788",
+      "subject": "Docs: Explain shared UI-name design and tested brush renaming"
+    },
+    {
+      "original": "68fb0ffe0a0822bd007ac16336e194c52aea4fe9",
+      "destination": "d1329f7cb22f98212efe2cb1157a3599cf4b7e99",
+      "subject": "UI: Add shared opt-in translated ID display names"
+    }
+  ]
+}

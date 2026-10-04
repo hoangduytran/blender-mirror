@@ -1,0 +1,26 @@
+/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop_datablock.py:137: DeprecationWarning: 'Scene.compositing_node_group' is expected to be removed in Blender 6.0
+  scene.compositing_node_group = tree
+00:00.507  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/tmpxcnoz28x/test.blend"
+00:00.548  lib.override.resync | WARNING Provided scene 'Scene_lib' is not local, using instead local scene 'Scene', view-layer 'ViewLayer' as container for the library override leftover collections and objects
+00:00.614  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/tmpxcnoz28x/test.blend"
+00:00.649  lib.override.resync | WARNING Provided scene 'Scene_lib' is not local, using instead local scene 'Scene', view-layer 'ViewLayer' as container for the library override leftover collections and objects
+/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop_datablock.py:191: DeprecationWarning: 'Scene.compositing_node_group' is expected to be removed in Blender 6.0
+  intern_sys_idprops = intern_sce.compositing_node_group.nodes['Render Layers'].bl_system_properties_get()
+/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop_datablock.py:192: DeprecationWarning: 'Scene.compositing_node_group' is expected to be removed in Blender 6.0
+  extern_sys_idprops = extern_sce.compositing_node_group.nodes['Render Layers'].bl_system_properties_get()
+00:00.677  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/tmpxcnoz28x/lib.blend"
+00:00.789  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/tmpxcnoz28x/test.blend_"
+/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop_datablock.py:213: DeprecationWarning: 'Scene.compositing_node_group' is expected to be removed in Blender 6.0
+  first_sys_idprops = first_sce.compositing_node_group.nodes['Render Layers'].bl_system_properties_get()
+/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop_datablock.py:214: DeprecationWarning: 'Scene.compositing_node_group' is expected to be removed in Blender 6.0
+  second_sys_idprops = second_sce.compositing_node_group.nodes['Render Layers'].bl_system_properties_get()
+Info: Saved as "lib.blend"
+Info: Saved as "test.blend"
+Info: Read library: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/tmpxcnoz28x/lib.blend', '//lib.blend', parent '<direct>'
+Info: Saved as "test.blend"
+Info: Read library: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/tmpxcnoz28x/lib.blend', '//lib.blend', parent '<direct>'
+Info: Saved as "test.blend_"
+Switching to fully guarded memory allocator.
+Blender 5.3.0 Alpha (hash b43c61281799 built 2026-10-04 01:44:42)
+
+Blender quit

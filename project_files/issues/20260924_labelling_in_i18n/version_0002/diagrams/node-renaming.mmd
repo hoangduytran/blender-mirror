@@ -1,0 +1,9 @@
+flowchart TD
+    N[Rename a node] --> R[RNA updates its saved lookup name]
+    L[Set a custom title] --> S[RNA updates its saved label]
+    R --> D[DNA stores both inside the node tree]
+    S --> D
+    D --> F[Save and reopen the project]
+    F --> K[Name and custom title are restored]
+    N -.-> T[Node type stays the same]
+    L -.-> T

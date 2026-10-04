@@ -1,0 +1,202 @@
+[
+  {
+    "old": "d1329f7cb22f98212efe2cb1157a3599cf4b7e99",
+    "new": "75b6c68d61f01317efefb2bdc8301105e3666c4c",
+    "subject": "UI: Add shared opt-in translated ID display names"
+  },
+  {
+    "old": "59bb431219046c73303d33b6333658282ca07788",
+    "new": "3ac2b0bc1322d922e4d2feb9b8315de6cf3e3f4a",
+    "subject": "Docs: Explain shared UI-name design and tested brush renaming"
+  },
+  {
+    "old": "db35146b3314fd3d3601d69b46f4fa29f074b406",
+    "new": "3b4576c8c177b7ab6908118017100f08bb4000a6",
+    "subject": "Docs: Add verified node rename and node-group example"
+  },
+  {
+    "old": "167028a64350d8d3ebb71345e6c74a5c7e69dac4",
+    "new": "0c0d61c072f9405246dc2ca3cbc88054d6cf770f",
+    "subject": "Docs: Add verified examples for other authored names"
+  },
+  {
+    "old": "f91a846cf36f0d94cd305670a4e0d4e968701ff7",
+    "new": "4ef09404fad0d1ee38162d6776322c07d1165193",
+    "subject": "Tests: Add shared UI-name reviewer runner and workspace demo"
+  },
+  {
+    "old": "bbf5b85e7765cadc3c27b136db65890bf4a7451b",
+    "new": "5b3348e6e326226709ed9fbadbdfcb06917232a7",
+    "subject": "Docs: Record destination build and shared-name review evidence"
+  },
+  {
+    "old": "9bb2b7e892019829c9579120bc31eb9c9b7d08da",
+    "new": "1fd1ce02362b0070b056269af6a4f1dcd061e377",
+    "subject": "UI: Extend generic name translation to authored tools and assets"
+  },
+  {
+    "old": "814a60056e097c9fdef695a52877f979cd8bf96f",
+    "new": "e6a54da54c326378be43a9edd6dc49ed3d9f574b",
+    "subject": "Docs: Align shared-name design and retain final original review evidence"
+  },
+  {
+    "old": "59dbedcb0ccc473d97fda83cd3e96b0db5bcff68",
+    "new": "68f3ee3080f656ef4ef46b3f578009f36f123b9f",
+    "subject": "Tests: Make factory and node-tool review demonstrations reproducible"
+  },
+  {
+    "old": "7382e0b61aa98d6f51c4740361cc29419fccc953",
+    "new": "b6b0e3dcee02b9fda498656ac60c09114e0464cf",
+    "subject": "Tests: Enable the review node tool in Object Mode"
+  },
+  {
+    "old": "b733553ef1954711c100c93ea182cce02c511501",
+    "new": "183f6137c306c46a0d74c04706c21a1cf07f0977",
+    "subject": "chore(chat-history): record port and manual name checks (Start: 01:35:41 End: 01:50:29)"
+  },
+  {
+    "old": "0312593811f9f4e6df82f864679ada5ea0e95ce0",
+    "new": "c2e27a90beafc4deaad10c775e057e57832e8894",
+    "subject": "Docs: Record destination verification and user-confirmed Sculpt presentation"
+  },
+  {
+    "old": "26be85462174995c6152b410988ea8113faf23ba",
+    "new": "825e4a98b91afb58072da77262bae8d4882e2649",
+    "subject": "Docs: Identify the first port review plan as historical"
+  },
+  {
+    "old": "ae92cd28ecd7a1ade57ab682b845f2813d671932",
+    "new": "6f98a71cd002be1f3755f259c4b94d474439ff34",
+    "subject": "Docs: Record source-name asset search and defer Vietnamese input issue"
+  },
+  {
+    "old": "2764de40d08a76889dd1829cfa2f99319b59db0d",
+    "new": "3ac612fedb3f94437c3855b062e19c95560c8685",
+    "subject": "chore(chat-history): record user node-tool language check"
+  },
+  {
+    "old": "ebe978c847584aa63427bceedf019616ec337d50",
+    "new": "d90b5d8a08c8f5a10cb883dea14e3888d813ee5b",
+    "subject": "Docs: Record user-verified node-tool presentation and source search"
+  },
+  {
+    "old": "4603213d17bc857c149ba994625ef2eb55814d5f",
+    "new": "3d7976d6bc9264e554d66f7c966df949d3dc5af6",
+    "subject": "chore(chat-history): record manual node-tool rename and undo"
+  },
+  {
+    "old": "279d643c517902770bb26cc397028cb0d15bebc6",
+    "new": "fc8af079021f3787d2f2e4c480de0e4bb9733c82",
+    "subject": "Docs: Record visible rename-back and undo redo results"
+  },
+  {
+    "old": "32b5f27d048431de76959befb673e8b34d0b61c8",
+    "new": "859a053894148114f74294c98b3ae2ff54c62887",
+    "subject": "chore(chat-history): record review saved-name clarification"
+  },
+  {
+    "old": "bd61a20bd89e682ea2bdea754acd75706dee26f3",
+    "new": "e3b7ce75540724c368496f5ed2341d943e1dd726",
+    "subject": "Tests: Distinguish saved names from idle presentation in review panel"
+  },
+  {
+    "old": "fd2eaf76a8e202bb5baa784f25798e155f7a466e",
+    "new": "4a540b86d95fadbff57e4d7c0a6823c697395d77",
+    "subject": "chore(chat-history): record visible name save reopen check"
+  },
+  {
+    "old": "5ba8af97aefea06102c33d97bc141e4c92cf33de",
+    "new": "2f1a93ef747d56c3d6c30b5091070e4bf8606efa",
+    "subject": "Docs: Retain visible save reopen and stored-name evidence"
+  },
+  {
+    "old": "7ac470cd138402f6d688089843801ad463b04fe9",
+    "new": "7e477a04b7c2e4ff4cfc58532887fc18b92d87d9",
+    "subject": "chore(chat-history): record visible asset labels and search"
+  },
+  {
+    "old": "e34f62724f232eafd270662dfb68925a4e0cbb27",
+    "new": "c2a341909828d7dc1966766e3eb04032ee750e7a",
+    "subject": "Docs: Record actual asset presentation and both-name search"
+  },
+  {
+    "old": "99586a8b0c18986d7fbeac6b6559198ce1f4dc98",
+    "new": "43c30118f52bf4365170fcdd1c1a5c5f1faf4f04",
+    "subject": "chore(chat-history): record asset search language refresh"
+  },
+  {
+    "old": "c659834527e4f91fc090f4eb8359b91a9865d57b",
+    "new": "6e47e287b9aca533542fccab16dc78327dfa2a02",
+    "subject": "chore(chat-history): record selected-language editing and caret correction"
+  },
+  {
+    "old": "0fdd210d53413a532c38d336d50c8c4219712345",
+    "new": "39d5e427c4e3b83ea0eed2ceeda01ee5563f5094",
+    "subject": "UI: Edit eligible names in the selected language without selecting the label"
+  },
+  {
+    "old": "585edf02050e3e57d8fc32335b7edb3e1f710f6a",
+    "new": "8a4354dbc5fd5659d6412e844b49ba36c288e89c",
+    "subject": "Tests: Register translated editor events only in translation-enabled builds"
+  },
+  {
+    "old": "e4de151097b829e5187b1403979f82196ef06a87",
+    "new": "4134f65765a5a78fca4e8e4eea3456560469a252",
+    "subject": "Docs: Align selected-language editing and retain real typing regression evidence"
+  },
+  {
+    "old": "aa31e1c5786174354cfca8603cfbf747876822db",
+    "new": "36d74fa44ae5cea20706fc1220a998beab99d63f",
+    "subject": "Docs: Record audit of committed editor and direct application checks"
+  },
+  {
+    "old": "3aa32cb2ca06ea27b8e501dfc1f8a622e4ac1cbc",
+    "new": "bf920d41f65fefb7d927958ddd733b262ab49a58",
+    "subject": "Docs: record personal workspace caret and selection correction"
+  },
+  {
+    "old": "386044ce9238f2177558bbbd080b833ae2b1b4bf",
+    "new": "d8735998d4ef2219ceaa507b9cb234433216a3b2",
+    "subject": "UI: preserve workspace text at the caret and show tab selections"
+  },
+  {
+    "old": "ec9a9b566ef9d5f94681c44ef213e0fb04c025a3",
+    "new": "35701f8fc803ddd507b5b94925c19bc1193c5667",
+    "subject": "Docs: align workspace editing, highlight and final original checks"
+  },
+  {
+    "old": "06d98ecfa15cd7939e5242bcedbf9135c0bb7860",
+    "new": "b0fb47934f30edb84cb94b2e61e17e24c2e9363b",
+    "subject": "Docs: retain passing final checks from both Blender checkouts"
+  },
+  {
+    "old": "17c7ec2f496d6dcdf247a1db3af2409f62199e5e",
+    "new": "56d478c82773eda278fd0885e6ba46ec6f0a67bb",
+    "subject": "Docs: save UI name review state at user requested pause"
+  },
+  {
+    "old": "07aa16c1be543366cc42142b4bbe78439101cbde",
+    "new": "3e7d397affb5b96ae3c9469b9275fd0e705fd25c",
+    "subject": "Docs: record verified external browser and selection checks"
+  },
+  {
+    "old": "a305c75630ccb1bdfee55cc1ac3b5a79eb037170",
+    "new": "b15865455c85ef153107dcdc5e4dbaef137ec0a1",
+    "subject": "Tests: verify external asset browser scanning, cache and translated search"
+  },
+  {
+    "old": "4ab17c1537a358662807d505affd6f203b03402a",
+    "new": "8dbbc896109f71f0dca1ec45895761bd83478035",
+    "subject": "Docs: record real external browser checks and cold-warm test coverage"
+  },
+  {
+    "old": "6e74198500d32f0a25af91ac862539fcd6bc8d52",
+    "new": "82eebe0bc2ac1250e096f184ed7f3685fe857cfe",
+    "subject": "Docs: record final shared UI name verification"
+  },
+  {
+    "old": "074c29df7f1729015613dd6909b1276088af2dd0",
+    "new": "f4baa805333b53ee3a02a20080eecdb4625b4f51",
+    "subject": "Docs: finalize synchronized UI name design and verification evidence"
+  }
+]

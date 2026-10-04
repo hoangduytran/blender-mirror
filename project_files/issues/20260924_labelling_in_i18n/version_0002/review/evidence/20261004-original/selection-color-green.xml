@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="7" failures="0" disabled="0" errors="0" time="0.287" timestamp="2026-10-04T03:10:20.067" name="AllTests">
+  <testsuite name="IDNameEditTest" tests="7" failures="0" disabled="0" skipped="0" errors="0" time="0.169" timestamp="2026-10-04T03:10:20.184">
+    <testcase name="EligibleRNANameStartsInSelectedLanguage" file="source/blender/editors/interface/interface_ops_test.cc" line="79" status="run" result="completed" time="0.044" timestamp="2026-10-04T03:10:20.184" classname="IDNameEditTest" />
+    <testcase name="UnchangedAndCanceledEditsPreserveSourceAndNote" file="source/blender/editors/interface/interface_ops_test.cc" line="105" status="run" result="completed" time="0.021" timestamp="2026-10-04T03:10:20.229" classname="IDNameEditTest" />
+    <testcase name="DeliberateSourceTextBecomesLiteral" file="source/blender/editors/interface/interface_ops_test.cc" line="128" status="run" result="completed" time="0.021" timestamp="2026-10-04T03:10:20.251" classname="IDNameEditTest" />
+    <testcase name="ChangedTextUsesExistingRNANameSetter" file="source/blender/editors/interface/interface_ops_test.cc" line="144" status="run" result="completed" time="0.019" timestamp="2026-10-04T03:10:20.272" classname="IDNameEditTest" />
+    <testcase name="TabAndExplicitOutlinerOwnerUseTheSameEditStart" file="source/blender/editors/interface/interface_ops_test.cc" line="171" status="run" result="completed" time="0.02" timestamp="2026-10-04T03:10:20.292" classname="IDNameEditTest" />
+    <testcase name="LiteralNamesAndPointerSelectionKeepExistingBehavior" file="source/blender/editors/interface/interface_ops_test.cc" line="205" status="run" result="completed" time="0.021" timestamp="2026-10-04T03:10:20.312" classname="IDNameEditTest" />
+    <testcase name="TabTextSelectionContrastsWithBothTabBackgrounds" file="source/blender/editors/interface/interface_ops_test.cc" line="233" status="run" result="completed" time="0.02" timestamp="2026-10-04T03:10:20.333" classname="IDNameEditTest" />
+  </testsuite>
+</testsuites>

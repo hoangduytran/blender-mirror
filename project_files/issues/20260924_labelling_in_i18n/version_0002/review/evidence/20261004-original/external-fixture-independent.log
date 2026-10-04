@@ -1,0 +1,10 @@
+ ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()
+ Function: Arch_ValidateAssumptions
+     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp
+     Line: 140
+00:00.322  blend            | Read blend: "/private/tmp/ui-name-external-fixture-green/external/review-external.blend"
+Warning: Library file, loading empty scene
+PASS saved external asset: Review External Asset Source version 1 display Tài nguyên ngoài mẫu SHA unchanged
+Blender 5.3.0 Alpha (hash 8f8b6bc8c04d built 2026-10-04 00:36:42)
+
+Blender quit

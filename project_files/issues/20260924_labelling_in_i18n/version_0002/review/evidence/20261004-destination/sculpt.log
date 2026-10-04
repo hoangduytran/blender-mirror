@@ -1,0 +1,15 @@
+Arguments: ["/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender", "--background", "--factory-startup", "--python-exit-code", "1", "--python", "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_id_ui_name_sculpt.py"]
+ ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()
+ Function: Arch_ValidateAssumptions
+     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp
+     Line: 140
+00:00.309  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_sculpt_nhsmt6u4/sculpt.blend"
+00:00.328  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_sculpt_nhsmt6u4/sculpt.blend"
+.
+----------------------------------------------------------------------
+Ran 1 test in 0.164s
+
+OK
+Blender 5.3.0 Alpha (hash 814a60056e09 built 2026-10-04 00:36:38)
+Thông Tin: Đã lưu thành "sculpt.blend"
+Thông Tin: Đã lưu thành "sculpt.blend"

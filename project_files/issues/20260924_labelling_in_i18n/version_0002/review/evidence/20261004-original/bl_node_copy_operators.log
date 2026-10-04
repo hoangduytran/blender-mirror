@@ -1,0 +1,54 @@
+["/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender", "--background", "--console-crash-handler", "--factory-startup", "--debug-memory", "--debug-exit-on-error", "--python-exit-code", "1", "--python-expr", "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'", "--python", "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_node_copy_operators.py", "--", "--testdir", "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group"]
+ ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()
+ Function: Arch_ValidateAssumptions
+     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp
+     Line: 140
+00:00.234  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend"
+00:00.310  reports          | Merged 2 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 1 IDs and 0 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+Switching to fully guarded memory allocator.
+Blender 5.3.0 Alpha (hash 2384b2052627 built 2026-10-04 00:28:25)
+00:00.355  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 1 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.409  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 1 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.453  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 1 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.499  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 1 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.543  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 0 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.585  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 0 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.637  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 0 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.688  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 0 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.730  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 0 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.774  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 0 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.814  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 2 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.871  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 2 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.914  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 2 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.956  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 2 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:00.997  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 2 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:01.049  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 0 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+00:01.110  reports          | Merged 1 IDs from '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main into '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend' Main; 0 IDs and 1 Libraries already existed as part of the destination Main, and 0 IDs missing from destination Main, were freed together with the source Main
+.00:01.142  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend"
+.00:01.541  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend"
+.00:01.995  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend"
+.00:02.309  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files/node_group/node_copy_operators.blend"
+.
+----------------------------------------------------------------------
+Ran 5 tests in 2.349s
+
+OK
+Info: Copied 1 selected node(s)
+Info: Copied 1 selected node(s)
+Info: Copied 1 selected node(s)
+Info: Copied 1 selected node(s)
+Info: Copied 1 selected node(s)
+Info: Copied 4 selected node(s)
+Info: Copied 4 selected node(s)
+Info: Copied 1 selected node(s)
+Info: Copied 1 selected node(s)
+Info: Copied 2 selected node(s)
+Info: Copied 5 selected node(s)
+Info: Copied 1 selected node(s)
+Info: Copied 1 selected node(s)
+Info: Copied 1 selected node(s)
+Info: Copied 1 selected node(s)
+Info: Copied 1 selected node(s)
+Info: Copied 1 selected node(s)
+1 ['Group.005']
+Info: Copied 1 selected node(s)

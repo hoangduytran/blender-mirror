@@ -1,0 +1,32 @@
+{
+  "stage": "initial",
+  "binary": "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender",
+  "language": "en_US",
+  "items": [
+    {
+      "kind": "review_workspace",
+      "stored": "Review Workspace Source",
+      "display": "Review Workspace Source",
+      "eligible": true
+    },
+    {
+      "kind": "review_brush",
+      "stored": "Review Brush Source",
+      "display": "Review Brush Source",
+      "eligible": true
+    },
+    {
+      "kind": "review_node_group",
+      "stored": "Review Node Tool Source",
+      "display": "Review Node Tool Source",
+      "eligible": true
+    },
+    {
+      "kind": "review_asset",
+      "stored": "Review Asset Source",
+      "display": "Review Asset Source",
+      "eligible": true
+    }
+  ],
+  "external_asset_imported": false
+}

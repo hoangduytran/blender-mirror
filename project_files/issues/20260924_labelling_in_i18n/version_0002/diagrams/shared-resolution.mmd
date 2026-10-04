@@ -1,0 +1,11 @@
+flowchart TD
+    A[Workspace, brush, node group, or asset already loaded] --> B[Saved translation note, if supplied by author]
+    A --> C[Saved original name]
+    B --> D[One shared rule chooses the label]
+    C --> D
+    E[Copied note in asset listing details] --> D
+    F[Current interface language and settings] --> D
+    D --> G[Borrowed label for the current draw]
+    G --> H[Size, draw, explain, and search the name]
+    C --> I[Rename, find, import, or refer to saved item]
+    J[Asset saved name and its existing reference] --> I

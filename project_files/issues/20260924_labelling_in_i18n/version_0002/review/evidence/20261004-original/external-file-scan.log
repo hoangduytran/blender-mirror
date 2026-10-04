@@ -1,0 +1,17 @@
+ ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()
+ Function: Arch_ValidateAssumptions
+     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp
+     Line: 140
+Note: Google Test filter = RegisteredNodeToolDisplayNameTest.SavedExternalBrushAssetScanAndSearch
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from RegisteredNodeToolDisplayNameTest
+[ RUN      ] RegisteredNodeToolDisplayNameTest.SavedExternalBrushAssetScanAndSearch
+asset.index      | ERROR Index not created: couldn't create folder "/Volumes/1TB_BK/mini_sequoia/Library/Caches/Blender/asset-library-indices/04c662227492656b/8f0ad89121b28592_marked.blend.index.json".
+                 | source/blender/editors/asset/intern/asset_indexer.cc:647 write_contents
+[       OK ] RegisteredNodeToolDisplayNameTest.SavedExternalBrushAssetScanAndSearch (54 ms)
+[----------] 1 test from RegisteredNodeToolDisplayNameTest (54 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (116 ms total)
+[  PASSED  ] 1 test.

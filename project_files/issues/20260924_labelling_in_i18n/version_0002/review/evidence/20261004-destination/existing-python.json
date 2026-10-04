@@ -1,0 +1,152 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "bl_node_copy_operators",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-destination-regressions-qpezycbm/bl_node_copy_operators/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_node_copy_operators.py",
+        "--",
+        "--testdir",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group"
+      ]
+    },
+    {
+      "name": "bl_node_group_compat",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-destination-regressions-qpezycbm/bl_node_group_compat/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_node_group_compat.py",
+        "--",
+        "--testdir",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group"
+      ]
+    },
+    {
+      "name": "bl_node_group_interface",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-destination-regressions-qpezycbm/bl_node_group_interface/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_node_group_interface.py",
+        "--",
+        "--testdir",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group"
+      ]
+    },
+    {
+      "name": "blendfile_library_overrides",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-destination-regressions-qpezycbm/blendfile_library_overrides/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_blendfile_library_overrides.py",
+        "--",
+        "--output-dir",
+        "/private/tmp/ui-name-destination-regressions-qpezycbm/blendfile_library_overrides/files",
+        "--test-dir",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/libraries_and_linking"
+      ]
+    },
+    {
+      "name": "id_management",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-destination-regressions-qpezycbm/id_management/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_id_management.py"
+      ]
+    },
+    {
+      "name": "script_pyapi_idprop",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-destination-regressions-qpezycbm/script_pyapi_idprop/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_pyapi_idprop.py"
+      ]
+    },
+    {
+      "name": "script_pyapi_idprop_datablock",
+      "returncode": 0,
+      "log": "/private/tmp/ui-name-destination-regressions-qpezycbm/script_pyapi_idprop_datablock/test.log",
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--console-crash-handler",
+        "--factory-startup",
+        "--debug-memory",
+        "--debug-exit-on-error",
+        "--python-exit-code",
+        "1",
+        "--python-expr",
+        "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_pyapi_idprop_datablock.py"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+Arguments: ["/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender", "--background", "--factory-startup", "--python-exit-code", "1", "--python", "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_id_ui_name.py"]
+......00:00.501  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/blender_ui_name_ga7ot8bp/marked.blend"
+....
+----------------------------------------------------------------------
+Ran 10 tests in 0.096s
+
+OK
+Blender 5.3.0 Alpha (hash ec9a9b566ef9 built 2026-10-04 02:21:20)
+Info: Saved as "marked.blend"
+Info: Saved copy as "workspace.blend"

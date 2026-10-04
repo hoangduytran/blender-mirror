@@ -1,0 +1,11 @@
+flowchart TD
+    A[Read saved name and author permission] --> B{Valid permission?}
+    B -->|No| C[Show saved name literally]
+    B -->|Yes| D{Interface Translation enabled?}
+    D -->|No| E[USE_DEFAULT: show source]
+    D -->|Yes| F{Translation available?}
+    F -->|No| E
+    F -->|Yes| G[USE_TRANSLATION: show translation]
+    H[User renames the item] --> I[Remove permission]
+    I --> J[USE_USERDEFINE: show user's name]
+    J --> K[Renaming back keeps permission absent]

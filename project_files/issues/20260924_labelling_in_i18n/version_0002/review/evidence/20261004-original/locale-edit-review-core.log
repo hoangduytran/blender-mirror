@@ -1,0 +1,211 @@
+Arguments: ["/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/tests/blender_test", "--gtest_filter=IDUINameTest.*:LibID*.*:AssetMetadataTest.*:AssetRepresentationTest.*:OperatorDisplayNameTest.*:RegisteredNodeToolDisplayNameTest.*:IDNameEditTest.*", "--gtest_output=xml:/private/tmp/ui-name-space-original-review/run-a6iee_w8/core.xml", "--test-assets-dir=/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/files", "--test-release-dir=/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/Resources/5.3"]
+ ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()
+ Function: Arch_ValidateAssumptions
+     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp
+     Line: 140
+Note: Google Test filter = IDUINameTest.*:LibID*.*:AssetMetadataTest.*:AssetRepresentationTest.*:OperatorDisplayNameTest.*:RegisteredNodeToolDisplayNameTest.*:IDNameEditTest.*
+[==========] Running 75 tests from 10 test suites.
+[----------] Global test environment set-up.
+[----------] 6 tests from IDNameEditTest
+[ RUN      ] IDNameEditTest.EligibleRNANameStartsInSelectedLanguage
+[       OK ] IDNameEditTest.EligibleRNANameStartsInSelectedLanguage (38 ms)
+[ RUN      ] IDNameEditTest.UnchangedAndCanceledEditsPreserveSourceAndNote
+[       OK ] IDNameEditTest.UnchangedAndCanceledEditsPreserveSourceAndNote (22 ms)
+[ RUN      ] IDNameEditTest.DeliberateSourceTextBecomesLiteral
+[       OK ] IDNameEditTest.DeliberateSourceTextBecomesLiteral (25 ms)
+[ RUN      ] IDNameEditTest.ChangedTextUsesExistingRNANameSetter
+[       OK ] IDNameEditTest.ChangedTextUsesExistingRNANameSetter (22 ms)
+[ RUN      ] IDNameEditTest.TabAndExplicitOutlinerOwnerUseTheSameEditStart
+[       OK ] IDNameEditTest.TabAndExplicitOutlinerOwnerUseTheSameEditStart (22 ms)
+[ RUN      ] IDNameEditTest.LiteralNamesAndPointerSelectionKeepExistingBehavior
+[       OK ] IDNameEditTest.LiteralNamesAndPointerSelectionKeepExistingBehavior (21 ms)
+[----------] 6 tests from IDNameEditTest (153 ms total)
+
+[----------] 3 tests from OperatorDisplayNameTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] OperatorDisplayNameTest.ExistingCallbacksRequireProperties
+[       OK ] OperatorDisplayNameTest.ExistingCallbacksRequireProperties (0 ms)
+[ RUN      ] OperatorDisplayNameTest.IndependentCallbacksWorkWithoutProperties
+[       OK ] OperatorDisplayNameTest.IndependentCallbacksWorkWithoutProperties (0 ms)
+[ RUN      ] OperatorDisplayNameTest.EmptyCallbackKeepsExistingFallback
+[       OK ] OperatorDisplayNameTest.EmptyCallbackKeepsExistingFallback (0 ms)
+[----------] 3 tests from OperatorDisplayNameTest (0 ms total)
+
+[----------] 2 tests from RegisteredNodeToolDisplayNameTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] RegisteredNodeToolDisplayNameTest.MarkedToolLocaleToggleAndRename
+[       OK ] RegisteredNodeToolDisplayNameTest.MarkedToolLocaleToggleAndRename (34 ms)
+[ RUN      ] RegisteredNodeToolDisplayNameTest.SavedExternalBrushAssetScanAndSearch
+asset.index      | ERROR Index not created: couldn't create folder "/Volumes/1TB_BK/mini_sequoia/Library/Caches/Blender/asset-library-indices/1577ef796ece709e/b4e02d653b45f545_marked.blend.index.json".
+                 | source/blender/editors/asset/intern/asset_indexer.cc:647 write_contents
+[       OK ] RegisteredNodeToolDisplayNameTest.SavedExternalBrushAssetScanAndSearch (28 ms)
+[----------] 2 tests from RegisteredNodeToolDisplayNameTest (63 ms total)
+
+[----------] 14 tests from AssetRepresentationTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] AssetRepresentationTest.display_name__local_rename_is_literal
+[       OK ] AssetRepresentationTest.display_name__local_rename_is_literal (0 ms)
+[ RUN      ] AssetRepresentationTest.display_name__external_metadata_preserves_identity
+[       OK ] AssetRepresentationTest.display_name__external_metadata_preserves_identity (0 ms)
+[ RUN      ] AssetRepresentationTest.display_name__translated_external_asset_search
+[       OK ] AssetRepresentationTest.display_name__translated_external_asset_search (22 ms)
+[ RUN      ] AssetRepresentationTest.library_relative_identifier__id_name_change
+[       OK ] AssetRepresentationTest.library_relative_identifier__id_name_change (0 ms)
+[ RUN      ] AssetRepresentationTest.weak_reference__current_file
+[       OK ] AssetRepresentationTest.weak_reference__current_file (0 ms)
+[ RUN      ] AssetRepresentationTest.weak_reference__custom_library
+[       OK ] AssetRepresentationTest.weak_reference__custom_library (0 ms)
+[ RUN      ] AssetRepresentationTest.weak_reference__id_name_change
+[       OK ] AssetRepresentationTest.weak_reference__id_name_change (0 ms)
+[ RUN      ] AssetRepresentationTest.weak_reference__compare
+[       OK ] AssetRepresentationTest.weak_reference__compare (0 ms)
+[ RUN      ] AssetRepresentationTest.weak_reference__resolve_to_full_path__current_file
+[       OK ] AssetRepresentationTest.weak_reference__resolve_to_full_path__current_file (0 ms)
+[ RUN      ] AssetRepresentationTest.weak_reference__resolve_to_full_path__custom_library
+[       OK ] AssetRepresentationTest.weak_reference__resolve_to_full_path__custom_library (0 ms)
+[ RUN      ] AssetRepresentationTest.weak_reference__resolve_to_full_path__custom_library__windows_pathsep
+[       OK ] AssetRepresentationTest.weak_reference__resolve_to_full_path__custom_library__windows_pathsep (0 ms)
+[ RUN      ] AssetRepresentationTest.weak_reference__resolve_to_exploded_path__current_file
+[       OK ] AssetRepresentationTest.weak_reference__resolve_to_exploded_path__current_file (0 ms)
+[ RUN      ] AssetRepresentationTest.weak_reference__resolve_to_exploded_path__custom_library
+[       OK ] AssetRepresentationTest.weak_reference__resolve_to_exploded_path__custom_library (0 ms)
+[ RUN      ] AssetRepresentationTest.weak_reference__resolve_to_exploded_path__custom_library__windows_pathsep
+[       OK ] AssetRepresentationTest.weak_reference__resolve_to_exploded_path__custom_library__windows_pathsep (0 ms)
+[----------] 14 tests from AssetRepresentationTest (23 ms total)
+
+[----------] 1 test from AssetMetadataTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] AssetMetadataTest.set_catalog_id
+[       OK ] AssetMetadataTest.set_catalog_id (0 ms)
+[----------] 1 test from AssetMetadataTest (0 ms total)
+
+[----------] 30 tests from IDUINameTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] IDUINameTest.FamiliarUnmarkedNamesRemainLiteral
+[       OK ] IDUINameTest.FamiliarUnmarkedNamesRemainLiteral (0 ms)
+[ RUN      ] IDUINameTest.ExplicitMarkSupportsSeveralDataTypes
+[       OK ] IDUINameTest.ExplicitMarkSupportsSeveralDataTypes (0 ms)
+[ RUN      ] IDUINameTest.WindowManagerCannotBeMarked
+[       OK ] IDUINameTest.WindowManagerCannotBeMarked (0 ms)
+[ RUN      ] IDUINameTest.LinkedDataCannotBeMarked
+[       OK ] IDUINameTest.LinkedDataCannotBeMarked (0 ms)
+[ RUN      ] IDUINameTest.RepeatedMarkAndClearPreserveOtherProperties
+[       OK ] IDUINameTest.RepeatedMarkAndClearPreserveOtherProperties (0 ms)
+[ RUN      ] IDUINameTest.UnchangedRenameKeepsMark
+[       OK ] IDUINameTest.UnchangedRenameKeepsMark (0 ms)
+[ RUN      ] IDUINameTest.RenameAwayAndBackRemainsLiteral
+[       OK ] IDUINameTest.RenameAwayAndBackRemainsLiteral (0 ms)
+[ RUN      ] IDUINameTest.OrdinaryCollisionClearsOnlyChangedItem
+[       OK ] IDUINameTest.OrdinaryCollisionClearsOnlyChangedItem (0 ms)
+[ RUN      ] IDUINameTest.UnchangedCollisionKeepsMark
+[       OK ] IDUINameTest.UnchangedCollisionKeepsMark (0 ms)
+[ RUN      ] IDUINameTest.ForcedCollisionClearsBothChangedItems
+[       OK ] IDUINameTest.ForcedCollisionClearsBothChangedItems (0 ms)
+[ RUN      ] IDUINameTest.RealCopyCannotRestoreNoteAfterNameCollision
+[       OK ] IDUINameTest.RealCopyCannotRestoreNoteAfterNameCollision (0 ms)
+[ RUN      ] IDUINameTest.TemporaryCopyKeepsValidNote
+[       OK ] IDUINameTest.TemporaryCopyKeepsValidNote (0 ms)
+[ RUN      ] IDUINameTest.AssetSnapshotPreservesOtherMetadataAndClearsTogether
+[       OK ] IDUINameTest.AssetSnapshotPreservesOtherMetadataAndClearsTogether (0 ms)
+[ RUN      ] IDUINameTest.AssetSnapshotCannotRestoreMissingMainNote
+[       OK ] IDUINameTest.AssetSnapshotCannotRestoreMissingMainNote (0 ms)
+[ RUN      ] IDUINameTest.AssetRenameRemovesBothNotes
+[       OK ] IDUINameTest.AssetRenameRemovesBothNotes (0 ms)
+[ RUN      ] IDUINameTest.MalformedAssetRootIsPreservedWithoutUnsafeGroupAccess
+[       OK ] IDUINameTest.MalformedAssetRootIsPreservedWithoutUnsafeGroupAccess (0 ms)
+[ RUN      ] IDUINameTest.WrongDescriptorTypeFallsBack
+[       OK ] IDUINameTest.WrongDescriptorTypeFallsBack (0 ms)
+[ RUN      ] IDUINameTest.UnsupportedVersionFallsBack
+[       OK ] IDUINameTest.UnsupportedVersionFallsBack (0 ms)
+[ RUN      ] IDUINameTest.WrongSourceTypeFallsBack
+[       OK ] IDUINameTest.WrongSourceTypeFallsBack (0 ms)
+[ RUN      ] IDUINameTest.MissingSourceFallsBack
+[       OK ] IDUINameTest.MissingSourceFallsBack (0 ms)
+[ RUN      ] IDUINameTest.BinarySourceFallsBack
+[       OK ] IDUINameTest.BinarySourceFallsBack (0 ms)
+[ RUN      ] IDUINameTest.MissingSourceStorageFallsBack
+[       OK ] IDUINameTest.MissingSourceStorageFallsBack (0 ms)
+[ RUN      ] IDUINameTest.MismatchedSourceFallsBackAndFinalizeRemovesNote
+[       OK ] IDUINameTest.MismatchedSourceFallsBackAndFinalizeRemovesNote (0 ms)
+[ RUN      ] IDUINameTest.DamagedSourceLengthsFallBackSafely
+[       OK ] IDUINameTest.DamagedSourceLengthsFallBackSafely (0 ms)
+[ RUN      ] IDUINameTest.SourceMustIncludeItsTerminatingZero
+[       OK ] IDUINameTest.SourceMustIncludeItsTerminatingZero (0 ms)
+[ RUN      ] IDUINameTest.MatchingInvalidUTF8SourceStillFallsBack
+[       OK ] IDUINameTest.MatchingInvalidUTF8SourceStillFallsBack (0 ms)
+[ RUN      ] IDUINameTest.SearchUsesSourceWhenDisabledOrUnmarked
+[       OK ] IDUINameTest.SearchUsesSourceWhenDisabledOrUnmarked (0 ms)
+[ RUN      ] IDUINameTest.UserDuplicateClearsPermissionEvenInAnotherMain
+[       OK ] IDUINameTest.UserDuplicateClearsPermissionEvenInAnotherMain (0 ms)
+[ RUN      ] IDUINameTest.InternalReplacementKeepsOnlyMatchingExplicitPermission
+[       OK ] IDUINameTest.InternalReplacementKeepsOnlyMatchingExplicitPermission (0 ms)
+[ RUN      ] IDUINameTest.RegistrationSnapshotCopiesOnlyTheValidAuthorNote
+[       OK ] IDUINameTest.RegistrationSnapshotCopiesOnlyTheValidAuthorNote (0 ms)
+[----------] 30 tests from IDUINameTest (0 ms total)
+
+[----------] 2 tests from LibIDMainSortTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] LibIDMainSortTest.local_ids_1
+[       OK ] LibIDMainSortTest.local_ids_1 (0 ms)
+[ RUN      ] LibIDMainSortTest.linked_ids_1
+[       OK ] LibIDMainSortTest.linked_ids_1 (0 ms)
+[----------] 2 tests from LibIDMainSortTest (0 ms total)
+
+[----------] 15 tests from LibIDMainUniqueNameTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] LibIDMainUniqueNameTest.local_ids_rename_existing_never
+[       OK ] LibIDMainUniqueNameTest.local_ids_rename_existing_never (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.local_ids_rename_existing_always
+[       OK ] LibIDMainUniqueNameTest.local_ids_rename_existing_always (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.local_ids_rename_existing_same_root
+[       OK ] LibIDMainUniqueNameTest.local_ids_rename_existing_same_root (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.linked_ids_1
+[       OK ] LibIDMainUniqueNameTest.linked_ids_1 (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.ids_sorted_by_default
+[       OK ] LibIDMainUniqueNameTest.ids_sorted_by_default (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.ids_sorted_by_default_with_libraries
+[       OK ] LibIDMainUniqueNameTest.ids_sorted_by_default_with_libraries (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.name_too_long_handling
+[       OK ] LibIDMainUniqueNameTest.name_too_long_handling (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.create_equivalent_numeric_suffixes
+[       OK ] LibIDMainUniqueNameTest.create_equivalent_numeric_suffixes (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.re_create_equivalent_numeric_suffixes
+[       OK ] LibIDMainUniqueNameTest.re_create_equivalent_numeric_suffixes (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.zero_suffix_is_never_assigned
+[       OK ] LibIDMainUniqueNameTest.zero_suffix_is_never_assigned (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.remove_after_dup_get_original_name
+[       OK ] LibIDMainUniqueNameTest.remove_after_dup_get_original_name (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.name_number_suffix_assignment
+[       OK ] LibIDMainUniqueNameTest.name_number_suffix_assignment (40 ms)
+[ RUN      ] LibIDMainUniqueNameTest.renames_with_duplicates
+[       OK ] LibIDMainUniqueNameTest.renames_with_duplicates (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.names_are_unique_per_id_type
+[       OK ] LibIDMainUniqueNameTest.names_are_unique_per_id_type (0 ms)
+[ RUN      ] LibIDMainUniqueNameTest.name_huge_number_suffix
+[       OK ] LibIDMainUniqueNameTest.name_huge_number_suffix (0 ms)
+[----------] 15 tests from LibIDMainUniqueNameTest (41 ms total)
+
+[----------] 1 test from LibIDMainGlobalUniqueNameTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] LibIDMainGlobalUniqueNameTest.linked_ids_1
+[       OK ] LibIDMainGlobalUniqueNameTest.linked_ids_1 (0 ms)
+[----------] 1 test from LibIDMainGlobalUniqueNameTest (0 ms total)
+
+[----------] 1 test from LibIDMakeLocalTest
+color_management | Using OCIO=/Volumes/1TB_BK/mini_sequoia/Library/Application Support/Blender/5.3/datafiles/colormanagement/config.ocio
+                 | source/blender/imbuf/intern/colormanagement.cc:350 colormanagement_init
+[ RUN      ] LibIDMakeLocalTest.brush
+[       OK ] LibIDMakeLocalTest.brush (0 ms)
+[----------] 1 test from LibIDMakeLocalTest (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 75 tests from 10 test suites ran. (496 ms total)
+[  PASSED  ] 75 tests.

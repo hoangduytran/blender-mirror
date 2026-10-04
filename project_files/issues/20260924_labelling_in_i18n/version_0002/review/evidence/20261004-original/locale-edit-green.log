@@ -1,0 +1,21 @@
+Note: Google Test filter = IDNameEditTest.*
+[==========] Running 6 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 6 tests from IDNameEditTest
+[ RUN      ] IDNameEditTest.EligibleRNANameStartsInSelectedLanguage
+[       OK ] IDNameEditTest.EligibleRNANameStartsInSelectedLanguage (42 ms)
+[ RUN      ] IDNameEditTest.UnchangedAndCanceledEditsPreserveSourceAndNote
+[       OK ] IDNameEditTest.UnchangedAndCanceledEditsPreserveSourceAndNote (18 ms)
+[ RUN      ] IDNameEditTest.DeliberateSourceTextBecomesLiteral
+[       OK ] IDNameEditTest.DeliberateSourceTextBecomesLiteral (17 ms)
+[ RUN      ] IDNameEditTest.ChangedTextUsesExistingRNANameSetter
+[       OK ] IDNameEditTest.ChangedTextUsesExistingRNANameSetter (17 ms)
+[ RUN      ] IDNameEditTest.TabAndExplicitOutlinerOwnerUseTheSameEditStart
+[       OK ] IDNameEditTest.TabAndExplicitOutlinerOwnerUseTheSameEditStart (18 ms)
+[ RUN      ] IDNameEditTest.LiteralNamesAndPointerSelectionKeepExistingBehavior
+[       OK ] IDNameEditTest.LiteralNamesAndPointerSelectionKeepExistingBehavior (18 ms)
+[----------] 6 tests from IDNameEditTest (135 ms total)
+
+[----------] Global test environment tear-down
+[==========] 6 tests from 1 test suite ran. (247 ms total)
+[  PASSED  ] 6 tests.

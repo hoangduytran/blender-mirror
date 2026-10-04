@@ -1,0 +1,67 @@
+{
+  "passed": true,
+  "checks": [
+    {
+      "name": "typing",
+      "passed": true,
+      "returncode": 0,
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--gpu-backend",
+        "metal",
+        "--no-native-pixels",
+        "--no-window-frame",
+        "-p",
+        "0",
+        "0",
+        "800",
+        "600",
+        "--enable-event-simulate",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/ui_simulate/run_blender_setup.py",
+        "--",
+        "--tests",
+        "test_workspace.ui_name_editing_space_appends"
+      ],
+      "log": "/private/tmp/ui-name-caret-final-destination-native-eut5_tfo/typing.log"
+    },
+    {
+      "name": "undo",
+      "passed": true,
+      "returncode": 0,
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_id_ui_name_undo.py",
+        "--",
+        "--report",
+        "/private/tmp/ui-name-caret-final-destination-native-eut5_tfo/undo.json"
+      ],
+      "log": "/private/tmp/ui-name-caret-final-destination-native-eut5_tfo/undo.log"
+    },
+    {
+      "name": "factory",
+      "passed": true,
+      "returncode": 0,
+      "command": [
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender",
+        "--background",
+        "--factory-startup",
+        "--python-exit-code",
+        "1",
+        "--python",
+        "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/project_files/issues/20260924_labelling_in_i18n/version_0002/review/compare_factory_files.py",
+        "--",
+        "--baseline-dir",
+        "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui-name-factory-source-ngdt6y7r",
+        "--output-dir",
+        "/private/tmp/ui-name-caret-final-destination-native-eut5_tfo/factory"
+      ],
+      "log": "/private/tmp/ui-name-caret-final-destination-native-eut5_tfo/factory.log"
+    }
+  ]
+}

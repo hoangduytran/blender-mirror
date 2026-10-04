@@ -1,0 +1,23 @@
+Note: Google Test filter = IDNameEditTest.EligibleRNANameStartsInSelectedLanguage
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from IDNameEditTest
+[ RUN      ] IDNameEditTest.EligibleRNANameStartsInSelectedLanguage
+source/blender/editors/interface/interface_ops_test.cc:85: Failure
+Expected equality of these values:
+  text
+    Which is: "Layout"
+  translated.c_str()
+    Which is: "B\xE1\xBB\x91 Tr\xC3\xAD"
+    As Text: "Bố Trí"
+
+[  FAILED  ] IDNameEditTest.EligibleRNANameStartsInSelectedLanguage (26 ms)
+[----------] 1 test from IDNameEditTest (26 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (94 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] IDNameEditTest.EligibleRNANameStartsInSelectedLanguage
+
+ 1 FAILED TEST

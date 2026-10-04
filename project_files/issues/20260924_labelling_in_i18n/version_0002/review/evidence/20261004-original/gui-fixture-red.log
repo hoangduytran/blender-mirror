@@ -1,0 +1,13 @@
+Traceback (most recent call last):
+  File "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_id_ui_name_gui.py", line 140, in <module>
+    main()
+    ~~~~^^
+  File "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_id_ui_name_gui.py", line 117, in main
+    assert scene.review_node_group.node_tool_idname == "geometry.review_ui_name_gui"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+
+Error: script failed, file: 'tests/python/bl_id_ui_name_gui.py', exiting.
+Blender 5.3.0 Alpha (hash 8f8b6bc8c04d built 2026-10-04 00:36:42)
+
+Blender quit

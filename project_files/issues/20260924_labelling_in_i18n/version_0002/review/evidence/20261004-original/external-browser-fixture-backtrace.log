@@ -1,0 +1,129 @@
+(lldb) target create "../build_darwin_full/bin/tests/blender_test"
+Current executable set to '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/tests/blender_test' (arm64).
+(lldb) settings set -- target.run-args  "--gtest_filter=RegisteredNodeToolDisplayNameTest.ExternalFileListColdAndWarmTranslatedSearch" "--test-assets-dir" "tests/files" "--test-release-dir" "../build_darwin_full/bin/Blender.app/Contents/Resources/5.3"
+(lldb) run
+Note: Google Test filter = RegisteredNodeToolDisplayNameTest.ExternalFileListColdAndWarmTranslatedSearch
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from RegisteredNodeToolDisplayNameTest
+2026-10-04 12:00:52.119731+0100 blender_test[5382:42276] [plugin] AddInstanceForFactory: No factory registered for id <CFUUID 0xc99bb87e0> F8BB1C28-BAE8-11D6-9C31-00039315CD46
+2026-10-04 12:00:52.129550+0100 blender_test[5382:42276]      HALDefaultDevice.cpp:746    Could not find default device for dIn
+2026-10-04 12:00:52.129567+0100 blender_test[5382:42276] AudioHardware-mac-imp.cpp:3513   AudioDeviceGetPropertyInfo: no device with given ID
+2026-10-04 12:00:52.129653+0100 blender_test[5382:42276]      HALDefaultDevice.cpp:746    Could not find default device for dIn
+2026-10-04 12:00:52.129659+0100 blender_test[5382:42276] AudioHardware-mac-imp.cpp:3513   AudioDeviceGetPropertyInfo: no device with given ID
+[ RUN      ] RegisteredNodeToolDisplayNameTest.ExternalFileListColdAndWarmTranslatedSearch
+Process 5382 launched: '/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/tests/blender_test' (arm64)
+Process 5382 stopped
+* thread #1, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x0)
+    frame #0: 0x0000000000000000
+error: memory read failed for 0x0
+Target 0: (blender_test) stopped.
+(lldb) thread backtrace all
+* thread #1, queue = 'com.apple.main-thread', stop reason = EXC_BAD_ACCESS (code=1, address=0x0)
+  * frame #0: 0x0000000000000000
+    frame #1: 0x00000001060d213c blender_test`blender::BLI_listbase_sort_r(blender::ListBase*, int (*)(void*, void const*, void const*), void*) + 116
+    frame #2: 0x0000000102f576e4 blender_test`blender::filelist_sort(blender::FileList*) + 88
+    frame #3: 0x0000000102f4faf4 blender_test`blender::filelist_files_ensure(blender::FileList*) + 36
+    frame #4: 0x00000001000c143c blender_test`blender::tests::RegisteredNodeToolDisplayNameTest_ExternalFileListColdAndWarmTranslatedSearch_Test::TestBody() + 2516
+    frame #5: 0x00000001000477f4 blender_test`void testing::internal::HandleExceptionsInMethodIfSupported<testing::Test, void>(testing::Test*, void (testing::Test::*)(), char const*) + 116
+    frame #6: 0x00000001000476d0 blender_test`testing::Test::Run() + 220
+    frame #7: 0x0000000100048a14 blender_test`testing::TestInfo::Run() + 360
+    frame #8: 0x00000001000499e0 blender_test`testing::TestSuite::Run() + 892
+    frame #9: 0x0000000100059940 blender_test`testing::internal::UnitTestImpl::RunAllTests() + 1116
+    frame #10: 0x0000000100059364 blender_test`bool testing::internal::HandleExceptionsInMethodIfSupported<testing::internal::UnitTestImpl, bool>(testing::internal::UnitTestImpl*, bool (testing::internal::UnitTestImpl::*)(), char const*) + 116
+    frame #11: 0x00000001000592bc blender_test`testing::UnitTest::Run() + 128
+    frame #12: 0x000000010000dcac blender_test`main + 88
+    frame #13: 0x0000000181ff04e4 dyld`start + 6992
+  thread #2
+    frame #0: 0x00000001823799f0 libsystem_kernel.dylib`__workq_kernreturn + 8
+  thread #3
+    frame #0: 0x00000001823799f0 libsystem_kernel.dylib`__workq_kernreturn + 8
+  thread #4
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x0000000182201490 libdispatch.dylib`_dispatch_sema4_wait + 28
+    frame #2: 0x0000000182201b20 libdispatch.dylib`_dispatch_semaphore_wait_slow + 132
+    frame #3: 0x000000010d7b2f3c libIlmThread.dylib`IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::threadLoop(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>) + 56
+    frame #4: 0x000000010d7b328c libIlmThread.dylib`void* std::__1::__thread_proxy[abi:nqe210106]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::*)(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>), IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider*, std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>>>(void*) + 88
+    frame #5: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #5
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x0000000182201490 libdispatch.dylib`_dispatch_sema4_wait + 28
+    frame #2: 0x0000000182201b20 libdispatch.dylib`_dispatch_semaphore_wait_slow + 132
+    frame #3: 0x000000010d7b2f3c libIlmThread.dylib`IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::threadLoop(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>) + 56
+    frame #4: 0x000000010d7b328c libIlmThread.dylib`void* std::__1::__thread_proxy[abi:nqe210106]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::*)(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>), IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider*, std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>>>(void*) + 88
+    frame #5: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #6
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x0000000182201490 libdispatch.dylib`_dispatch_sema4_wait + 28
+    frame #2: 0x0000000182201b20 libdispatch.dylib`_dispatch_semaphore_wait_slow + 132
+    frame #3: 0x000000010d7b2f3c libIlmThread.dylib`IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::threadLoop(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>) + 56
+    frame #4: 0x000000010d7b328c libIlmThread.dylib`void* std::__1::__thread_proxy[abi:nqe210106]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::*)(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>), IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider*, std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>>>(void*) + 88
+    frame #5: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #7
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x0000000182201490 libdispatch.dylib`_dispatch_sema4_wait + 28
+    frame #2: 0x0000000182201b20 libdispatch.dylib`_dispatch_semaphore_wait_slow + 132
+    frame #3: 0x000000010d7b2f3c libIlmThread.dylib`IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::threadLoop(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>) + 56
+    frame #4: 0x000000010d7b328c libIlmThread.dylib`void* std::__1::__thread_proxy[abi:nqe210106]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::*)(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>), IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider*, std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>>>(void*) + 88
+    frame #5: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #8
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x0000000182201490 libdispatch.dylib`_dispatch_sema4_wait + 28
+    frame #2: 0x0000000182201b20 libdispatch.dylib`_dispatch_semaphore_wait_slow + 132
+    frame #3: 0x000000010d7b2f3c libIlmThread.dylib`IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::threadLoop(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>) + 56
+    frame #4: 0x000000010d7b328c libIlmThread.dylib`void* std::__1::__thread_proxy[abi:nqe210106]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::*)(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>), IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider*, std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>>>(void*) + 88
+    frame #5: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #9
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x0000000182201490 libdispatch.dylib`_dispatch_sema4_wait + 28
+    frame #2: 0x0000000182201b20 libdispatch.dylib`_dispatch_semaphore_wait_slow + 132
+    frame #3: 0x000000010d7b2f3c libIlmThread.dylib`IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::threadLoop(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>) + 56
+    frame #4: 0x000000010d7b328c libIlmThread.dylib`void* std::__1::__thread_proxy[abi:nqe210106]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::*)(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>), IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider*, std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>>>(void*) + 88
+    frame #5: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #10
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x0000000182201490 libdispatch.dylib`_dispatch_sema4_wait + 28
+    frame #2: 0x0000000182201b20 libdispatch.dylib`_dispatch_semaphore_wait_slow + 132
+    frame #3: 0x000000010d7b2f3c libIlmThread.dylib`IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::threadLoop(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>) + 56
+    frame #4: 0x000000010d7b328c libIlmThread.dylib`void* std::__1::__thread_proxy[abi:nqe210106]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::*)(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>), IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider*, std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>>>(void*) + 88
+    frame #5: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #11
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x0000000182201490 libdispatch.dylib`_dispatch_sema4_wait + 28
+    frame #2: 0x0000000182201b20 libdispatch.dylib`_dispatch_semaphore_wait_slow + 132
+    frame #3: 0x000000010d7b2f3c libIlmThread.dylib`IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::threadLoop(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>) + 56
+    frame #4: 0x000000010d7b328c libIlmThread.dylib`void* std::__1::__thread_proxy[abi:nqe210106]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::*)(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>), IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider*, std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>>>(void*) + 88
+    frame #5: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #12
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x0000000182201490 libdispatch.dylib`_dispatch_sema4_wait + 28
+    frame #2: 0x0000000182201b20 libdispatch.dylib`_dispatch_semaphore_wait_slow + 132
+    frame #3: 0x000000010d7b2f3c libIlmThread.dylib`IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::threadLoop(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>) + 56
+    frame #4: 0x000000010d7b328c libIlmThread.dylib`void* std::__1::__thread_proxy[abi:nqe210106]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::*)(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>), IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider*, std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>>>(void*) + 88
+    frame #5: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #13
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x0000000182201490 libdispatch.dylib`_dispatch_sema4_wait + 28
+    frame #2: 0x0000000182201b20 libdispatch.dylib`_dispatch_semaphore_wait_slow + 132
+    frame #3: 0x000000010d7b2f3c libIlmThread.dylib`IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::threadLoop(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>) + 56
+    frame #4: 0x000000010d7b328c libIlmThread.dylib`void* std::__1::__thread_proxy[abi:nqe210106]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider::*)(std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>), IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolProvider*, std::__1::shared_ptr<IlmThread_3_4::(anonymous namespace)::DefaultThreadPoolData>>>(void*) + 88
+    frame #5: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #14, name = 'caulk.messenger.shared:17'
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x000000018ed0be00 caulk`caulk::semaphore::timed_wait(double) + 224
+    frame #2: 0x000000018ed0bcac caulk`caulk::concurrent::details::worker_thread::run() + 32
+    frame #3: 0x000000018ed0b94c caulk`void* caulk::thread_proxy<std::__1::tuple<caulk::thread::attributes, void (caulk::concurrent::details::worker_thread::*)(), std::__1::tuple<caulk::concurrent::details::worker_thread*>>>(void*) + 96
+    frame #4: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #15, name = 'caulk.messenger.shared:high'
+    frame #0: 0x0000000182377bb0 libsystem_kernel.dylib`semaphore_wait_trap + 8
+    frame #1: 0x000000018ed0be00 caulk`caulk::semaphore::timed_wait(double) + 224
+    frame #2: 0x000000018ed0bcac caulk`caulk::concurrent::details::worker_thread::run() + 32
+    frame #3: 0x000000018ed0b94c caulk`void* caulk::thread_proxy<std::__1::tuple<caulk::thread::attributes, void (caulk::concurrent::details::worker_thread::*)(), std::__1::tuple<caulk::concurrent::details::worker_thread*>>>(void*) + 96
+    frame #4: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136
+  thread #16
+    frame #0: 0x000000018237b50c libsystem_kernel.dylib`__psynch_cvwait + 8
+    frame #1: 0x00000001823bc128 libsystem_pthread.dylib`_pthread_cond_wait + 980
+    frame #2: 0x00000001822d1858 libc++.1.dylib`std::__1::condition_variable::wait(std::__1::unique_lock<std::__1::mutex>&) + 32
+    frame #3: 0x0000000100c485c0 blender_test`blender::delayed_close_thread_run() + 300
+    frame #4: 0x0000000100c5350c blender_test`void* std::__1::__thread_proxy[abi:nqe210106]<std::__1::tuple<std::__1::unique_ptr<std::__1::__thread_struct, std::__1::default_delete<std::__1::__thread_struct>>, void (*)()>>(void*) + 52
+    frame #5: 0x00000001823bbc58 libsystem_pthread.dylib`_pthread_start + 136

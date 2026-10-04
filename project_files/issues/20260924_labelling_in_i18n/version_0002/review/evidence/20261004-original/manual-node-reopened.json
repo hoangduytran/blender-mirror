@@ -1,0 +1,31 @@
+{
+  "stage": "reopened",
+  "binary": "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender",
+  "language": "vi_VN",
+  "items": [
+    {
+      "kind": "review_workspace",
+      "stored": "Review Workspace Source",
+      "display": "Kh\u00f4ng gian m\u1eabu",
+      "eligible": true
+    },
+    {
+      "kind": "review_brush",
+      "stored": "Review Brush Source",
+      "display": "C\u1ecd m\u1eabu",
+      "eligible": true
+    },
+    {
+      "kind": "review_node_group",
+      "stored": "My Tool Renamed",
+      "display": "My Tool Renamed",
+      "eligible": false
+    },
+    {
+      "kind": "review_asset",
+      "stored": "Review Asset Source",
+      "display": "T\u00e0i nguy\u00ean m\u1eabu",
+      "eligible": true
+    }
+  ]
+}

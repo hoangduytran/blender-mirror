@@ -1,0 +1,24 @@
+Arguments: ["/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender", "--background", "--factory-startup", "--python-exit-code", "1", "--python", "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_id_ui_name_libraries.py"]
+ ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()
+ Function: Arch_ValidateAssumptions
+     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp
+     Line: 140
+00:00.223  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_jmhknf13/roundtrip.blend"
+.00:00.246  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_1byc052p/roundtrip.blend"
+.00:00.269  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_qr7voa_t/roundtrip.blend"
+00:00.277  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_qr7voa_t/roundtrip.blend"
+.00:00.299  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_gnmfrb4z/roundtrip.blend"
+.
+----------------------------------------------------------------------
+Ran 4 tests in 0.104s
+
+OK
+Blender 5.3.0 Alpha (hash ec9a9b566ef9 built 2026-10-04 02:21:20)
+Thông Tin: Đã lưu thành "roundtrip.blend"
+Thông Tin: Đã lưu thành "roundtrip.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_1byc052p/source.blend', '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_1byc052p/source.blend', phụ huynh '<direct>'
+Thông Tin: Đã lưu thành "roundtrip.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_qr7voa_t/source.blend', '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_qr7voa_t/source.blend', phụ huynh '<direct>'
+Thông Tin: Đã lưu thành "roundtrip.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_qr7voa_t/source.blend', '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_qr7voa_t/source.blend', phụ huynh '<direct>'
+Thông Tin: Đã lưu thành "roundtrip.blend"

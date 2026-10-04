@@ -1,0 +1,15 @@
+Arguments: ["/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender", "--background", "--factory-startup", "--python-exit-code", "1", "--python", "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/project_files/issues/20260924_labelling_in_i18n/version_0002/reference/other_names_example.py"]
+ ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()
+ Function: Arch_ValidateAssumptions
+     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp
+     Line: 140
+00:00.167  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/other_names_example_sxbxka99/names.blend"
+materials: opt-in translates display; copy/rename clears; saved name preserved
+objects: opt-in translates display; copy/rename clears; saved name preserved
+collections: opt-in translates display; copy/rename clears; saved name preserved
+actions: opt-in translates display; copy/rename clears; saved name preserved
+Thông Tin: Đã lưu thành "names.blend"
+Save/reopen: all ID names, asset metadata and contained names preserved
+Blender 5.3.0 Alpha (hash 2384b2052627 built 2026-10-04 00:28:25)
+
+Blender quit

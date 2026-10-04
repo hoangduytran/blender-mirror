@@ -1,0 +1,15 @@
+Arguments: ["/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender", "--background", "--factory-startup", "--python-exit-code", "1", "--python", "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/project_files/issues/20260924_labelling_in_i18n/version_0002/reference/brush_rename_example.py"]
+ ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()
+ Function: Arch_ValidateAssumptions
+     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp
+     Line: 140
+00:00.174  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/brush_rename_example_bkyqs7gz/brush.blend"
+Unmarked: saved='Author brush example'; displayed='Author brush example'; marked=False
+Author marks the name: saved='Author brush example'; displayed='Cọ mẫu của tác giả'; marked=True
+User renames: saved='Cọ yêu thích của tôi'; displayed='Cọ yêu thích của tôi'; marked=False
+Thông Tin: Đã lưu thành "brush.blend"
+Save and reopen: saved='Cọ yêu thích của tôi'; displayed='Cọ yêu thích của tôi'; marked=False
+Rename back: saved='Author brush example'; displayed='Author brush example'; marked=False
+Blender 5.3.0 Alpha (hash 814a60056e09 built 2026-10-04 00:36:38)
+
+Blender quit

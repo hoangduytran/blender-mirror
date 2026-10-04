@@ -1,0 +1,36 @@
+["/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender", "--background", "--console-crash-handler", "--factory-startup", "--debug-memory", "--debug-exit-on-error", "--python-exit-code", "1", "--python-expr", "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'", "--python", "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_node_group_compat.py", "--", "--testdir", "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group"]
+00:00.790  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/nodegroup25.blend"
+00:00.794  blend.doversion  | WARNING Region type 4 missing in space type "Info" (id: 7) - removing region
+00:00.796  depsgraph        | WARNING Dependency cycle detected:
+                            |   NTShader Nodetree/NTREE_OUTPUT() depends on
+                            |   MAMaterial/MATERIAL_UPDATE() via 'Material -> Node'
+                            |   NTShader Nodetree/NTREE_OUTPUT() via 'Material's NTree'
+                            |
+00:00.796  depsgraph        | WARNING Detected 1 dependency cycles
+/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_node_group_compat.py:319: DeprecationWarning: 'Scene.compositing_node_group' is expected to be removed in Blender 6.0
+  tree = bpy.data.scenes['Scene'].compositing_node_group
+.00:00.814  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/nodegroup25.blend"
+00:00.817  blend.doversion  | WARNING Region type 4 missing in space type "Info" (id: 7) - removing region
+00:00.820  depsgraph        | WARNING Dependency cycle detected:
+                            |   NTShader Nodetree/NTREE_OUTPUT() depends on
+                            |   MAMaterial/MATERIAL_UPDATE() via 'Material -> Node'
+                            |   NTShader Nodetree/NTREE_OUTPUT() via 'Material's NTree'
+                            |
+00:00.820  depsgraph        | WARNING Detected 1 dependency cycles
+.00:00.842  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/nodegroup36.blend"
+00:00.855  object.modifier  | WARNING Object: "Cube", Modifier: "GeometryNodes", Node group must have a group output node
+/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_node_group_compat.py:230: DeprecationWarning: 'Scene.compositing_node_group' is expected to be removed in Blender 6.0
+  tree = bpy.data.scenes['Scene'].compositing_node_group
+.00:00.880  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/nodegroup36.blend"
+00:00.893  object.modifier  | WARNING Object: "Cube", Modifier: "GeometryNodes", Node group must have a group output node
+.00:00.913  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/nodegroup36.blend"
+00:00.927  object.modifier  | WARNING Object: "Cube", Modifier: "GeometryNodes", Node group must have a group output node
+.00:00.944  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/node_group_socket_interface_compositor.blend"
+00:00.968  blend.doversion  | WARNING Region type 4 missing in space type "Info" (id: 7) - removing region
+.
+----------------------------------------------------------------------
+Ran 6 tests in 0.199s
+
+OK
+Switching to fully guarded memory allocator.
+Blender 5.3.0 Alpha (hash 814a60056e09 built 2026-10-04 00:36:38)

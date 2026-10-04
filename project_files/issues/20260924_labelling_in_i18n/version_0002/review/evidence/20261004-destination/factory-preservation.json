@@ -1,0 +1,131 @@
+{
+  "passed": true,
+  "files": [
+    {
+      "file": "assets/brushes/essentials_brushes-curve_sculpt.blend",
+      "ids": 12,
+      "differences": [],
+      "before_sha256": "4ede28320eb8430c06899f4937be5b1b980b06688189e03ad0b1ee56f1e1bd1f",
+      "source_sha256": "01131fc9fa6aaff2bbbc22a2ebf41f984d5f663ab229bfe9a6a0e5bff0c75b70"
+    },
+    {
+      "file": "assets/brushes/essentials_brushes-gp_draw.blend",
+      "ids": 13,
+      "differences": [],
+      "before_sha256": "0596dce9286b824c31af67197b96e83a0c4a42ce2dbb36f40dfc8ecab3fe9f06",
+      "source_sha256": "82a52618be3c65b6dff01598c25f42588faa98a2753e0efcddc7d69bbc44fd92"
+    },
+    {
+      "file": "assets/brushes/essentials_brushes-gp_sculpt.blend",
+      "ids": 9,
+      "differences": [],
+      "before_sha256": "235631a858c91b5cdaf70240ce0ed15bff11ef4474767e983d169a1bbf4723f6",
+      "source_sha256": "73c986c22af252499a6b7e6e0dd6410eb5025c9cd2beea2e75177b5502f12160"
+    },
+    {
+      "file": "assets/brushes/essentials_brushes-gp_vertex.blend",
+      "ids": 5,
+      "differences": [],
+      "before_sha256": "ee1e9eee2cb898c3e95dbe2c059a51d4a5ec863a0d9bbd8ea1beb7d6a20bed06",
+      "source_sha256": "c4a608d28a66950382e65499147201575253bc8f33546f4d8b97e76212efe313"
+    },
+    {
+      "file": "assets/brushes/essentials_brushes-gp_weight.blend",
+      "ids": 4,
+      "differences": [],
+      "before_sha256": "ec19a0cbca6a8413c45a25994a3db0ce1c7c8bd002d1968069dc1b558ce8500e",
+      "source_sha256": "e6bae3a813cce82e00109f89f62a5b452f1472822a823c98b450ac124693a20a"
+    },
+    {
+      "file": "assets/brushes/essentials_brushes-mesh_sculpt.blend",
+      "ids": 64,
+      "differences": [],
+      "before_sha256": "f8b15126658f5a4ac455b0826a7eeae026576ed7c2ac45562d8880383fbf03bf",
+      "source_sha256": "476c42f754b2ec39987cc183cfa037abeae7f266ec3435f96ae3e6b86696a354"
+    },
+    {
+      "file": "assets/brushes/essentials_brushes-mesh_texture.blend",
+      "ids": 45,
+      "differences": [],
+      "before_sha256": "6c57caeaaa1f16e175783a2fbcbabf8772e108414edca92cad52bcc8019110f8",
+      "source_sha256": "891b6b0b93adaf0f7ddda097d862e1749899b56bfa1ebfe2d3f6fa6dd9b14c32"
+    },
+    {
+      "file": "assets/brushes/essentials_brushes-mesh_vertex.blend",
+      "ids": 38,
+      "differences": [],
+      "before_sha256": "7b4b5d973f1bc4a06f7553afc96c7cb0bd9a0c17921cd65903b40395eccd3300",
+      "source_sha256": "3ed8059cd72d8b6affae5d6b6de1037b3037feff32cc9c85d33dc4beeccebb3d"
+    },
+    {
+      "file": "assets/brushes/essentials_brushes-mesh_weight.blend",
+      "ids": 5,
+      "differences": [],
+      "before_sha256": "ec029f2bb0b1be0c7ee3acb913bcf4c17e7217c4f5c8d97a5c6f577abf71d856",
+      "source_sha256": "03bbde2f0f2703e1939d8440eb437fb1e351e382765f460319827bdc755e6506"
+    },
+    {
+      "file": "assets/nodes/compositing_nodes_essentials.blend",
+      "ids": 24,
+      "differences": [],
+      "before_sha256": "85d67897304e2b82d94393db3e3ddf59d0e9a6f3e62c539486e961a688039f5f",
+      "source_sha256": "12bd45a536b04bec6ce7d8f688ad7fe36d77ca679856905dfe7ff9aaa9f17e75"
+    },
+    {
+      "file": "assets/nodes/geometry_nodes_dynamics_assets.blend",
+      "ids": 63,
+      "differences": [],
+      "before_sha256": "a2e6b4013abfc3b9355927e33b2ae5af2182dc079e820041124652a75ce7b100",
+      "source_sha256": "a9de5d014e4e38834bdf07bdc388e1cc8297c50438154451c71f55a7b155ea95"
+    },
+    {
+      "file": "assets/nodes/geometry_nodes_essentials.blend",
+      "ids": 33,
+      "differences": [],
+      "before_sha256": "4271f315f5703d26ab412888a4212303ce3fb667b87c48538c1c0960e391611c",
+      "source_sha256": "f3bdfee66bceaddc409fef8eab0ea6316008feb2a7513e2742c747a03df5e176"
+    },
+    {
+      "file": "assets/nodes/principal_components.blend",
+      "ids": 2,
+      "differences": [],
+      "before_sha256": "91cb8cada033daab6c6fbb8aef4767782cf75be867a0c2f38ced742160f38a39",
+      "source_sha256": "25624a7b2800ca924731eb3aa19b9a69a8edec65a1f9be191bb575aa6de1d94e"
+    },
+    {
+      "file": "assets/nodes/procedural_hair_node_assets.blend",
+      "ids": 32,
+      "differences": [],
+      "before_sha256": "14589ca395ac23eb3f5d8b6be4758e780368457c109a7e4bfca2a7fa6ade1057",
+      "source_sha256": "e76259228fcd8c5edd058b327168b499d15acfc53cfc9e6229998a0f0f6dedfc"
+    },
+    {
+      "file": "assets/nodes/shading_nodes_essentials.blend",
+      "ids": 4,
+      "differences": [],
+      "before_sha256": "ffdaf64a4777233f6e47799bad17825a6c1e07c500eb1d9d0c23997f745327ee",
+      "source_sha256": "5f224e8e2cbc7a061db92fccfe6e0d8990f1b85916b60648be8590d55c9e102c"
+    }
+  ],
+  "excluded_rna_properties": [
+    "filepath",
+    "icon_id",
+    "id_data",
+    "is_evaluated",
+    "is_library_indirect",
+    "is_runtime_data",
+    "is_updated",
+    "is_updated_data",
+    "is_updated_transform",
+    "original",
+    "rna_type",
+    "session_uid",
+    "ui_name",
+    "ui_name_is_translatable",
+    "users"
+  ],
+  "excluded_custom_properties": [
+    "_blender_ui_name"
+  ],
+  "scope": "All RNA-accessible settings on brush/node-group IDs and their owned nested RNA data; node topology, sockets, interface and asset catalog metadata. ID references use type/name/library basename. Stored preview pixels are hashed; non-RNA DNA fields are not compared."
+}

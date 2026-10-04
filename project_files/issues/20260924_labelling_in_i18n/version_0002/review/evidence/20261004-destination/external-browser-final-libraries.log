@@ -1,0 +1,20 @@
+Arguments: ["/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender", "--background", "--factory-startup", "--python-exit-code", "1", "--python", "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_id_ui_name_libraries.py"]
+00:00.304  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library__jt1rod7/roundtrip.blend"
+.00:00.363  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_dyukfv80/roundtrip.blend"
+.00:00.402  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_c88q6bak/roundtrip.blend"
+00:00.423  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_c88q6bak/roundtrip.blend"
+.00:00.460  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_5gk6muoa/roundtrip.blend"
+.
+----------------------------------------------------------------------
+Ran 4 tests in 0.198s
+
+OK
+Blender 5.3.0 Alpha (hash ec9a9b566ef9 built 2026-10-04 02:21:20)
+Thông Tin: Đã lưu thành "roundtrip.blend"
+Thông Tin: Đã lưu thành "roundtrip.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_dyukfv80/source.blend', '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_dyukfv80/source.blend', phụ huynh '<direct>'
+Thông Tin: Đã lưu thành "roundtrip.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_c88q6bak/source.blend', '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_c88q6bak/source.blend', phụ huynh '<direct>'
+Thông Tin: Đã lưu thành "roundtrip.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_c88q6bak/source.blend', '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui_name_library_c88q6bak/source.blend', phụ huynh '<direct>'
+Thông Tin: Đã lưu thành "roundtrip.blend"

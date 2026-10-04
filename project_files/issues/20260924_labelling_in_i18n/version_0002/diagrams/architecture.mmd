@@ -1,0 +1,14 @@
+flowchart LR
+    A[DNA: existing saved name and properties] --> B[BKE: validate permission and resolve label]
+    B --> C[RNA: read-only presentation and author actions]
+    C --> D[bpy: use the same RNA API]
+    B --> E[UI: labels, widths and search]
+    D --> E
+    F[Current language and existing catalog] --> B
+    G[Asset metadata or minimal tool snapshot] --> B
+    E --> H[Show translated or literal text]
+    A --> I[Raw names identify and import items]
+    E --> J[Editor starts with displayed text]
+    J --> L[Workspace edits: end caret, no selection]
+    L --> M[Select All: visible text-field highlight]
+    J --> K[Unchanged keeps source; real edit saves user text]

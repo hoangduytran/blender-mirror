@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="1" failures="0" disabled="0" errors="0" time="0.116" timestamp="2026-10-04T02:22:05.109" name="AllTests">
+  <testsuite name="RegisteredNodeToolDisplayNameTest" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0.054" timestamp="2026-10-04T02:22:05.168">
+    <testcase name="SavedExternalBrushAssetScanAndSearch" file="source/blender/windowmanager/intern/wm_operator_type_test.cc" line="211" status="run" result="completed" time="0.054" timestamp="2026-10-04T02:22:05.168" classname="RegisteredNodeToolDisplayNameTest" />
+  </testsuite>
+</testsuites>

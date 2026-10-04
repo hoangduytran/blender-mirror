@@ -1,0 +1,35 @@
+["/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/build_darwin/bin/Blender.app/Contents/MacOS/Blender", "--background", "--console-crash-handler", "--factory-startup", "--debug-memory", "--debug-exit-on-error", "--python-exit-code", "1", "--python-expr", "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'", "--python", "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_node_group_interface.py", "--", "--testdir", "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group"]
+00:00.382  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/python/bl_node_group_interface.py:479: DeprecationWarning: 'Scene.compositing_node_group' is expected to be removed in Blender 6.0
+  self.scene.compositing_node_group = self.main_tree
+.00:00.402  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:00.426  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:00.475  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:00.528  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:00.573  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:00.628  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:00.655  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:00.760  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:00.821  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:01.036  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:01.604  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:01.725  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:01.880  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:01.908  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:01.967  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:02.012  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:02.099  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:02.202  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:02.234  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:02.255  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:02.278  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:02.302  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:02.326  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.00:02.348  blend            | Read blend: "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/tests/files/node_group/empty.blend"
+.
+----------------------------------------------------------------------
+Ran 25 tests in 1.990s
+
+OK
+Switching to fully guarded memory allocator.
+Blender 5.3.0 Alpha (hash 814a60056e09 built 2026-10-04 00:36:38)

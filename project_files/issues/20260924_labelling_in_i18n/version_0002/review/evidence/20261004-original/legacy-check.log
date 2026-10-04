@@ -1,0 +1,9 @@
+ ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()
+ Function: Arch_ValidateAssumptions
+     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp
+     Line: 140
+00:00.378  blend            | Read blend: "/private/tmp/id-ui-name-legacy459.blend"
+Legacy Blender (4, 5, 91) file: 14 names stayed unmarked and literal
+Blender 5.3.0 Alpha (hash 2384b2052627 built 2026-10-04 00:26:08)
+
+Blender quit

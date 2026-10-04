@@ -1,0 +1,41 @@
+["/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender", "--background", "--console-crash-handler", "--factory-startup", "--debug-memory", "--debug-exit-on-error", "--python-exit-code", "1", "--python-expr", "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'", "--python", "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop_datablock.py"]
+ ArchWarn: ARCH_CACHE_LINE_SIZE != Arch_ObtainCacheLineSize()
+ Function: Arch_ValidateAssumptions
+     File: /Users/jonas/blender-dev-deps/build_darwin/deps_arm64/build/usd/src/external_usd/pxr/base/arch/assumptions.cpp
+     Line: 140
+/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop_datablock.py:137: DeprecationWarning: 'Scene.compositing_node_group' is expected to be removed in Blender 6.0
+  scene.compositing_node_group = tree
+00:00.365  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/tmpcnxhsf8x/test.blend"
+00:00.387  lib.override.resync | WARNING Provided scene 'Scene_lib' is not local, using instead local scene 'Scene', view-layer 'ViewLayer' as container for the library override leftover collections and objects
+00:00.431  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/tmpcnxhsf8x/test.blend"
+00:00.471  lib.override.resync | WARNING Provided scene 'Scene_lib' is not local, using instead local scene 'Scene', view-layer 'ViewLayer' as container for the library override leftover collections and objects
+/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop_datablock.py:191: DeprecationWarning: 'Scene.compositing_node_group' is expected to be removed in Blender 6.0
+  intern_sys_idprops = intern_sce.compositing_node_group.nodes['Render Layers'].bl_system_properties_get()
+/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop_datablock.py:192: DeprecationWarning: 'Scene.compositing_node_group' is expected to be removed in Blender 6.0
+  extern_sys_idprops = extern_sce.compositing_node_group.nodes['Render Layers'].bl_system_properties_get()
+00:00.492  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/tmpcnxhsf8x/lib.blend"
+00:00.623  image.write      | ERROR OpenImageIO write failed: Could not open file "/Volumes/1TB_BK/mini_sequoia/.thumbnails/large/blender_72170_3e522e9a7d1968b77d73e77c653c2403.png.png"
+Switching to fully guarded memory allocator.
+Blender 5.3.0 Alpha (hash 4041af919a44 built 2026-10-04 02:09:02)
+0   Blender                             0x0000000104da25d0 _ZN7blender20BLI_system_backtraceEP7__sFILE + 92
+1   Blender                             0x000000010a4b8e20 _ZN7blenderL28clog_abort_on_error_callbackEPv + 20
+2   Blender                             0x00000001053084c4 _Z8CLG_logfPK11CLG_LogType9CLG_LevelPKcS4_S4_z + 2396
+3   Blender                             0x000000010614eb1c _ZN7blender5imbuf14imb_oiio_writeERKNS0_12WriteContextEPKcRKN11OpenImageIO4v3_19ImageSpecE + 500
+4   Blender                             0x00000001052d8750 _ZN7blender12imb_save_pngEPNS_5ImBufEPKcNS_10ImBufFlagsE + 56
+5   Blender                             0x00000001052ec254 _ZN7blenderL15thumb_create_exEPKcS1_S1_bS1_S1_S1_NS_9ThumbSizeENS_11ThumbSourceEPNS_5ImBufEPKNS_22ThumbCancellationTokenE + 1184
+6   Blender                             0x00000001052ebd78 _ZN7blender16IMB_thumb_createEPKcNS_9ThumbSizeENS_11ThumbSourceEPNS_5ImBufE + 452
+7   Blender                             0x00000001053a12e0 _ZN7blenderL24wm_save_as_mainfile_execEPNS_8bContextEPNS_10wmOperatorE + 2412
+8   Blender                             0x0000000105398238 _ZN7blenderL18wm_operator_invokeEPNS_8bContextEPNS_14wmOperatorTypeEPKNS_7wmEventEPNS_10PointerRNAEPNS_10ReportListEbb + 648
+9   Blender                             0x00000001053910c0 _ZN7blender19WM_operator_call_pyEPNS_8bContextEPNS_14wmOperatorTypeENS_2wm13OpCallContextEPNS_10PointerRNAEPNS_10ReportListEb + 108
+10  Blender                             0x000000010611f270 _ZN7blenderL14bpy_op_fn_callEPNS_13BPyOpFunctionEP7_objectS3_ + 1048
+11  Blender                             0x0000000109f5a700 _PyObject_MakeTpCall + 300
+12  Blender                             0x000000010a08b93c _PyEval_EvalFrameDefault + 14724
+13  Blender                             0x000000010a087a8c PyEval_EvalCode + 252
+14  Blender                             0x000000010a0f5614 run_eval_code_obj + 180
+15  Blender                             0x000000010a0f52c8 run_mod + 328
+16  Blender                             0x000000010a0f46e0 PyRun_FileExFlags + 176
+17  Blender                             0x000000010611c278 _ZN7blenderL18python_script_execEPNS_8bContextEPKcPNS_4TextEPNS_10ReportListEb + 472
+18  Blender                             0x0000000104339280 _ZN7blenderL26arg_handle_python_file_runEiPPKcPv + 256
+19  Blender                             0x0000000104daf088 _ZN7blender14BLI_args_parseEPNS_5bArgsEiPFiiPPKcPvES5_ + 188
+20  Blender                             0x00000001043356a0 main + 960
+21  dyld                                0x00000001812104e4 start + 6992

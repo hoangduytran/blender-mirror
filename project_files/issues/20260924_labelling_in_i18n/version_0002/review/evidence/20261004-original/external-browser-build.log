@@ -1,0 +1,28 @@
+[0/1] Re-running CMake...
+-- Detected OS X 26.5 and Command Line Tools 26.6 at /Library/Developer/CommandLineTools
+-- SDKs Directory: /Library/Developer/CommandLineTools/SDKs
+-- Detected OSX_SYSROOT: /Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk
+-- Found OpenPGL: /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/lib/macos_arm64/openpgl/lib/libopenpgl.a
+-- Found required Ceres dependency: absl version 20250814 in /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/lib/macos_arm64/abseil/lib/cmake/absl
+-- Found required Ceres dependency: Eigen version 5.0.1 in /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/lib/macos_arm64/eigen/share/eigen3/cmake
+-- Found Ceres version: 2.3.0 installed in: /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/lib/macos_arm64/ceres with components: [EigenSparse, SparseLinearAlgebraLibrary, LAPACK, AccelerateSparse, SchurSpecializations]
+CMake Warning at build_files/cmake/platform/platform_apple.cmake:464 (message):
+  Ccache NOT found, disabling WITH_COMPILER_CCACHE
+Call Stack (most recent call first):
+  CMakeLists.txt:1578 (include)
+
+
+-- Using NINJA_POOL_JOBS:
+--   NINJA_MAX_NUM_PARALLEL_LINK_JOBS: max concurrent linking jobs (computed): 2
+--   NINJA_MAX_NUM_PARALLEL_COMPILE_HEAVY_JOBS: max concurrent heavy compile jobs (computed): 8
+--   NINJA_MAX_NUM_PARALLEL_COMPILE_JOBS: max concurrent regular compile jobs (computed): 7
+-- Found Metal: /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/System/Library/Frameworks/Metal.framework
+-- Configuring done (1.2s)
+-- Generating done (1.7s)
+-- Build files have been written to: /Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full
+[1/6] Generating buildinfo.h_fake, buildinfo.h
+[2/6] Building C object source/creator/CMakeFiles/buildinfoobj.dir/buildinfo.c.o
+[3/6] Building CXX object source/blender/windowmanager/CMakeFiles/windowmanager_tests.dir/intern/wm_operator_type_test.cc.o
+[4/6] Linking CXX static library lib/libwindowmanager_tests.a
+[5/6] Linking CXX executable bin/tests/blender_test
+ld: warning: search path '/usr/local/opt/tcl-tk/lib' not found

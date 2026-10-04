@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "checks": [
+    "rename undo/redo",
+    "duplicate undo/redo",
+    "forced collision undo/redo"
+  ],
+  "binary": "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender"
+}

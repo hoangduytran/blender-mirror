@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "returncode": 0,
+  "command": [
+    "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/build_darwin_full/bin/Blender.app/Contents/MacOS/Blender",
+    "--background",
+    "--console-crash-handler",
+    "--factory-startup",
+    "--debug-memory",
+    "--debug-exit-on-error",
+    "--python-exit-code",
+    "1",
+    "--python-expr",
+    "import bpy;bpy.context.preferences.filepaths.file_preview_type='NONE'",
+    "--python",
+    "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/tests/python/bl_pyapi_idprop_datablock.py"
+  ],
+  "log": "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/ui-name-space-root-idprop-lamkm8xg/test.log"
+}

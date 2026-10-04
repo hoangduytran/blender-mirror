@@ -1,0 +1,11 @@
+flowchart LR
+    A[Finish adding note, renaming, or copying] --> B[Main translation note on saved item]
+    B --> C[Update copied note for asset listing]
+    C --> D[Save asset details using existing code]
+    D --> E[Read details from file or valid cached list]
+    E --> F[Check note and choose label using shared rules]
+    D --> G[Load whole item]
+    G --> H[Update listing copy from main note]
+    H --> F
+    F --> I[Browser label and source or translated search]
+    I --> J[Same item, unchanged path, no required import]

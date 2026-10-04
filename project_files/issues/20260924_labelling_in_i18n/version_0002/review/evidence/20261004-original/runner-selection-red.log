@@ -1,0 +1,13 @@
+....F
+======================================================================
+FAIL: test_missing_tab_selection_case_is_failure (__main__.ReviewRunnerTest.test_missing_tab_selection_case_is_failure)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Volumes/1TB_BK/hoangduytran/Dev/tran/blender-git/blender/project_files/issues/20260924_labelling_in_i18n/version_0002/review/test_review_runner.py", line 77, in test_missing_tab_selection_case_is_failure
+    self.assertNotEqual(code,0)
+AssertionError: 0 == 0
+
+----------------------------------------------------------------------
+Ran 5 tests in 12.006s
+
+FAILED (failures=1)

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="37" failures="0" disabled="0" errors="0" time="0.155" timestamp="2026-10-04T02:46:00.496" name="AllTests">
+  <testsuite name="CopyDriversToSelected" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0.001" timestamp="2026-10-04T02:46:00.561">
+    <testcase name="get_property_drivers" file="source/blender/editors/interface/interface_ops_test.cc" line="307" status="run" result="completed" time="0.001" timestamp="2026-10-04T02:46:00.561" classname="CopyDriversToSelected" />
+    <testcase name="paste_property_drivers" file="source/blender/editors/interface/interface_ops_test.cc" line="422" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.563" classname="CopyDriversToSelected" />
+  </testsuite>
+  <testsuite name="AssetLibraryServiceTest" tests="9" failures="0" disabled="0" skipped="0" errors="0" time="0.002" timestamp="2026-10-04T02:46:00.578">
+    <testcase name="get_destroy" file="source/blender/asset_system/tests/asset_library_service_test.cc" line="81" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.578" classname="AssetLibraryServiceTest" />
+    <testcase name="library_pointers" file="source/blender/asset_system/tests/asset_library_service_test.cc" line="96" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.578" classname="AssetLibraryServiceTest" />
+    <testcase name="library_from_reference" file="source/blender/asset_system/tests/asset_library_service_test.cc" line="114" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.579" classname="AssetLibraryServiceTest" />
+    <testcase name="library_path_trailing_slashes" file="source/blender/asset_system/tests/asset_library_service_test.cc" line="146" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.579" classname="AssetLibraryServiceTest" />
+    <testcase name="catalogs_loaded" file="source/blender/asset_system/tests/asset_library_service_test.cc" line="173" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.579" classname="AssetLibraryServiceTest" />
+    <testcase name="has_any_unsaved_catalogs" file="source/blender/asset_system/tests/asset_library_service_test.cc" line="185" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.579" classname="AssetLibraryServiceTest" />
+    <testcase name="has_any_unsaved_catalogs_after_write" file="source/blender/asset_system/tests/asset_library_service_test.cc" line="214" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.579" classname="AssetLibraryServiceTest" />
+    <testcase name="move_runtime_current_file_into_on_disk_library__empty_directory" file="source/blender/asset_system/tests/asset_library_service_test.cc" line="249" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.580" classname="AssetLibraryServiceTest" />
+    <testcase name="move_runtime_current_file_into_on_disk_library__directory_with_catalogs" file="source/blender/asset_system/tests/asset_library_service_test.cc" line="322" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.580" classname="AssetLibraryServiceTest" />
+  </testsuite>
+  <testsuite name="AssetLibraryTest" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-10-04T02:46:00.597">
+    <testcase name="AS_asset_library_load_from_directory" file="source/blender/asset_system/tests/asset_library_test.cc" line="38" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.597" classname="AssetLibraryTest" />
+    <testcase name="load_nonexistent_directory" file="source/blender/asset_system/tests/asset_library_test.cc" line="62" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.597" classname="AssetLibraryTest" />
+  </testsuite>
+  <testsuite name="BrushTest" tests="2" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-10-04T02:46:00.614">
+    <testcase name="deep_copy" file="source/blender/blenkernel/intern/brush_test.cc" line="52" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.614" classname="BrushTest" />
+    <testcase name="deep_copy_grease_pencil_brush" file="source/blender/blenkernel/intern/brush_test.cc" line="81" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.614" classname="BrushTest" />
+  </testsuite>
+  <testsuite name="IDPropertyTest" tests="11" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-10-04T02:46:00.631">
+    <testcase name="NewStringMaxSizeUtf8Truncate" file="source/blender/blenkernel/intern/idprop_test.cc" line="25" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.631" classname="IDPropertyTest" />
+    <testcase name="AssignStringMaxSizeUtf8Truncate" file="source/blender/blenkernel/intern/idprop_test.cc" line="43" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.631" classname="IDPropertyTest" />
+    <testcase name="AssignStringMaxSizeBytesIgnoreUtf8" file="source/blender/blenkernel/intern/idprop_test.cc" line="54" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.631" classname="IDPropertyTest" />
+    <testcase name="CreateGroup" file="source/blender/blenkernel/intern/idprop_test.cc" line="69" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.631" classname="IDPropertyTest" />
+    <testcase name="AddToGroup" file="source/blender/blenkernel/intern/idprop_test.cc" line="75" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.631" classname="IDPropertyTest" />
+    <testcase name="ReplaceInGroup" file="source/blender/blenkernel/intern/idprop_test.cc" line="91" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.631" classname="IDPropertyTest" />
+    <testcase name="RemoveFromGroup" file="source/blender/blenkernel/intern/idprop_test.cc" line="103" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.631" classname="IDPropertyTest" />
+    <testcase name="ReplaceGroupInGroup" file="source/blender/blenkernel/intern/idprop_test.cc" line="116" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.631" classname="IDPropertyTest" />
+    <testcase name="SyncGroupValues" file="source/blender/blenkernel/intern/idprop_test.cc" line="134" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.631" classname="IDPropertyTest" />
+    <testcase name="GroupLookupFloatArray" file="source/blender/blenkernel/intern/idprop_test.cc" line="155" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.631" classname="IDPropertyTest" />
+    <testcase name="ReprGroup" file="source/blender/blenkernel/intern/idprop_test.cc" line="183" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.631" classname="IDPropertyTest" />
+  </testsuite>
+  <testsuite name="LibRemapTest" tests="11" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2026-10-04T02:46:00.650">
+    <testcase name="embedded_ids_can_not_be_remapped" file="source/blender/blenkernel/intern/lib_remap_test.cc" line="112" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.650" classname="LibRemapTest" />
+    <testcase name="embedded_ids_can_not_be_deleted" file="source/blender/blenkernel/intern/lib_remap_test.cc" line="128" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.650" classname="LibRemapTest" />
+    <testcase name="delete_when_remap_to_self_not_allowed" file="source/blender/blenkernel/intern/lib_remap_test.cc" line="148" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.650" classname="LibRemapTest" />
+    <testcase name="users_are_decreased_when_not_skipping_never_null" file="source/blender/blenkernel/intern/lib_remap_test.cc" line="167" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.650" classname="LibRemapTest" />
+    <testcase name="users_are_same_when_skipping_never_null" file="source/blender/blenkernel/intern/lib_remap_test.cc" line="185" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.650" classname="LibRemapTest" />
+    <testcase name="do_not_delete_when_cannot_unset" file="source/blender/blenkernel/intern/lib_remap_test.cc" line="207" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.650" classname="LibRemapTest" />
+    <testcase name="force_never_null_usage" file="source/blender/blenkernel/intern/lib_remap_test.cc" line="219" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.650" classname="LibRemapTest" />
+    <testcase name="never_null_usage_flag_not_requested_on_delete" file="source/blender/blenkernel/intern/lib_remap_test.cc" line="230" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.650" classname="LibRemapTest" />
+    <testcase name="never_null_usage_storage_requested_on_delete" file="source/blender/blenkernel/intern/lib_remap_test.cc" line="245" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.650" classname="LibRemapTest" />
+    <testcase name="never_null_usage_flag_not_requested_on_remap" file="source/blender/blenkernel/intern/lib_remap_test.cc" line="266" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.650" classname="LibRemapTest" />
+    <testcase name="never_null_usage_storage_requested_on_remap" file="source/blender/blenkernel/intern/lib_remap_test.cc" line="281" status="run" result="completed" time="0." timestamp="2026-10-04T02:46:00.650" classname="LibRemapTest" />
+  </testsuite>
+</testsuites>

@@ -1,0 +1,12 @@
+sequenceDiagram
+    participant P as Preferences
+    participant T as Available translations
+    participant W as Blender window updates
+    participant V as Tabs / shelves / menus / browser
+    P->>T: Set current language
+    P->>W: Tell open windows that language changed
+    W->>V: Refresh displayed names, and search
+    V->>T: Ask for translations of marked names
+    T-->>V: Translation, or original if unavailable
+    V->>V: Measure and draw the same text
+    Note over W,V: Saved names and files stay unchanged

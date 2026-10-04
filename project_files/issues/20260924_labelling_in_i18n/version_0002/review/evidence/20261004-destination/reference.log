@@ -1,0 +1,32 @@
+Arguments: ["/opt/homebrew/opt/python@3.14/bin/python3.14", "-B", "-m", "unittest", "discover", "-s", "/Volumes/1TB_BK/hoangduytran/Dev/programming/blender_stuff/blender/project_files/issues/20260924_labelling_in_i18n/version_0002/reference", "-p", "test_*.py", "-v"]
+test_append_without_and_with_collision (test_name_localization.NameLocalizationTests.test_append_without_and_with_collision) ... ok
+test_collision_peer_and_requested_id_clear (test_name_localization.NameLocalizationTests.test_collision_peer_and_requested_id_clear) ... ok
+test_context_separates_same_spelling (test_name_localization.NameLocalizationTests.test_context_separates_same_spelling) ... ok
+test_copy_after_unique_naming_does_not_restore_marker (test_name_localization.NameLocalizationTests.test_copy_after_unique_naming_does_not_restore_marker) ... ok
+test_external_asset_uses_snapshot_without_id (test_name_localization.NameLocalizationTests.test_external_asset_uses_snapshot_without_id) ... ok
+test_identical_labels_keep_distinct_identity_and_stable_tiebreak (test_name_localization.NameLocalizationTests.test_identical_labels_keep_distinct_identity_and_stable_tiebreak) ... ok
+test_identity_preserving_copy_retains_metadata (test_name_localization.NameLocalizationTests.test_identity_preserving_copy_retains_metadata) ... ok
+test_interface_disabled (test_name_localization.NameLocalizationTests.test_interface_disabled) ... ok
+test_invalid_descriptors_are_literal (test_name_localization.NameLocalizationTests.test_invalid_descriptors_are_literal) ... ok
+test_linked_read_only_display (test_name_localization.NameLocalizationTests.test_linked_read_only_display) ... ok
+test_loaded_id_does_not_infer_from_stale_asset_snapshot (test_name_localization.NameLocalizationTests.test_loaded_id_does_not_infer_from_stale_asset_snapshot) ... ok
+test_mark_asset_after_stamping_syncs_snapshot (test_name_localization.NameLocalizationTests.test_mark_asset_after_stamping_syncs_snapshot) ... ok
+test_missing_catalog_and_empty_translation (test_name_localization.NameLocalizationTests.test_missing_catalog_and_empty_translation) ... ok
+test_old_localized_name_stays_literal (test_name_localization.NameLocalizationTests.test_old_localized_name_stays_literal) ... ok
+test_old_reader_metadata_loss_falls_back (test_name_localization.NameLocalizationTests.test_old_reader_metadata_loss_falls_back) ... ok
+test_rename_away_and_back_remains_literal (test_name_localization.NameLocalizationTests.test_rename_away_and_back_remains_literal) ... ok
+test_rename_unicode_saved_literally (test_name_localization.NameLocalizationTests.test_rename_unicode_saved_literally) ... ok
+test_runtime_language_across_three_types (test_name_localization.NameLocalizationTests.test_runtime_language_across_three_types) ... ok
+test_save_reopen_preserves_author_intent (test_name_localization.NameLocalizationTests.test_save_reopen_preserves_author_intent) ... ok
+test_search_matches_both_names_and_deduplicates (test_name_localization.NameLocalizationTests.test_search_matches_both_names_and_deduplicates) ... ok
+test_supported_state_restore_recovers_metadata (test_name_localization.NameLocalizationTests.test_supported_state_restore_recovers_metadata) ... ok
+test_unchanged_edit_preserves_marker (test_name_localization.NameLocalizationTests.test_unchanged_edit_preserves_marker) ... ok
+test_unmarked_familiar_name_stays_literal (test_name_localization.NameLocalizationTests.test_unmarked_familiar_name_stays_literal) ... ok
+test_unrelated_properties_survive_clear_and_sync (test_name_localization.NameLocalizationTests.test_unrelated_properties_survive_clear_and_sync) ... ok
+test_user_duplicate_same_name_is_literal (test_name_localization.NameLocalizationTests.test_user_duplicate_same_name_is_literal) ... ok
+test_utf8_bound_is_bytes_not_characters (test_name_localization.NameLocalizationTests.test_utf8_bound_is_bytes_not_characters) ... ok
+
+----------------------------------------------------------------------
+Ran 26 tests in 0.001s
+
+OK

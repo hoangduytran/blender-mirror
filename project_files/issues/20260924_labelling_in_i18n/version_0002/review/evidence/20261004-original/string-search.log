@@ -1,0 +1,15 @@
+Note: Google Test filter = string_search.*
+[==========] Running 3 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 3 tests from string_search
+[ RUN      ] string_search.damerau_levenshtein_distance
+[       OK ] string_search.damerau_levenshtein_distance (0 ms)
+[ RUN      ] string_search.get_fuzzy_match_errors
+[       OK ] string_search.get_fuzzy_match_errors (0 ms)
+[ RUN      ] string_search.extract_normalized_words
+[       OK ] string_search.extract_normalized_words (0 ms)
+[----------] 3 tests from string_search (0 ms total)
+
+[----------] Global test environment tear-down
+[==========] 3 tests from 1 test suite ran. (0 ms total)
+[  PASSED  ] 3 tests.

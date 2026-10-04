@@ -1,0 +1,33 @@
+Note: Google Test filter = IDNameEditTest.TabTextSelectionContrastsWithBothTabBackgrounds
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from IDNameEditTest
+[ RUN      ] IDNameEditTest.TabTextSelectionContrastsWithBothTabBackgrounds
+source/blender/editors/interface/interface_ops_test.cc:244: Failure
+Expected: (contrast) >= (30.0f), actual: 0 vs 30
+
+source/blender/editors/interface/interface_ops_test.cc:244: Failure
+Expected: (contrast) >= (30.0f), actual: 0 vs 30
+
+source/blender/editors/interface/interface_ops_test.cc:244: Failure
+Expected: (contrast) >= (30.0f), actual: 0 vs 30
+
+source/blender/editors/interface/interface_ops_test.cc:244: Failure
+Expected: (contrast) >= (30.0f), actual: 3.8 vs 30
+
+source/blender/editors/interface/interface_ops_test.cc:244: Failure
+Expected: (contrast) >= (30.0f), actual: 3.8 vs 30
+
+source/blender/editors/interface/interface_ops_test.cc:244: Failure
+Expected: (contrast) >= (30.0f), actual: 3.8 vs 30
+
+[  FAILED  ] IDNameEditTest.TabTextSelectionContrastsWithBothTabBackgrounds (49 ms)
+[----------] 1 test from IDNameEditTest (49 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (178 ms total)
+[  PASSED  ] 0 tests.
+[  FAILED  ] 1 test, listed below:
+[  FAILED  ] IDNameEditTest.TabTextSelectionContrastsWithBothTabBackgrounds
+
+ 1 FAILED TEST

@@ -1,0 +1,39 @@
+{"check": "section2_and23_API_availability", "passed": true, "detail": {"class_hasattr_ui_name": false, "rna_ui_name": true, "rna_mark": true, "vi_enum": true, "workspaces_new": false}}
+00:00.312  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-plsxnbr7/consumer.blend"
+Thông Tin: Đã lưu thành "consumer.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-plsxnbr7/library.blend', '//library.blend', phụ huynh '<direct>'
+{"check": "section14_exact_link_save_reopen", "passed": true, "detail": {"name": "Review Linked Source", "display": "Vật thể liên kết mẫu", "eligible": true, "unchanged_source": true}}
+00:00.375  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-60h2e2fb/consumer.blend"
+00:00.394  blend.readfile   | WARNING Append: ID 'OBReview Linked Source' is already linked
+00:00.395  blend.readfile   | WARNING Append: ID 'OBReview Linked Source' is already linked
+00:00.406  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-60h2e2fb/append-consumer.blend"
+Thông Tin: Đã lưu thành "consumer.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-60h2e2fb/library.blend', '//library.blend', phụ huynh '<direct>'
+Review Linked Source True Vật thể liên kết mẫu
+Thông Tin: Đã lưu thành "append-consumer.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-60h2e2fb/library.blend', '//library.blend', phụ huynh '<direct>'
+{"check": "section15_exact_append_collision_reopen", "passed": true, "detail": {"first_name": "Review Personal Append", "repeated_append_suffix": ".001", "reopen_literal": true, "unchanged_source": true}}
+00:00.493  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-z03qrc5m/consumer.blend"
+00:00.518  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-z03qrc5m/consumer.blend"
+00:00.539  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-z03qrc5m/consumer.blend"
+Thông Tin: Đã lưu thành "consumer.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-z03qrc5m/library.blend', '//library.blend', phụ huynh '<direct>'
+Thông Tin: Đã lưu thành "consumer.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-z03qrc5m/library.blend', '//library.blend', phụ huynh '<direct>'
+Thông Tin: Đã lưu thành "consumer.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-z03qrc5m/library.blend', '//library.blend', phụ huynh '<direct>'
+{"check": "section16_exact_override_renameback_reopen", "passed": true, "detail": {"name": "Review Linked Source", "eligible": false, "marked_reference": true, "unchanged_source": true}}
+00:00.593  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-2x5n2qz9/consumer.blend"
+00:00.616  blend            | Read blend: "/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-2x5n2qz9/clear-consumer.blend"
+Thông Tin: Đã lưu thành "consumer.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-2x5n2qz9/library.blend', '//library.blend', phụ huynh '<direct>'
+Thông Tin: Đã lưu thành "clear-consumer.blend"
+Thông Tin: Đọc thư viện: '/var/folders/yz/wm3sg7hx66d9vwky0105b_km0000gn/T/name-library-review-2x5n2qz9/library.blend', '//library.blend', phụ huynh '<direct>'
+{"check": "section16_clear_override_reopen", "passed": true, "detail": {"eligible": false, "marked_reference": true, "unchanged_source": true}}
+{"check": "section17_exact_brush_copy_suffixes", "passed": true, "detail": {"names": ["Review Collision", "Review Collision.001", "Review Collision.002"], "eligibility": [true, false, false]}}
+Review API Source Review API Source False Object
+{"check": "section20_exact_public_API", "passed": true, "detail": {"final_name": "Review Personal API", "eligible": false, "readonly_properties": 3}}
+{"check": "section23_corrected_workspace_copy", "passed": true, "detail": {"name": "Review Unmarked Workspace", "eligible": false, "copy_API": true}}
+Blender 5.3.0 Alpha (hash 4041af919a44 built 2026-10-04 02:09:02)
+
+Blender quit
