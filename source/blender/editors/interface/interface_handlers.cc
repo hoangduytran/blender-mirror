@@ -401,6 +401,7 @@ struct TextEdit {
   /* Allow reallocating #edit_string and using #max_string_size to track alloc size (maxlen + 1) */
   bool is_str_dynamic = false;
   char *original_string = nullptr;
+  std::optional<ButtonIDNameEdit> id_name_edit;
 
   /* Button text selection:
    * extension direction, selextend, inside do_but_TEX */
@@ -1349,7 +1350,14 @@ static void apply_but_TEX(bContext *C, Button *but, HandleButtonData *data)
     return;
   }
 
-  button_string_set(C, but, data->text_edit.edit_string);
+  const TextEdit &edit = data->text_edit;
+  const StringRefNull value = edit.id_name_edit ?
+                                 button_id_name_edit_apply(*edit.id_name_edit,
+                                                           edit.edit_string,
+                                                           edit.original_string,
+                                                           data->cancel) :
+                                 StringRefNull(edit.edit_string);
+  button_string_set(C, but, value.c_str());
   button_update_edited(but);
 
   ButtonText *text_button = but->type == ButtonType::Text ? static_cast<ButtonText *>(but) :
@@ -1392,7 +1400,14 @@ static void apply_but_TEX(bContext *C, Button *but, HandleButtonData *data)
 static void apply_but_TAB(bContext *C, Button *but, HandleButtonData *data)
 {
   if (data->text_edit.edit_string) {
-    button_string_set(C, but, data->text_edit.edit_string);
+    const TextEdit &edit = data->text_edit;
+    const StringRefNull value = edit.id_name_edit ?
+                                   button_id_name_edit_apply(*edit.id_name_edit,
+                                                             edit.edit_string,
+                                                             edit.original_string,
+                                                             data->cancel) :
+                                   StringRefNull(edit.edit_string);
+    button_string_set(C, but, value.c_str());
     button_update_edited(but);
   }
   else {
@@ -3809,6 +3824,8 @@ static void textedit_begin(bContext *C, Button *but, HandleButtonData *data)
   bool no_zero_strip = false;
 
   MEM_SAFE_DELETE(text_edit.edit_string);
+  text_edit.id_name_edit.reset();
+  text_edit.is_str_dynamic = false;
 
   WorkspaceStatus status(C);
 
@@ -3887,10 +3904,23 @@ static void textedit_begin(bContext *C, Button *but, HandleButtonData *data)
     numedit_begin_set_values(but, data);
   }
 
-  /* won't change from now on */
+  text_edit.original_string = BLI_strdup(text_edit.edit_string);
+  text_edit.id_name_edit = button_id_name_edit_begin(
+      *but, text_edit.edit_string, text_edit.max_string_size);
+  const bool edits_translated_name = text_edit.id_name_edit.has_value();
+  ID *name_owner = edits_translated_name ? text_edit.id_name_edit->id :
+                                         button_id_name_edit_owner(*but);
+  const bool edits_workspace_name = name_owner && GS(name_owner->name) == ID_WS;
+  const bool starts_unselected = edits_workspace_name || edits_translated_name;
+  const bool had_no_select_flag = bool(but->flag & BUT_ACTIVATE_ON_INIT_NO_SELECT);
+  if (starts_unselected) {
+    /* All workspace names retain the previous fix's end caret, including personal saved names. */
+    button_flag_enable(but, BUT_ACTIVATE_ON_INIT_NO_SELECT);
+  }
+  if (edits_translated_name) {
+    text_edit.is_str_dynamic = true;
+  }
   const int len = strlen(text_edit.edit_string);
-
-  text_edit.original_string = BLI_strdupn(text_edit.edit_string, len);
   text_edit.sel_pos_init = 0;
 
   /* set cursor pos to the end of the text */
@@ -3903,6 +3933,10 @@ static void textedit_begin(bContext *C, Button *but, HandleButtonData *data)
     but->selsta = 0;
   }
   but->selend = len;
+  const bool restores_selection_flag = starts_unselected && !had_no_select_flag;
+  if (restores_selection_flag) {
+    button_flag_disable(but, BUT_ACTIVATE_ON_INIT_NO_SELECT);
+  }
 
   /* Initialize undo history tracking. */
   text_edit.undo_stack_text = textedit_undo_stack_create();
@@ -4552,7 +4586,9 @@ static int do_but_textedit(
     button_edit_unit_hint_refresh(C, but, data);
 
     /* only do live update when but flag request it (BUT_TEXTEDIT_UPDATE). */
-    if (update && data->interactive) {
+    /* Keep the translation note intact until confirmation, so Escape needs no metadata restore. */
+    const bool applies_live_edit = update && data->interactive && !text_edit.id_name_edit;
+    if (applies_live_edit) {
       apply_but(C, block, but, data, true);
     }
     else {
@@ -13827,12 +13863,17 @@ std::optional<int2> try_activate_rna_button(bContext *C,
     return std::nullopt;
   }
 
-  if (state == BUTTON_STATE_TEXT_EDITING && ELEM(button->type,
-                                                 ButtonType::Text,
-                                                 ButtonType::Num,
-                                                 ButtonType::NumSlider,
-                                                 ButtonType::SearchMenu))
-  {
+  /* Reuse the existing workspace test's editable-tab activation conditions. */
+  const bool is_editable_tab = button->type == ButtonType::Tab && button->rnaprop &&
+                               button->custom_data &&
+                               ELEM(RNA_property_type(button->rnaprop), PROP_POINTER, PROP_STRING);
+  const bool supports_text_editing = is_editable_tab || ELEM(button->type,
+                                                             ButtonType::Text,
+                                                             ButtonType::Num,
+                                                             ButtonType::NumSlider,
+                                                             ButtonType::SearchMenu);
+  const bool activates_text_editing = state == BUTTON_STATE_TEXT_EDITING && supports_text_editing;
+  if (activates_text_editing) {
     button_activate_state(C, button, BUTTON_STATE_TEXT_EDITING);
   }
 

@@ -948,6 +948,9 @@ def dump_template_messages(msgs, reports, settings):
         template = os.path.basename(template)
         bpy.ops.wm.read_homefile(use_factory_startup=True, app_template=template)
         for ws in bpy.data.workspaces:
+            is_eligible = ws.ui_name_is_translatable
+            if not is_eligible:
+                continue
             names = workspace_names.setdefault(ws.name, [])
             names.append(template or "General")
 
@@ -1083,21 +1086,24 @@ def dump_asset_messages(msgs, reports, settings):
     for bfile in bfiles:
         basename = os.path.basename(bfile)
         bpy.ops.wm.open_mainfile(filepath=bfile)
-        # For now, only parse node groups.
-        # Perhaps some other assets will need to be extracted later?
-        for asset_type in ("node_groups",):
-            for asset in getattr(bpy.data, asset_type):
-                if asset.asset_data is None:  # Not an asset
-                    continue
-                assets = asset_files.setdefault(basename, [])
-                asset_data = {"name": asset.name,
-                              "description": asset.asset_data.description}
+        # Only explicit saved notes make data names interface messages.
+        for asset in bpy.data.user_map():
+            is_asset = asset.asset_data is not None
+            if not is_asset:
+                continue
+            assets = asset_files.setdefault(basename, [])
+            asset_data = {"name": asset.name,
+                          "name_translatable": asset.ui_name_is_translatable,
+                          "name_context": asset.ui_name_translation_context,
+                          "description": asset.asset_data.description}
+            assets.append(asset_data)
+            is_node_group = isinstance(asset, bpy.types.NodeTree)
+            if is_node_group:
                 for interface in asset.interface.items_tree:
                     if interface.name == "Geometry":  # Ignore common socket
                         continue
                     socket_data = asset_data.setdefault("sockets", [])
                     socket_data.append((interface.name, interface.description))
-                assets.append(asset_data)
                 for node in asset.nodes:
                     if node.bl_idname == "GeometryNodeWarning" and node.inputs['Message'].default_value:
                         warning_data = asset_data.setdefault("warnings", [])
@@ -1111,10 +1117,12 @@ def dump_asset_messages(msgs, reports, settings):
         for asset in sorted(asset_files[asset_file], key=lambda a: a["name"]):
             name, description = asset["name"], asset["description"]
             msgsrc = "Asset name from file " + asset_file
-            process_msg(
-                msgs, settings.DEFAULT_CONTEXT, name, msgsrc,
-                reports, None, settings,
-            )
+            is_name_translatable = asset["name_translatable"]
+            if is_name_translatable:
+                process_msg(
+                    msgs, asset["name_context"], name, msgsrc,
+                    reports, None, settings,
+                )
             msgsrc = "Asset description from file " + asset_file
             process_msg(
                 msgs, settings.DEFAULT_CONTEXT, description, msgsrc,

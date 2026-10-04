@@ -18,7 +18,10 @@
 #include "BLI_uuid.hh"
 #include "BLI_vector.hh"
 
+#include "BKE_id_ui_name.hh"
 #include "BKE_idtype.hh"
+
+#include "DNA_ID.h"
 
 #include "../file_intern.hh"
 #include "../filelist.hh"
@@ -283,6 +286,14 @@ static void filelist_filter_and_sort_assets(FileList *filelist,
     const AssetMetaData *asset_data = filelist_file_internal_get_asset_data(file);
     if (asset_data) {
       std::string searchable_string = file->name;
+      asset_system::AssetRepresentation *asset = file->get_asset();
+      const bool has_asset_representation = asset != nullptr;
+      if (has_asset_representation) {
+        const ID *id = asset->local_id();
+        const IDProperty *properties = id ? id->system_properties : asset_data->properties;
+        searchable_string = BKE_id_ui_name_search_text(
+            short(asset->get_id_type()), asset->get_name(), properties);
+      }
       for (const AssetTag &asset_tag : asset_data->tags) {
         searchable_string += " ";
         searchable_string += asset_tag.name;

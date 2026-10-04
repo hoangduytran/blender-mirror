@@ -32,6 +32,7 @@
 #include "BKE_geometry_set.hh"
 #include "BKE_global.hh"
 #include "BKE_grease_pencil.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_idprop_hash.hh"
 #include "BKE_layer.hh"
 #include "BKE_lib_id.hh"
@@ -137,6 +138,7 @@ struct OperatorTypeData : public wmOperatorType::TypeData {
   GeometryNodeAssetTraitFlag flag;
 
   std::unique_ptr<IDProperty, bke::idprop::IDPropertyDeleter> asset_meta_data_properties;
+  std::unique_ptr<IDProperty, bke::idprop::IDPropertyDeleter> name_translation_properties;
   Vector<StructRNA *> generated_structs;
   Vector<Array<EnumPropertyItem, 0>> enum_item_storage;
 
@@ -191,6 +193,10 @@ void OperatorTypeData::ensure_hash()
       },
       this->group_ref);
   bke::idprop::hash(*this->asset_meta_data_properties, hash_state);
+  const bool has_name_translation_properties = this->name_translation_properties != nullptr;
+  if (has_name_translation_properties) {
+    bke::idprop::hash(*this->name_translation_properties, hash_state);
+  }
   static_assert(sizeof(this->hash) == sizeof(XXH128_hash_t));
   const XXH128_hash_t xxh3_hash = XXH3_128bits_digest(hash_state);
   this->hash = {xxh3_hash.low64, xxh3_hash.high64};
@@ -253,6 +259,8 @@ std::optional<OperatorTypeData> OperatorTypeData::from_asset(
   }
   type_data.flag = GeometryNodeAssetTraitFlag(IDP_int_get(traits_flag));
   type_data.group_ref = asset.make_weak_reference();
+  type_data.name_translation_properties.reset(
+      BKE_id_ui_name_properties_copy(type_data.name, metadata.properties));
 
   const IDProperty *properties = BKE_asset_metadata_idprop_find(&metadata, "properties");
   if (!properties || properties->type != IDP_GROUP) {
@@ -309,6 +317,8 @@ std::optional<OperatorTypeData> OperatorTypeData::from_group(const bNodeTree &gr
   type_data.description = group.description ? group.description : "";
   type_data.flag = GeometryNodeAssetTraitFlag(group.geometry_node_asset_traits->flag);
   type_data.group_ref = OperatorTypeData::LocalRef{group.id.session_uid};
+  type_data.name_translation_properties.reset(
+      BKE_id_ui_name_properties_copy(type_data.name, group.id.system_properties));
 
   type_data.asset_meta_data_properties =
       std::unique_ptr<IDProperty, bke::idprop::IDPropertyDeleter>(
@@ -1407,6 +1417,14 @@ static StructRNA *create_panels_srna(const IDProperty &properties,
   return srna;
 }
 
+/* Resolve presentation on demand. Reading an external tool's metadata never imports its ID. */
+static std::string node_tool_display_name(wmOperatorType *ot, PointerRNA * /*properties*/)
+{
+  const auto &type_data = static_cast<const OperatorTypeData &>(*ot->custom_data);
+  return BKE_id_ui_name_resolve(
+      ID_NT, type_data.name, type_data.name_translation_properties.get());
+}
+
 static void register_node_tool(wmOperatorType *ot,
                                std::unique_ptr<OperatorTypeData> &type_data_ptr)
 {
@@ -1415,6 +1433,8 @@ static void register_node_tool(wmOperatorType *ot,
 
   PropertyRNA *prop;
   ot->name = type_data.name.c_str();
+  ot->get_name = node_tool_display_name;
+  ot->name_requires_properties = false;
   ot->idname = type_data.idname.c_str();
   ot->description = type_data.description.empty() ? nullptr : type_data.description.c_str();
 

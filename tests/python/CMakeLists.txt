@@ -383,6 +383,26 @@ add_blender_test(
 )
 
 add_blender_test(
+  script_id_ui_name
+  --python ${CMAKE_CURRENT_LIST_DIR}/bl_id_ui_name.py
+)
+
+add_blender_test(
+  script_id_ui_name_libraries
+  --python ${CMAKE_CURRENT_LIST_DIR}/bl_id_ui_name_libraries.py
+)
+
+add_blender_test(
+  script_id_ui_name_factory
+  --python ${CMAKE_CURRENT_LIST_DIR}/bl_id_ui_name_factory.py
+)
+
+add_blender_test(
+  script_id_ui_name_sculpt
+  --python ${CMAKE_CURRENT_LIST_DIR}/bl_id_ui_name_sculpt.py
+)
+
+add_blender_test(
   script_pyapi_blf_buffer
   --python ${CMAKE_CURRENT_LIST_DIR}/bl_pyapi_blf.py
   --
@@ -1875,6 +1895,9 @@ if(WITH_UI_TESTS)
     test_blend_autoexec.pref_disabled_drop_blend_file
     test_blend_autoexec.pref_disabled_drop_blend_file_trusted_source
   )
+  if(WITH_INTERNATIONAL)
+    list(APPEND _ui_tests test_workspace.ui_name_editing_space_appends)
+  endif()
   foreach(ui_test ${_ui_tests})
     add_blender_test_ui(
       "${ui_test}"

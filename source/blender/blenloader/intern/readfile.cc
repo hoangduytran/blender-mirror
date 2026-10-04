@@ -74,6 +74,7 @@
 #include "BKE_blender_version.h"
 #include "BKE_collection.hh"
 #include "BKE_global.hh" /* for G */
+#include "BKE_id_ui_name.hh"
 #include "BKE_idprop.hh"
 #include "BKE_idtype.hh"
 #include "BKE_layer.hh"
@@ -2360,6 +2361,9 @@ static void direct_link_id_common(BlendDataReader *reader,
     BLO_read_struct(reader, IDProperty, &id->system_properties);
     IDP_BlendDataRead(reader, &id->system_properties);
   }
+
+  /* Listing metadata is derived from the loaded ID, never an author opt-in by itself. */
+  BKE_id_ui_name_copy_finalize(*id);
 
   id->flag &= ~ID_FLAG_INDIRECT_WEAK_LINK;
 

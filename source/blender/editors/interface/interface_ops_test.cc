@@ -3,15 +3,26 @@
  * SPDX-License-Identifier: GPL-2.0-or-later */
 
 #include "BKE_action.hh"
+#include "BKE_context.hh"
 #include "BKE_anim_data.hh"
 #include "BKE_fcurve.hh"
 #include "BKE_gtest_base.hh"
 #include "BKE_idtype.hh"
+#include "BKE_id_ui_name.hh"
+#include "BKE_global.hh"
 #include "BKE_lib_id.hh"
 #include "BKE_main.hh"
 #include "BKE_object.hh"
 
 #include "DNA_anim_types.h"
+#include "DNA_windowmanager_types.h"
+#include "DNA_userdef_types.h"
+
+#include "BLT_lang.hh"
+#include "BLT_translation.hh"
+#include "BLO_userdef_default.h"
+#include "BLI_string.hh"
+#include "MEM_guardedalloc.h"
 
 #include "RNA_access.hh"
 #include "RNA_define.hh"
@@ -30,7 +41,216 @@
 
 #include "testing/testing.h"
 
+#include <cmath>
+
 namespace blender::ui::tests {
+
+class IDNameEditTest : public bke::BlenderGTestBase {
+ protected:
+  Main *main_ = nullptr;
+  Main *previous_main_ = nullptr;
+  bContext *context_ = nullptr;
+  std::string previous_locale_;
+  eUserpref_Translation_Flags previous_flags_;
+
+  void SetUp() override
+  {
+    main_ = BKE_main_new();
+    previous_main_ = G_MAIN;
+    G_MAIN = main_;
+    context_ = CTX_create();
+    CTX_data_main_set(context_, main_);
+    previous_locale_ = BLT_lang_get();
+    previous_flags_ = U.transopts;
+    BLT_lang_set("vi_VN");
+    U.transopts |= USER_TR_IFACE;
+  }
+
+  void TearDown() override
+  {
+    CTX_free(context_);
+    G_MAIN = previous_main_;
+    BKE_main_free(main_);
+    U.transopts = previous_flags_;
+    BLT_lang_set(previous_locale_.c_str());
+  }
+};
+
+TEST_F(IDNameEditTest, EligibleRNANameStartsInSelectedLanguage)
+{
+#ifndef WITH_INTERNATIONAL
+  GTEST_SKIP() << "Blender was built without translations";
+#endif
+  ID &id = *static_cast<ID *>(BKE_id_new(main_, ID_WS, "Layout"));
+  ASSERT_TRUE(BKE_id_ui_name_mark(id));
+  const std::string translated = BKE_id_ui_name_get(id);
+  ASSERT_NE(translated, "Layout");
+  ButtonText button;
+  button.type = ButtonType::Text;
+  button.rnapoin = RNA_id_pointer_create(&id);
+  button.rnaprop = RNA_struct_name_property(button.rnapoin.type);
+  int capacity = 7;
+  char *text = MEM_new_array<char>(capacity, __func__);
+  button_string_get(&button, text, capacity);
+  EXPECT_STREQ(text, "Layout");
+  const auto snapshot = button_id_name_edit_begin(button, text, capacity);
+  EXPECT_TRUE(snapshot.has_value());
+  EXPECT_GE(capacity, translated.size() + 1);
+  EXPECT_STREQ(text, translated.c_str());
+  EXPECT_STREQ(id.name + 2, "Layout");
+  EXPECT_TRUE(BKE_id_ui_name_is_translatable(id));
+  MEM_delete(text);
+}
+
+TEST_F(IDNameEditTest, UnchangedAndCanceledEditsPreserveSourceAndNote)
+{
+#ifndef WITH_INTERNATIONAL
+  GTEST_SKIP() << "Blender was built without translations";
+#endif
+  ID &id = *static_cast<ID *>(BKE_id_new(main_, ID_WS, "Layout"));
+  ASSERT_TRUE(BKE_id_ui_name_mark(id));
+  const std::string display = BKE_id_ui_name_get(id);
+  ASSERT_NE(display, "Layout");
+  const ButtonIDNameEdit snapshot{&id, display};
+  EXPECT_EQ(button_id_name_edit_apply(snapshot, display, "Layout", false), "Layout");
+  EXPECT_EQ(button_id_name_edit_apply(snapshot, "Typed name", "Layout", true), "Layout");
+  EXPECT_EQ(button_id_name_edit_apply(snapshot, "Layout", "Layout", true), "Layout");
+  /* apply_but() transfers original_string into edit_string before a canceled apply. */
+  EXPECT_EQ(button_id_name_edit_apply(snapshot, "Layout", nullptr, true), "Layout");
+  EXPECT_TRUE(BKE_id_ui_name_is_translatable(id));
+  /* Confirmation uses the captured display, even after the locale has changed. */
+  BLT_lang_set("en_US");
+  EXPECT_EQ(button_id_name_edit_apply(snapshot, display, "Layout", false), "Layout");
+  EXPECT_STREQ(id.name + 2, "Layout");
+  EXPECT_TRUE(BKE_id_ui_name_is_translatable(id));
+}
+
+TEST_F(IDNameEditTest, DeliberateSourceTextBecomesLiteral)
+{
+#ifndef WITH_INTERNATIONAL
+  GTEST_SKIP() << "Blender was built without translations";
+#endif
+  ID &id = *static_cast<ID *>(BKE_id_new(main_, ID_WS, "Layout"));
+  ASSERT_TRUE(BKE_id_ui_name_mark(id));
+  const std::string display = BKE_id_ui_name_get(id);
+  ASSERT_NE(display, "Layout");
+  const ButtonIDNameEdit snapshot{&id, display};
+  EXPECT_EQ(button_id_name_edit_apply(snapshot, "Layout", "Layout", false), "Layout");
+  EXPECT_STREQ(id.name + 2, "Layout");
+  EXPECT_FALSE(BKE_id_ui_name_is_translatable(id));
+  EXPECT_EQ(BKE_id_ui_name_get(id), "Layout");
+}
+
+TEST_F(IDNameEditTest, ChangedTextUsesExistingRNANameSetter)
+{
+#ifndef WITH_INTERNATIONAL
+  GTEST_SKIP() << "Blender was built without translations";
+#endif
+  ID &id = *static_cast<ID *>(BKE_id_new(main_, ID_WS, "Layout"));
+  ASSERT_TRUE(BKE_id_ui_name_mark(id));
+  const std::string display = BKE_id_ui_name_get(id);
+  ASSERT_NE(display, "Layout");
+  const ButtonIDNameEdit snapshot{&id, display};
+  ButtonText button;
+  button.type = ButtonType::Text;
+  button.rnapoin = RNA_id_pointer_create(&id);
+  button.rnaprop = RNA_struct_name_property(button.rnapoin.type);
+  const StringRefNull unchanged = button_id_name_edit_apply(snapshot, display, "Layout", false);
+  EXPECT_TRUE(button_string_set(context_, &button, unchanged.c_str()));
+  EXPECT_STREQ(id.name + 2, "Layout");
+  EXPECT_TRUE(BKE_id_ui_name_is_translatable(id));
+  const StringRefNull changed = button_id_name_edit_apply(
+      snapshot, "Tên của tôi", "Layout", false);
+  EXPECT_TRUE(button_string_set(context_, &button, changed.c_str()));
+  EXPECT_STREQ(id.name + 2, "Tên của tôi");
+  EXPECT_FALSE(BKE_id_ui_name_is_translatable(id));
+  EXPECT_TRUE(button_string_set(context_, &button, "Layout"));
+  EXPECT_FALSE(BKE_id_ui_name_is_translatable(id));
+}
+
+TEST_F(IDNameEditTest, TabAndExplicitOutlinerOwnerUseTheSameEditStart)
+{
+#ifndef WITH_INTERNATIONAL
+  GTEST_SKIP() << "Blender was built without translations";
+#endif
+  ID &id = *static_cast<ID *>(BKE_id_new(main_, ID_WS, "Layout"));
+  ASSERT_TRUE(BKE_id_ui_name_mark(id));
+  const std::string display = BKE_id_ui_name_get(id);
+  ASSERT_NE(display, "Layout");
+  /* The active workspace pointer belongs to Window, while the tab represents this ID. */
+  wmWindow window{};
+  ButtonTab tab;
+  tab.type = ButtonType::Tab;
+  tab.rnapoin = RNA_pointer_create_discrete(nullptr, RNA_Window, &window);
+  tab.rnaprop = RNA_struct_find_property(&tab.rnapoin, "workspace");
+  tab.custom_data = &id;
+  int capacity = 7;
+  char *text = MEM_new_array<char>(capacity, __func__);
+  button_string_get(&tab, text, capacity);
+  EXPECT_STREQ(text, "Layout");
+  EXPECT_TRUE(button_id_name_edit_begin(tab, text, capacity).has_value());
+  EXPECT_STREQ(text, display.c_str());
+  MEM_delete(text);
+
+  ButtonText outliner;
+  outliner.type = ButtonType::Text;
+  text_button_id_name_set(&outliner, &id);
+  text = BLI_strdup("Layout");
+  capacity = 7;
+  EXPECT_TRUE(button_id_name_edit_begin(outliner, text, capacity).has_value());
+  EXPECT_STREQ(text, display.c_str());
+  MEM_delete(text);
+}
+
+TEST_F(IDNameEditTest, LiteralNamesAndPointerSelectionKeepExistingBehavior)
+{
+  ID &id = *static_cast<ID *>(BKE_id_new(main_, ID_WS, "Layout"));
+  ButtonText button;
+  button.type = ButtonType::Text;
+  button.rnapoin = RNA_id_pointer_create(&id);
+  button.rnaprop = RNA_struct_name_property(button.rnapoin.type);
+  int capacity = 7;
+  char *text = BLI_strdup("Layout");
+  EXPECT_FALSE(button_id_name_edit_begin(button, text, capacity).has_value());
+  EXPECT_STREQ(text, "Layout");
+  EXPECT_TRUE(BKE_id_ui_name_mark(id));
+  U.transopts &= ~USER_TR_IFACE;
+  EXPECT_FALSE(button_id_name_edit_begin(button, text, capacity).has_value());
+  EXPECT_STREQ(text, "Layout");
+  U.transopts |= USER_TR_IFACE;
+
+  wmWindow window{};
+  ButtonSearch selector;
+  selector.type = ButtonType::SearchMenu;
+  selector.rnapoin = RNA_pointer_create_discrete(nullptr, RNA_Window, &window);
+  selector.rnaprop = RNA_struct_find_property(&selector.rnapoin, "workspace");
+  selector.custom_data = &id;
+  EXPECT_FALSE(button_id_name_edit_begin(selector, text, capacity).has_value());
+  EXPECT_STREQ(text, "Layout");
+  MEM_delete(text);
+}
+
+TEST_F(IDNameEditTest, TabTextSelectionContrastsWithBothTabBackgrounds)
+{
+  const ThemeUI &theme = U_theme_default.tui;
+  uchar tab_selection[4];
+  widget_text_selection_color(&theme.wcol_tab, &theme, ButtonType::Tab, tab_selection);
+  EXPECT_EQ(tab_selection[3], 51);
+  for (const uchar *background : {theme.wcol_tab.inner, theme.wcol_tab.inner_sel}) {
+    for (int channel = 0; channel < 3; channel++) {
+      const float alpha = tab_selection[3] / 255.0f;
+      const float contrast = std::abs((tab_selection[channel] - background[channel]) * alpha);
+      /* Normal text selection has more than 40 levels of contrast in this same default theme. */
+      EXPECT_GE(contrast, 30.0f);
+    }
+  }
+  uchar text_selection[4];
+  widget_text_selection_color(&theme.wcol_text, nullptr, ButtonType::Text, text_selection);
+  for (int channel = 0; channel < 3; channel++) {
+    EXPECT_EQ(text_selection[channel], theme.wcol_text.item[channel]);
+  }
+  EXPECT_EQ(text_selection[3], 51);
+}
 
 class CopyDriversToSelected : public bke::BlenderGTestBase {
  public:

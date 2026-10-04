@@ -20,6 +20,7 @@
 #include "BLI_vector.hh"
 
 #include "BKE_screen.hh"
+#include "BKE_id_ui_name.hh"
 
 #include "BLT_translation.hh"
 
@@ -169,7 +170,7 @@ uiListNameFilter::~uiListNameFilter()
   MEM_SAFE_DELETE(storage_.filter_dyn);
 }
 
-eUIListFilterResult uiListNameFilter::operator()(const PointerRNA & /*itemptr*/,
+eUIListFilterResult uiListNameFilter::operator()(const PointerRNA &itemptr,
                                                  StringRefNull name,
                                                  int /*index*/)
 {
@@ -183,10 +184,14 @@ eUIListFilterResult uiListNameFilter::operator()(const PointerRNA & /*itemptr*/,
    *   Unlike shell input - `\` should be treated like any other character.
    */
   const int fn_flag = FNM_CASEFOLD | FNM_NOESCAPE;
-  if (fnmatch(filter_, name.c_str(), fn_flag) == 0) {
+  const bool matches_source = fnmatch(filter_, name.c_str(), fn_flag) == 0;
+  if (matches_source) {
     return UI_LIST_ITEM_FILTER_MATCHES;
   }
-  return UI_LIST_ITEM_FILTER_MISMATCHES;
+  const bool has_id = itemptr.data && RNA_struct_is_ID(itemptr.type);
+  const StringRefNull display = has_id ? BKE_id_ui_name_get(*static_cast<ID *>(itemptr.data)) : name;
+  const bool matches_display = display != name && fnmatch(filter_, display.c_str(), fn_flag) == 0;
+  return matches_display ? UI_LIST_ITEM_FILTER_MATCHES : UI_LIST_ITEM_FILTER_MISMATCHES;
 }
 
 struct StringCmp {

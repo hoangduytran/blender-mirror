@@ -1989,6 +1989,8 @@ void block_funcN_set(Block *block,
                      ButtonArgNFree func_argN_free_fn = MEM_delete_void,
                      ButtonArgNCopy func_argN_copy_fn = MEM_dupalloc_void);
 
+/** Identify an ID name edited by a non-RNA text button. The ID is borrowed. */
+void text_button_id_name_set(Button *but, ID *id);
 void text_button_func_rename_set(
     Button *but, std::function<void(bContext &C, StringRefNull oldname)> rename_func);
 void text_button_func_rename_full_set(

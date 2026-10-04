@@ -48,6 +48,7 @@ struct uiListType;
 struct uiStyle;
 struct uiWidgetColors;
 struct UnitSettings;
+struct ThemeUI;
 struct wmEvent;
 struct wmKeyConfig;
 struct wmOperatorType;
@@ -382,6 +383,8 @@ struct TextWrapCache {
 
 /** Derived struct for #ButtonType::Text */
 struct ButtonText : public Button {
+  /** Borrowed ID for explicit non-RNA name editing, such as an Outliner ID row. */
+  ID *id_name_owner = nullptr;
   std::function<void(bContext &, StringRefNull)> rename_func = nullptr;
   char *rename_orig = nullptr;
   /**
@@ -935,6 +938,25 @@ void button_string_get(Button *but, char *str, size_t str_maxncpy) ATTR_NONNULL(
  * \param r_str_size: size of the returned string (including terminator).
  */
 char *button_string_get_dynamic(Button *but, int *r_str_size);
+/** Edit-only snapshot. Stored RNA names and cancellation strings remain literal. */
+struct ButtonIDNameEdit {
+  ID *id;
+  std::string initial_display;
+};
+/** The actual editable name owner; pointer-selection controls return null. */
+ID *button_id_name_edit_owner(Button &but);
+/** Theme is required only for tabs; other controls keep their existing selection color. */
+void widget_text_selection_color(const uiWidgetColors *wcol,
+                                 const ThemeUI *theme,
+                                 ButtonType type,
+                                 uchar color[4]);
+std::optional<ButtonIDNameEdit> button_id_name_edit_begin(Button &but,
+                                                        char *&edit_string,
+                                                        int &max_string_size);
+StringRefNull button_id_name_edit_apply(const ButtonIDNameEdit &snapshot,
+                                       StringRefNull edited,
+                                       const char *original,
+                                       bool canceled);
 /**
  * \param str: will be overwritten.
  */

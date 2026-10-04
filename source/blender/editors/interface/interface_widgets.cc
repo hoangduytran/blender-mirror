@@ -2177,9 +2177,15 @@ static void widget_draw_text_ime_underline(const uiFontStyle *fstyle,
 
 /* Text selection uses a lower opacity than the item color.
  * See #163741 for details. */
-static void widget_text_selection_color(const uiWidgetColors *wcol, uchar color[4])
+void widget_text_selection_color(const uiWidgetColors *wcol,
+                                 const ThemeUI *theme,
+                                 ButtonType type,
+                                 uchar color[4])
 {
-  copy_v4_v4_uchar(color, wcol->item);
+  /* Tab item colors belong to the tab background; editable text needs the text-field highlight. */
+  const bool selects_tab_text = type == ButtonType::Tab;
+  const uchar *item = selects_tab_text ? theme->wcol_text.item : wcol->item;
+  copy_v4_v4_uchar(color, item);
   color[3] = 51;
 }
 
@@ -2335,7 +2341,9 @@ static void widget_draw_textbox(const uiFontStyle *fstyle,
           immVertexFormat(), "pos", gpu::VertAttrType::SFLOAT_32_32);
       immBindBuiltinProgram(GPU_SHADER_3D_UNIFORM_COLOR);
       uchar selection_color[4];
-      widget_text_selection_color(wcol, selection_color);
+      const bool is_tab_text = but->type == ButtonType::Tab;
+      const ThemeUI *selection_theme = is_tab_text ? &theme::theme_get()->tui : nullptr;
+      widget_text_selection_color(wcol, selection_theme, but->type, selection_color);
       immUniformColor4ubv(selection_color);
       const StringRef line = lines[selection.line];
       const Vector<Bounds<int>> boxes = BLF_str_selection_boxes(
@@ -2650,7 +2658,9 @@ static void widget_draw_text(const uiFontStyle *fstyle,
           immVertexFormat(), "pos", gpu::VertAttrType::SFLOAT_32_32);
       immBindBuiltinProgram(GPU_SHADER_3D_UNIFORM_COLOR);
       uchar selection_color[4];
-      widget_text_selection_color(wcol, selection_color);
+      const bool is_tab_text = but->type == ButtonType::Tab;
+      const ThemeUI *selection_theme = is_tab_text ? &theme::theme_get()->tui : nullptr;
+      widget_text_selection_color(wcol, selection_theme, but->type, selection_color);
       immUniformColor4ubv(selection_color);
       const auto boxes = BLF_str_selection_boxes(
           fstyle->uifont_id,

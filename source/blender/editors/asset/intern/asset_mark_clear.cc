@@ -13,6 +13,7 @@
 #include "BKE_asset.hh"
 #include "BKE_context.hh"
 #include "BKE_global.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_idtype.hh"
 #include "BKE_lib_id.hh"
 #include "BKE_main.hh"
@@ -33,10 +34,12 @@ namespace blender::ed::asset {
 
 bool mark_id(ID *id)
 {
-  if (id->asset_data) {
+  const bool is_already_asset = id->asset_data != nullptr;
+  if (is_already_asset) {
     return false;
   }
-  if (!BKE_id_can_be_asset(id)) {
+  const bool can_mark_asset = BKE_id_can_be_asset(id);
+  if (!can_mark_asset) {
     return false;
   }
 
@@ -44,10 +47,14 @@ bool mark_id(ID *id)
 
   const IDTypeInfo *id_type_info = BKE_idtype_get_info_from_id(id);
   id->asset_data = BKE_asset_metadata_create();
-  if (AssetTypeInfo *type_info = id_type_info->asset_type_info) {
+  AssetTypeInfo *type_info = id_type_info->asset_type_info;
+  const bool has_asset_callbacks = type_info != nullptr;
+  if (has_asset_callbacks) {
     id->asset_data->local_type_info = type_info;
     type_info->on_mark_asset_fn(id, id->asset_data);
   }
+
+  BKE_id_ui_name_asset_sync(*id);
 
   /* Important for asset storage to update properly! */
   list::storage_tag_main_data_dirty();
@@ -97,13 +104,16 @@ void pre_save_assets(Main *bmain)
 {
   ID *id;
   FOREACH_MAIN_ID_BEGIN (bmain, id) {
-    if (!id->asset_data || !id->asset_data->local_type_info) {
+    const bool has_asset_metadata = id->asset_data != nullptr;
+    if (!has_asset_metadata) {
       continue;
     }
-
-    if (id->asset_data->local_type_info->pre_save_fn) {
+    const bool has_pre_save_callback = id->asset_data->local_type_info &&
+                                       id->asset_data->local_type_info->pre_save_fn;
+    if (has_pre_save_callback) {
       id->asset_data->local_type_info->pre_save_fn(id, id->asset_data);
     }
+    BKE_id_ui_name_asset_sync(*id);
   }
   FOREACH_MAIN_ID_END;
 }
@@ -121,14 +131,17 @@ bool can_mark_single_from_context(const bContext *C)
 
 bool copy_to_id(const AssetMetaData *asset_data, ID *destination)
 {
-  if (!BKE_id_can_be_asset(destination)) {
+  const bool can_mark_asset = BKE_id_can_be_asset(destination);
+  if (!can_mark_asset) {
     return false;
   }
 
-  if (destination->asset_data) {
+  const bool has_asset_metadata = destination->asset_data != nullptr;
+  if (has_asset_metadata) {
     BKE_asset_metadata_free(&destination->asset_data);
   }
   destination->asset_data = BKE_asset_metadata_copy(asset_data);
+  BKE_id_ui_name_asset_sync(*destination);
   return true;
 }
 

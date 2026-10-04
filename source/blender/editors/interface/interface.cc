@@ -36,6 +36,7 @@
 #include "BKE_animsys.hh"
 #include "BKE_context.hh"
 #include "BKE_idprop.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_report.hh"
 #include "BKE_scene.hh"
 #include "BKE_screen.hh"
@@ -1063,6 +1064,7 @@ static void but_update_old_active_from_new(Button *oldbut, Button *but)
       ButtonText *text_newbut = static_cast<ButtonText *>(but);
       std::swap(text_oldbut->rename_func, text_newbut->rename_func);
       std::swap(text_oldbut->rename_full_func, text_newbut->rename_full_func);
+      std::swap(text_oldbut->id_name_owner, text_newbut->id_name_owner);
       break;
     }
     default:
@@ -3502,6 +3504,79 @@ bool button_string_eval_number(bContext *C, const Button *but, const char *str, 
   return number_from_string(C, str, r_value);
 }
 
+ID *button_id_name_edit_owner(Button &but)
+{
+  const bool is_plain_text = but.type == ButtonType::Text && !but.rnaprop;
+  if (is_plain_text) {
+    return static_cast<ButtonText &>(but).id_name_owner;
+  }
+  const bool has_property = but.rnaprop && but.rnapoin;
+  if (!has_property) {
+    return nullptr;
+  }
+  PointerRNA target = but.rnapoin;
+  PropertyRNA *name_property = but.rnaprop;
+  const bool is_tab_target = but.type == ButtonType::Tab && but.custom_data &&
+                             RNA_property_type(but.rnaprop) == PROP_POINTER;
+  if (is_tab_target) {
+    target = RNA_pointer_create_discrete(
+        but.rnapoin.owner_id,
+        RNA_property_pointer_type(&but.rnapoin, but.rnaprop),
+        but.custom_data);
+    name_property = RNA_struct_name_property(target.type);
+  }
+  const bool edits_id_name = target.data && RNA_struct_is_ID(target.type) && name_property &&
+                             RNA_property_type(name_property) == PROP_STRING &&
+                             name_property == RNA_struct_name_property(target.type) &&
+                             RNA_property_editable(&target, name_property);
+  return edits_id_name ? static_cast<ID *>(target.data) : nullptr;
+}
+
+std::optional<ButtonIDNameEdit> button_id_name_edit_begin(Button &but,
+                                                        char *&edit_string,
+                                                        int &max_string_size)
+{
+  ID *id = button_id_name_edit_owner(but);
+  const bool has_translated_name = BLT_translate_iface() && id &&
+                                   BKE_id_ui_name_is_translatable(*id);
+  if (!has_translated_name) {
+    return std::nullopt;
+  }
+  const StringRefNull display = BKE_id_ui_name_get(*id);
+  const bool differs_from_source = display != StringRefNull(edit_string);
+  if (!differs_from_source) {
+    return std::nullopt;
+  }
+  ButtonIDNameEdit snapshot{id, std::string(display)};
+  const int required_size = display.size() + 1;
+  const bool needs_larger_buffer = required_size > max_string_size;
+  if (needs_larger_buffer) {
+    MEM_delete(edit_string);
+    max_string_size = required_size;
+    edit_string = MEM_new_array<char>(max_string_size, __func__);
+  }
+  BLI_strncpy(edit_string, snapshot.initial_display.c_str(), max_string_size);
+  return snapshot;
+}
+
+StringRefNull button_id_name_edit_apply(const ButtonIDNameEdit &snapshot,
+                                       StringRefNull edited,
+                                       const char *original,
+                                       const bool canceled)
+{
+  if (canceled) {
+    /* The handler may already have moved the raw cancellation string into the edit buffer. */
+    return original ? StringRefNull(original) : edited;
+  }
+  const bool preserves_source = edited == snapshot.initial_display;
+  if (preserves_source) {
+    return StringRefNull(original);
+  }
+  /* A deliberate edit to the original English text is also a literal user name. */
+  BKE_id_ui_name_clear(*snapshot.id);
+  return edited;
+}
+
 bool button_string_set(bContext *C, Button *but, const char *str)
 {
   if (but->rnaprop && but->rnapoin &&
@@ -4323,7 +4398,22 @@ static void but_update_ex(Button *but, const bool validate)
       if (!but->editstr) {
         char str[UI_MAX_DRAW_STR];
         button_string_get(but, str, UI_MAX_DRAW_STR);
-        but->drawstr = fmt::format("{}{}", but->str, str);
+        PointerRNA display_ptr = but->rnapoin;
+        const bool is_pointer_property = but->rnaprop &&
+                                         RNA_property_type(but->rnaprop) == PROP_POINTER;
+        if (is_pointer_property) {
+          display_ptr = RNA_property_pointer_get(&but->rnapoin, but->rnaprop);
+        }
+        const bool shows_id_name = but->rnaprop && display_ptr.data &&
+                                   RNA_struct_is_ID(display_ptr.type) &&
+                                   (is_pointer_property ||
+                                    (RNA_property_type(but->rnaprop) == PROP_STRING &&
+                                     STREQ(RNA_property_identifier(but->rnaprop), "name")));
+        const StringRefNull display = shows_id_name ?
+                                          BKE_id_ui_name_get(*static_cast<ID *>(display_ptr.data)) :
+                                          StringRefNull(str);
+        /* The edit handler captures this display separately from the ordinary stored RNA name. */
+        but->drawstr = fmt::format("{}{}", but->str, display);
       }
       break;
 
@@ -6029,6 +6119,12 @@ void button_poin_menu_argN_set(Button *but,
   but->func_argN = argN;
   but->func_argN_free_fn = func_argN_free_fn;
   but->func_argN_copy_fn = func_argN_copy_fn;
+}
+
+void text_button_id_name_set(Button *but, ID *id)
+{
+  BLI_assert(but->type == ButtonType::Text);
+  static_cast<ButtonText *>(but)->id_name_owner = id;
 }
 
 void text_button_func_rename_set(

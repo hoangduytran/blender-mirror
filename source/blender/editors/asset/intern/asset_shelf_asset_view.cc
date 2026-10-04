@@ -120,7 +120,8 @@ void AssetView::build_items()
     const bool show_names = (shelf_.settings.display_flag & ASSETSHELF_SHOW_NAMES);
     const StringRef identifier = asset.library_relative_identifier();
 
-    AssetViewItem &item = this->add_item<AssetViewItem>(asset, identifier, asset.get_name());
+    AssetViewItem &item = this->add_item<AssetViewItem>(
+        asset, identifier, asset.get_display_name());
     if (!show_names) {
       item.hide_label();
     }
@@ -392,7 +393,13 @@ void AssetViewItem::on_activate(bContext &C)
 bool AssetViewItem::should_be_filtered_visible(const StringRefNull filter_string) const
 {
   const StringRefNull asset_name = asset_.get_name();
-  return fnmatch(filter_string.c_str(), asset_name.c_str(), FNM_CASEFOLD) == 0;
+  const bool matches_source = fnmatch(filter_string.c_str(), asset_name.c_str(), FNM_CASEFOLD) ==
+                              0;
+  if (matches_source) {
+    return true;
+  }
+  /* The label is resolved when the view is rebuilt and owns its string. */
+  return fnmatch(filter_string.c_str(), this->label.c_str(), FNM_CASEFOLD) == 0;
 }
 
 std::unique_ptr<ui::AbstractViewItemDragController> AssetViewItem::create_drag_controller() const

@@ -42,6 +42,7 @@
 #include "BKE_key.hh"
 #include "BKE_layer.hh"
 #include "BKE_lib_id.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_lib_override.hh"
 #include "BKE_library.hh"
 #include "BKE_main.hh"
@@ -745,7 +746,8 @@ static void scenes__collection_set_flag_recursive_fn(bContext *C, void *poin, vo
   outliner_collection_set_flag_recursive_fn(C, nullptr, collection, propname);
 }
 
-static void namebutton_fn(bContext *C, TreeStoreElem *tselem, const char *oldname)
+static void namebutton_fn(
+    bContext *C, TreeStoreElem *tselem, const char *oldname, const bool note_changed)
 {
   Main *bmain = CTX_data_main(C);
   SpaceOutliner *space_outliner = CTX_wm_space_outliner(C);
@@ -769,8 +771,13 @@ static void namebutton_fn(bContext *C, TreeStoreElem *tselem, const char *oldnam
     TreeElement *te = outliner_find_tree_element(&space_outliner->runtime->tree, tselem);
 
     if (ELEM(tselem->type, TSE_SOME_ID, TSE_LINKED_NODE_TREE)) {
-      if (id_rename_helper()) {
+      const bool name_changed = id_rename_helper();
+      const bool has_name_edit = name_changed || note_changed;
+      if (has_name_edit) {
         undo_str = CTX_N_(BLT_I18NCONTEXT_OPERATOR_DEFAULT, "Rename Data-Block");
+      }
+      if (note_changed) {
+        WM_event_add_notifier(C, NC_ID | NA_RENAME, tselem->id);
       }
 
       WM_msg_publish_rna_prop(mbus, tselem->id, tselem->id, ID, name);
@@ -832,8 +839,13 @@ static void namebutton_fn(bContext *C, TreeStoreElem *tselem, const char *oldnam
         }
         case TSE_NLA_ACTION: {
           /* The #tselem->id is a #bAction. */
-          if (id_rename_helper()) {
+          const bool name_changed = id_rename_helper();
+          const bool has_name_edit = name_changed || note_changed;
+          if (has_name_edit) {
             undo_str = CTX_N_(BLT_I18NCONTEXT_OPERATOR_DEFAULT, "Rename Data-Block");
+          }
+          if (note_changed) {
+            WM_event_add_notifier(C, NC_ID | NA_RENAME, tselem->id);
           }
           WM_msg_publish_rna_prop(mbus, tselem->id, tselem->id, ID, name);
           DEG_id_tag_update(tselem->id, ID_RECALC_SYNC_TO_EVAL);
@@ -971,7 +983,9 @@ static void namebutton_fn(bContext *C, TreeStoreElem *tselem, const char *oldnam
         }
         case TSE_LAYER_COLLECTION: {
           /* The #tselem->id is a #Collection, not a #LayerCollection */
-          if (id_rename_helper()) {
+          const bool name_changed = id_rename_helper();
+          const bool has_name_edit = name_changed || note_changed;
+          if (has_name_edit) {
             undo_str = CTX_N_(BLT_I18NCONTEXT_OPERATOR_DEFAULT, "Rename Data-Block");
           }
           WM_msg_publish_rna_prop(mbus, tselem->id, tselem->id, ID, name);
@@ -2316,9 +2330,21 @@ static void outliner_buttons(const bContext *C,
    * code (see #apply_but_undo) would not work here, as the new name is not yet applied to the
    * ID. */
   button_flag_disable(bt, ui::BUT_UNDO);
-  text_button_func_rename_set(bt, [tselem](bContext &C, StringRefNull oldname) {
-    namebutton_fn(&C, tselem, oldname.c_str());
-  });
+  const bool edits_id_name = tselem->id && GS(tselem->id->name) != ID_LI &&
+                             ELEM(tselem->type,
+                                  TSE_SOME_ID,
+                                  TSE_LINKED_NODE_TREE,
+                                  TSE_NLA_ACTION,
+                                  TSE_LAYER_COLLECTION);
+  ID *name_owner = edits_id_name ? tselem->id : nullptr;
+  text_button_id_name_set(bt, name_owner);
+  const bool had_translation_note = name_owner && BKE_id_ui_name_is_translatable(*name_owner);
+  text_button_func_rename_set(
+      bt, [tselem, name_owner, had_translation_note](bContext &C, StringRefNull oldname) {
+        const bool note_changed = had_translation_note &&
+                                  !BKE_id_ui_name_is_translatable(*name_owner);
+        namebutton_fn(&C, tselem, oldname.c_str(), note_changed);
+      });
 
   /* Returns false if button got removed. */
   if (false == button_active_only(C, region, block, bt)) {
@@ -3321,16 +3347,17 @@ static void outliner_draw_tree_element(ui::Block *block,
     GPU_blend(GPU_BLEND_NONE);
 
     /* Name. */
+    const StringRefNull display_name = tree_element_display_name(*te);
     if ((tselem->flag & TSE_TEXTBUT) == 0) {
       if (ELEM(tselem->type, TSE_RNA_PROPERTY, TSE_RNA_ARRAY_ELEM)) {
         ui::theme::get_color_blend_3ubv(TH_BACK, TH_TEXT, 0.75f, text_color);
         text_color[3] = 255;
       }
       text_color[3] *= alpha_fac;
-      ui::fontstyle_draw_simple(fstyle, startx + offsx, *starty + 5 * ufac, te->name, text_color);
+      ui::fontstyle_draw_simple(fstyle, startx + offsx, *starty + 5 * ufac, display_name.c_str(), text_color);
     }
 
-    offsx += int(UI_UNIT_X + ui::fontstyle_string_width(fstyle, te->name));
+    offsx += int(UI_UNIT_X + ui::fontstyle_string_width(fstyle, display_name.c_str()));
 
     /* Closed item, we draw the icons, not when it's a scene, or master-server list though. */
     if (!TSELEM_OPEN(tselem, space_outliner)) {

@@ -9,6 +9,7 @@
 #include "BKE_anim_data.hh"
 #include "BKE_collection.hh"
 #include "BKE_context.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_idtype.hh"
 #include "BKE_layer.hh"
 #include "BKE_lib_id.hh"
@@ -171,7 +172,7 @@ static void id_search_cb(const bContext *C,
   /* ID listbase */
   for (ID &id : *lb) {
     if (id_search_allows_id(template_ui, flag, &id, str)) {
-      search.add(id.name + 2, &id);
+      search.add(BKE_id_ui_name_search_text(id.id_type(), BKE_id_name(id), id.system_properties), &id);
     }
   }
 
@@ -203,7 +204,7 @@ static void id_search_cb_tagged(const bContext *C,
   for (ID &id : *lb) {
     if (id.tag & ID_TAG_DOIT) {
       if (id_search_allows_id(template_ui, flag, &id, str)) {
-        search.add(id.name + 2, &id);
+        search.add(BKE_id_ui_name_search_text(id.id_type(), BKE_id_name(id), id.system_properties), &id);
       }
       id.tag &= ~ID_TAG_DOIT;
     }
@@ -1463,12 +1464,13 @@ static void template_ID_tabs(const bContext *C,
   const uiStyle *style = style_get_dpi();
 
   for (ID *id : BKE_id_ordered_list(template_id.idlb)) {
-    const int name_width = fontstyle_string_width(&style->widget, id->name + 2);
+    const StringRefNull label = BKE_id_ui_name_get(*id);
+    const int name_width = fontstyle_string_width(&style->widget, label.c_str());
     const int but_width = name_width + UI_UNIT_X;
 
     ButtonTab *tab = static_cast<ButtonTab *>(uiDefButR_prop(block,
                                                              ButtonType::Tab,
-                                                             id->name + 2,
+                                                             label.c_str(),
                                                              0,
                                                              0,
                                                              but_width,
@@ -1489,11 +1491,13 @@ static void template_ID_tabs(const bContext *C,
     button_drawflag_enable(tab, but_align);
   }
 
-  if (flag & UI_ID_ADD_NEW) {
+  const bool should_show_add_button = (flag & UI_ID_ADD_NEW) != 0;
+  if (should_show_add_button) {
     const bool editable = RNA_property_editable(&template_id.ptr, template_id.prop);
     Button *but;
 
-    if (active_ptr.has_type()) {
+    const bool has_active_type = active_ptr.has_type();
+    if (has_active_type) {
       type = active_ptr.type;
     }
 
@@ -1616,14 +1620,15 @@ void template_ID_session_uid(
 
   const uiFontStyle *fstyle = UI_FSTYLE_WIDGET;
   const int margin = UI_UNIT_X * 0.75f;
-  const int estimated_width = id ? (fontstyle_string_width(fstyle, id->name + 2) + margin) : 0;
+  const StringRefNull label = id ? BKE_id_ui_name_get(*id) : StringRefNull("");
+  const int estimated_width = id ? (fontstyle_string_width(fstyle, label.c_str()) + margin) : 0;
   const int width = std::clamp(
       estimated_width, TEMPLATE_SEARCH_TEXTBUT_MIN_WIDTH, TEMPLATE_SEARCH_TEXTBUT_MIN_WIDTH * 4);
 
   Button *but = uiDefBlockButN(block,
                                id_search_menu_session_uid,
                                MEM_new<TemplateID>(__func__, template_ui),
-                               id ? id->name + 2 : nullptr,
+                               id ? label.c_str() : nullptr,
                                0,
                                0,
                                width,

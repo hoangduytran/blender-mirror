@@ -11,6 +11,7 @@
 #include "DNA_ID.h"
 #include "DNA_material_types.h"
 
+#include "BKE_id_ui_name.hh"
 #include "BKE_lib_id.hh"
 #include "BKE_library.hh"
 
@@ -759,7 +760,9 @@ static ID *rna_ID_copy(ID *id, Main *bmain)
 {
   ID *newid = BKE_id_copy_for_use_in_bmain(bmain, id);
 
-  if (newid != nullptr) {
+  const bool has_user_copy = newid != nullptr;
+  if (has_user_copy) {
+    BKE_id_ui_name_clear(*newid);
     id_us_min(newid);
     BKE_main_ensure_invariants(*bmain, *newid);
   }
@@ -767,6 +770,59 @@ static ID *rna_ID_copy(ID *id, Main *bmain)
   WM_main_add_notifier(NC_ID | NA_ADDED, nullptr);
 
   return newid;
+}
+
+static void rna_ID_ui_name_translation_mark(ID *id, ReportList *reports)
+{
+  const bool can_mark_name = BKE_id_ui_name_mark(*id);
+  if (!can_mark_name) {
+    BKE_report(reports, RPT_ERROR, "Cannot mark this data-block name for translation");
+    return;
+  }
+  WM_main_add_notifier(NC_ID | NA_EDITED, id);
+  WM_main_add_notifier(NC_ASSET | NA_EDITED, nullptr);
+  WM_main_add_notifier(NC_WINDOW, nullptr);
+}
+
+static void rna_ID_ui_name_translation_clear(ID *id, ReportList *reports)
+{
+  const bool can_edit_name = !ID_IS_LINKED(id) && ID_IS_EDITABLE(id);
+  if (!can_edit_name) {
+    BKE_report(reports, RPT_ERROR, "Data-block is not editable");
+    return;
+  }
+  BKE_id_ui_name_clear(*id);
+  WM_main_add_notifier(NC_ID | NA_EDITED, id);
+  WM_main_add_notifier(NC_ASSET | NA_EDITED, nullptr);
+  WM_main_add_notifier(NC_WINDOW, nullptr);
+}
+
+static bool rna_ID_ui_name_is_translatable_get(PointerRNA *ptr)
+{
+  return BKE_id_ui_name_is_translatable(*static_cast<ID *>(ptr->data));
+}
+
+static void rna_ID_ui_name_get(PointerRNA *ptr, char *value)
+{
+  const StringRefNull label = BKE_id_ui_name_get(*static_cast<ID *>(ptr->data));
+  memcpy(value, label.c_str(), label.size() + 1);
+}
+
+static int rna_ID_ui_name_length(PointerRNA *ptr)
+{
+  return int(BKE_id_ui_name_get(*static_cast<ID *>(ptr->data)).size());
+}
+
+static void rna_ID_ui_name_translation_context_get(PointerRNA *ptr, char *value)
+{
+  const ID &id = *static_cast<ID *>(ptr->data);
+  strcpy(value, BKE_idtype_idcode_to_translation_context(short(id.id_type())));
+}
+
+static int rna_ID_ui_name_translation_context_length(PointerRNA *ptr)
+{
+  const ID &id = *static_cast<ID *>(ptr->data);
+  return int(strlen(BKE_idtype_idcode_to_translation_context(short(id.id_type()))));
 }
 
 static void rna_ID_asset_mark(ID *id)
@@ -2630,6 +2686,36 @@ static void rna_def_ID(BlenderRNA *brna)
   RNA_def_function_flag(func, FUNC_USE_MAIN);
   parm = RNA_def_pointer(func, "id", "ID", "", "New copy of the ID");
   RNA_def_function_return(func, parm);
+
+  prop = RNA_def_property(srna, "ui_name_is_translatable", PROP_BOOLEAN, PROP_NONE);
+  RNA_def_property_clear_flag(prop, PROP_EDITABLE);
+  RNA_def_property_boolean_funcs(prop, "rna_ID_ui_name_is_translatable_get", nullptr);
+  RNA_def_property_ui_text(
+      prop, "Translatable UI Name", "Whether the stored name is explicitly eligible for display-name translation");
+
+  prop = RNA_def_property(srna, "ui_name", PROP_STRING, PROP_NONE);
+  RNA_def_property_clear_flag(prop, PROP_EDITABLE);
+  RNA_def_property_string_funcs(prop, "rna_ID_ui_name_get", "rna_ID_ui_name_length", nullptr);
+  RNA_def_property_ui_text(
+      prop, "UI Name", "Displayed name; saved names and lookup keys are unchanged");
+
+  prop = RNA_def_property(srna, "ui_name_translation_context", PROP_STRING, PROP_NONE);
+  RNA_def_property_clear_flag(prop, PROP_EDITABLE);
+  RNA_def_property_string_funcs(prop,
+                                "rna_ID_ui_name_translation_context_get",
+                                "rna_ID_ui_name_translation_context_length",
+                                nullptr);
+  RNA_def_property_ui_text(
+      prop, "UI Name Translation Context", "Translation context used for this data-block's displayed name");
+
+  func = RNA_def_function(srna, "ui_name_translation_mark", "rna_ID_ui_name_translation_mark");
+  RNA_def_function_flag(func, FUNC_USE_REPORTS);
+  RNA_def_function_ui_description(func,
+                                  "Author the current stored name for display translation; user renaming clears eligibility");
+
+  func = RNA_def_function(srna, "ui_name_translation_clear", "rna_ID_ui_name_translation_clear");
+  RNA_def_function_flag(func, FUNC_USE_REPORTS);
+  RNA_def_function_ui_description(func, "Remove display-name translation eligibility without changing the stored name");
 
   func = RNA_def_function(srna, "asset_mark", "rna_ID_asset_mark");
   RNA_def_function_ui_description(

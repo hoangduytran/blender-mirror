@@ -1183,11 +1183,12 @@ struct wmOperatorType {
    * Return a different name to use in the user interface, based on property values.
    * The returned string is expected to be translated if needed.
    *
-   * WARNING: This callback does not currently work as expected in most common usage cases (e.g.
-   * any definition of an operator button through the layout API will fail to execute it). See
-   * #112253 for details.
+   * WARNING: Property-dependent callbacks do not work in most layout operator buttons. See
+   * #112253. Property-independent callbacks may opt out through #name_requires_properties.
    */
   std::string (*get_name)(wmOperatorType *ot, PointerRNA *ptr) = nullptr;
+  /** Keep existing callbacks protected; opt out only when #get_name accepts a null pointer. */
+  bool name_requires_properties = true;
 
   /**
    * Return a different description to use in the user interface, based on property values.

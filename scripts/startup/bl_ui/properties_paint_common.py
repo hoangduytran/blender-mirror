@@ -190,7 +190,8 @@ class BrushAssetShelf:
         if not shelf_name:
             return
 
-        display_name = brush.name if (brush and show_name) else None
+        has_named_brush = brush is not None and show_name
+        display_name = brush.ui_name if has_named_brush else None
         if display_name and brush.has_unsaved_changes:
             # Show "*" to the left for consistency with unsaved files in the title bar.
             display_name = "* " + display_name

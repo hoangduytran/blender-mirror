@@ -22,6 +22,7 @@
 #include "BKE_global.hh"
 #include "BKE_image.hh"
 #include "BKE_lib_id.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_main.hh"
 #include "BKE_main_invariants.hh"
 #include "BKE_material.hh"
@@ -997,6 +998,7 @@ static wmOperatorStatus node_duplicate_exec(bContext *C, wmOperator *op)
     if (node->id && dupli_node_tree && !ID_IS_LINKED(node->id)) {
       ID *new_group = duplicated_node_groups.lookup_or_add_cb(node->id, [&]() {
         ID *new_group = BKE_id_copy(bmain, node->id);
+        BKE_id_ui_name_clear(*new_group);
         /* Remove user added by copying. */
         id_us_min(new_group);
         return new_group;

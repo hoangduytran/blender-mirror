@@ -42,6 +42,7 @@
 
 #include "BKE_context.hh"
 #include "BKE_idtype.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_image.hh"
 #include "BKE_library.hh"
 #include "BKE_main.hh"
@@ -1958,7 +1959,7 @@ static std::unique_ptr<TooltipData> tooltip_data_from_search_item_tooltip_data(I
   std::unique_ptr<TooltipData> data = std::make_unique<TooltipData>();
   const ID_Type type_id = GS(id->name);
 
-  tooltip_text_field_add(*data, id->name + 2, {}, TIP_STYLE_HEADER, TIP_LC_MAIN);
+  tooltip_text_field_add(*data, BKE_id_ui_name_get(*id), {}, TIP_STYLE_HEADER, TIP_LC_MAIN);
 
   if (type_id == ID_IM) {
     tooltip_from_image(*reinterpret_cast<Image *>(id), *data);

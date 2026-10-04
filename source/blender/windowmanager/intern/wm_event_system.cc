@@ -590,6 +590,20 @@ static bool notifier_refreshes_node_group_operators(const wmNotifier &note)
       return true;
     }
   }
+  else if (note.category == NC_WM) {
+    /* Undo and file reads can replace both the name and its author note. */
+    const bool replaces_id_state = ELEM(note.data, ND_UNDO, ND_FILEREAD);
+    return replaces_id_state;
+  }
+  else if (note.category == NC_ID) {
+    const bool changes_id_name = ELEM(note.action, NA_RENAME, NA_EDITED);
+    if (changes_id_name) {
+      const ID *id = static_cast<const ID *>(note.reference);
+      /* Null references broadcast ID changes, including names edited in the Outliner. */
+      const bool changes_node_group = !id || id->id_type() == ID_NT;
+      return changes_node_group;
+    }
+  }
   return false;
 }
 

@@ -22,6 +22,7 @@
 #include "BLI_span.hh"
 #include "BLI_stack.hh"
 #include "BLI_string.hh"
+#include "BLI_string_utf8.hh"
 #include "BLI_string_ref.hh"
 #include "BLI_string_utf8.hh"
 #include "BLI_vector_set.hh"
@@ -32,6 +33,7 @@
 
 #include "BKE_context.hh"
 #include "BKE_node.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_node_runtime.hh"
 #include "BKE_node_tree_interface.hh"
 
@@ -97,8 +99,8 @@ void node_group_label(const bNodeTree * /*ntree*/,
                       char *label,
                       int label_maxncpy)
 {
-  BLI_strncpy(
-      label, (node->id) ? node->id->name + 2 : IFACE_("Missing Data-Block"), label_maxncpy);
+  BLI_strncpy_utf8(
+      label, (node->id) ? BKE_id_ui_name_get(*node->id).c_str() : IFACE_("Missing Data-Block"), label_maxncpy);
 }
 
 int node_group_ui_class(const bNode *node)

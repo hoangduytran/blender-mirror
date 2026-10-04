@@ -63,6 +63,7 @@
 #include "BKE_paint_types.hh"
 #include "BKE_screen.hh"
 #include "BKE_workspace.hh"
+#include "BKE_id_ui_name.hh"
 
 #include "BLO_readfile.hh"
 
@@ -608,6 +609,8 @@ void BLO_update_defaults_startup_blend(Main *bmain, const char *app_template)
   /* For all app templates. */
   for (WorkSpace &workspace : bmain->workspaces) {
     BLO_update_defaults_workspace(&workspace, app_template);
+    /* Only trusted factory startup calls this entry point, never ordinary file loads. */
+    BKE_id_ui_name_mark(workspace.id);
   }
 
   /* Grease pencil materials and paint modes setup. */

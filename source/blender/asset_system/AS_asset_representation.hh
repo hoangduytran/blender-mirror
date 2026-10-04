@@ -136,7 +136,10 @@ class AssetRepresentation : NonCopyable, NonMovable {
    */
   PreviewImage *get_preview() const;
 
+  /** Saved name used by imports and library references. */
   StringRefNull get_name() const;
+  /** Borrowed until name or language changes. Display only; never an import key or reference. */
+  StringRefNull get_display_name() const;
   ID_Type get_id_type() const;
   AssetMetaData &get_metadata() const;
 

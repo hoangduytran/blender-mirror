@@ -169,7 +169,8 @@ void draw_asset_menu_item(const asset_system::AssetRepresentation *asset,
                           ui::Layout &layout)
 {
   ui::Layout &row = layout.row(true);
-  if (asset->is_online_only()) {
+  const bool is_online_only = asset->is_online_only();
+  if (is_online_only) {
     row.enabled_set(false);
   }
   PointerRNA asset_ptr = RNA_pointer_create_discrete(
@@ -180,9 +181,9 @@ void draw_asset_menu_item(const asset_system::AssetRepresentation *asset,
                                  asset_system::RemoteAssetFileStatus::NO_MATCH ?
                              ICON_STATUS_WARNING :
                              ICON_NONE;
-  const int icon = asset->is_online_only() ? ICON_INTERNET : icon_local;
-  PointerRNA props_ptr = row.op(
-      opname, IFACE_(asset->get_name()), icon, operator_call_context, UI_ITEM_NONE);
+  const int icon = is_online_only ? ICON_INTERNET : icon_local;
+  const std::string label = asset->get_display_name();
+  PointerRNA props_ptr = row.op(opname, label, icon, operator_call_context, UI_ITEM_NONE);
   asset::operator_asset_reference_props_set(*asset, props_ptr);
 }
 

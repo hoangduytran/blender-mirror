@@ -20,6 +20,7 @@
 #include "BKE_asset_edit.hh"
 #include "BKE_blendfile.hh"
 #include "BKE_brush.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_context.hh"
 #include "BKE_global.hh"
 #include "BKE_lib_id.hh"
@@ -226,6 +227,7 @@ static wmOperatorStatus brush_asset_save_as_exec(bContext *C, wmOperator *op)
 
     BKE_asset_metadata_free(&brush->id.asset_data);
     brush->id.asset_data = BKE_asset_metadata_copy(original_brush->id.asset_data);
+    BKE_id_ui_name_asset_sync(brush->id);
     BLI_assert(brush->id.asset_data != nullptr);
   }
 

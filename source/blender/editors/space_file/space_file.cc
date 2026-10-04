@@ -390,6 +390,21 @@ static void file_listener(const wmSpaceTypeListenerParams *listener_params)
 
   /* context changes */
   switch (wmn->category) {
+    case NC_WINDOW: {
+      /* Interface translation toggles notify windows. Recompute aliases only for an active asset
+       * search, without rereading the library or discarding the file cache. */
+      const bool has_asset_browser = sfile && sfile->browse_mode == FILE_BROWSE_MODE_ASSETS &&
+                                     sfile->files;
+      if (has_asset_browser) {
+        const FileSelectParams *params = ED_fileselect_get_active_params(sfile);
+        const bool has_search = params && params->filter_search[0] != '\0';
+        if (has_search) {
+          filelist_tag_needs_filtering(sfile->files);
+          ED_area_tag_refresh(area);
+        }
+      }
+      break;
+    }
     case NC_UI:
       if (wmn->data == ND_UI_LANG && sfile) {
         filelist_tag_force_reset(sfile->files);

@@ -55,15 +55,25 @@ static void operator_search_update_fn(const bContext *C,
       str, str_len, ' ', reinterpret_cast<int (*)[2]>(words.data()), words_max);
 
   for (wmOperatorType *ot : WM_operatortypes_registered_get()) {
-    const char *ot_ui_name = CTX_IFACE_(ot->translation_context, ot->name);
-
     if ((ot->flag & OPTYPE_INTERNAL) && (G.debug & G_DEBUG_WM) == 0) {
       continue;
     }
 
-    if (BLI_string_all_words_matched(
-            ot_ui_name, str, reinterpret_cast<int (*)[2]>(words.data()), words_len))
-    {
+    const bool has_independent_name = ot->get_name && !ot->name_requires_properties;
+    /* Ordinary operators keep their allocation-free lookup path. */
+    const std::string resolved_name = has_independent_name ? WM_operatortype_name(ot, nullptr) :
+                                                           std::string();
+    const StringRefNull ot_ui_name = has_independent_name ?
+                                        StringRefNull(resolved_name) :
+                                        StringRefNull(CTX_IFACE_(ot->translation_context, ot->name));
+    const bool matches_display = BLI_string_all_words_matched(
+        ot_ui_name.c_str(), str, reinterpret_cast<int (*)[2]>(words.data()), words_len);
+    const bool matches_source =
+        !matches_display && has_independent_name &&
+        BLI_string_all_words_matched(
+            ot->name, str, reinterpret_cast<int (*)[2]>(words.data()), words_len);
+    const bool matches_name = matches_display || matches_source;
+    if (matches_name) {
       if (WM_operator_poll(const_cast<bContext *>(C), ot)) {
         std::string name = ot_ui_name;
         if (const std::optional<std::string> kmi_str = WM_key_event_operator_string(

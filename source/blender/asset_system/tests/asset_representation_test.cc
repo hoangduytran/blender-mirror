@@ -7,6 +7,13 @@
 
 #include "AS_asset_representation.hh"
 
+#include "BLT_lang.hh"
+#include "BLT_translation.hh"
+
+#include "BLI_string_search.hh"
+
+#include "BKE_asset.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_lib_id.hh"
 #include "BKE_main.hh"
 
@@ -16,6 +23,7 @@
 
 #include "DNA_asset_types.h"
 #include "DNA_object_types.h"
+#include "DNA_userdef_types.h"
 
 #include "ED_asset_mark_clear.hh"
 
@@ -57,6 +65,127 @@ class AssetRepresentationTest : public AssetLibraryTestBase {
     return *library.add_local_id_asset(id).lock();
   }
 };
+
+/* Asset labels share the ID policy; import identity always stays canonical. */
+TEST_F(AssetRepresentationTest, display_name__local_rename_is_literal)
+{
+  Object *object = BKE_id_new<Object>(bmain, "Factory tool label");
+  AssetLibrary *library = get_builtin_library_from_type(ASSET_LIBRARY_LOCAL);
+  AssetRepresentation &asset = add_dummy_id_asset(*library, object->id);
+
+  ASSERT_TRUE(BKE_id_ui_name_mark(object->id));
+  EXPECT_EQ(asset.get_display_name(), BKE_id_ui_name_get(object->id));
+  EXPECT_EQ(asset.get_name(), "Factory tool label");
+  EXPECT_EQ(asset.library_relative_identifier(), "Object" SEP_STR "Factory tool label");
+
+  BKE_id_rename(*bmain, object->id, "My literal tool");
+  EXPECT_FALSE(BKE_id_ui_name_is_translatable(object->id));
+  EXPECT_EQ(asset.get_display_name(), "My literal tool");
+  EXPECT_EQ(asset.library_relative_identifier(), "Object" SEP_STR "My literal tool");
+}
+
+TEST_F(AssetRepresentationTest, display_name__external_metadata_preserves_identity)
+{
+  Object *object = BKE_id_new<Object>(bmain, "Factory tool label");
+  ASSERT_TRUE(ed::asset::mark_id(&object->id));
+  ASSERT_TRUE(BKE_id_ui_name_mark(object->id));
+  std::unique_ptr<AssetMetaData> metadata = std::make_unique<AssetMetaData>(
+      *object->id.asset_data);
+  AssetLibrary *library = get_builtin_library_from_type(ASSET_LIBRARY_LOCAL);
+  AssetRepresentation &asset = *library
+                                    ->add_external_on_disk_asset(
+                                        "factory.blend/Object/Factory tool label",
+                                        "Factory tool label",
+                                        ID_OB,
+                                        std::move(metadata))
+                                    .lock();
+
+  EXPECT_EQ(asset.get_display_name(), BKE_id_ui_name_get(object->id));
+  EXPECT_EQ(asset.get_name(), "Factory tool label");
+  EXPECT_EQ(asset.library_relative_identifier(), "factory.blend/Object/Factory tool label");
+  EXPECT_EQ(asset.local_id(), nullptr);
+
+  /* Stale snapshots never grant eligibility to a renamed listing. */
+  AssetRepresentation &renamed = *library
+                                      ->add_external_on_disk_asset(
+                                          "other.blend/Object/My tool",
+                                          "My tool",
+                                          ID_OB,
+                                          std::make_unique<AssetMetaData>(*object->id.asset_data))
+                                      .lock();
+  EXPECT_EQ(renamed.get_display_name(), "My tool");
+}
+
+TEST_F(AssetRepresentationTest, display_name__translated_external_asset_search)
+{
+  const bool has_translation_support = BLT_translate();
+  if (!has_translation_support) {
+    GTEST_SKIP() << "Requires an international build";
+  }
+  struct RestoreTranslation {
+    std::string locale = BLT_lang_get();
+    eUserpref_Translation_Flags flags = U.transopts;
+    ~RestoreTranslation()
+    {
+      U.transopts = flags;
+      BLT_lang_set(locale.c_str());
+    }
+  } restore_translation;
+
+  BLT_lang_set("vi_VN");
+  U.transopts |= USER_TR_IFACE;
+  ID &brush = *static_cast<ID *>(BKE_id_new(bmain, ID_BR, "Smooth"));
+  ASSERT_TRUE(ed::asset::mark_id(&brush));
+  ASSERT_TRUE(BKE_id_ui_name_mark(brush));
+  AssetLibrary *library = get_builtin_library_from_type(ASSET_LIBRARY_LOCAL);
+  AssetRepresentation &asset = *library
+                                    ->add_external_on_disk_asset(
+                                        "factory.blend/Brush/Smooth",
+                                        "Smooth",
+                                        ID_BR,
+                                        std::make_unique<AssetMetaData>(*brush.asset_data))
+                                    .lock();
+  /* A missing catalogue fails this test instead of silently testing fallback twice. */
+  const std::string translated = asset.get_display_name();
+  ASSERT_NE(translated, "Smooth");
+  EXPECT_EQ(asset.get_name(), "Smooth");
+  EXPECT_EQ(asset.library_relative_identifier(), "factory.blend/Brush/Smooth");
+
+  auto search_for = [&](StringRef query) {
+    string_search::StringSearch<AssetRepresentation> search(
+        nullptr, string_search::MainWordsHeuristic::All);
+    search.add(
+        BKE_id_ui_name_search_text(ID_BR, asset.get_name(), asset.get_metadata().properties),
+        &asset);
+    return search.query(query);
+  };
+  const Vector<AssetRepresentation *> source_matches = search_for("Smooth");
+  const Vector<AssetRepresentation *> translated_matches = search_for(translated);
+  ASSERT_EQ(source_matches.size(), 1);
+  ASSERT_EQ(translated_matches.size(), 1);
+  EXPECT_EQ(source_matches[0], &asset);
+  EXPECT_EQ(translated_matches[0], &asset);
+
+  U.transopts &= ~USER_TR_IFACE;
+  EXPECT_EQ(asset.get_display_name(), "Smooth");
+  EXPECT_EQ(search_for("Smooth").size(), 1);
+  EXPECT_TRUE(search_for(translated).is_empty());
+
+  U.transopts |= USER_TR_IFACE;
+  BKE_id_rename(*bmain, brush, "My deliberate custom brush");
+  AssetRepresentation &literal = add_dummy_id_asset(*library, brush);
+  EXPECT_EQ(literal.get_display_name(), "My deliberate custom brush");
+  string_search::StringSearch<AssetRepresentation> literal_search(
+      nullptr, string_search::MainWordsHeuristic::All);
+  literal_search.add(
+      BKE_id_ui_name_search_text(ID_BR, literal.get_name(), brush.system_properties), &literal);
+  EXPECT_EQ(literal_search.query("custom brush").size(), 1);
+  EXPECT_TRUE(literal_search.query(translated).is_empty());
+
+  BLT_lang_set("en_US");
+  EXPECT_EQ(asset.get_display_name(), "Smooth");
+  EXPECT_EQ(asset.get_name(), "Smooth");
+}
 
 TEST_F(AssetRepresentationTest, library_relative_identifier__id_name_change)
 {

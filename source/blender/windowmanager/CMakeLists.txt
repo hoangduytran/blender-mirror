@@ -215,9 +215,14 @@ add_dependencies(bf_windowmanager bf_rna)
 
 if(WITH_GTESTS)
   set(TEST_INC
+    ../asset_system/intern
+    ../asset_system/intern/library_types
+    ../editors/asset
+    ../editors/space_file
   )
   set(TEST_SRC
     intern/wm_dragdrop_test.cc
+    intern/wm_operator_type_test.cc
   )
   blender_add_test_suite_lib(windowmanager "${TEST_SRC}" "${INC};${TEST_INC}" "${INC_SYS}" "${LIB}")
 endif()

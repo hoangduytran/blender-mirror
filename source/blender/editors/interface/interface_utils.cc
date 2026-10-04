@@ -28,6 +28,7 @@
 #include "BKE_context.hh"
 #include "BKE_global.hh"
 #include "BKE_lib_id.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_screen.hh"
 
 #include "MEM_guardedalloc.h"
@@ -611,7 +612,15 @@ void rna_collection_search_update_fn(
   else {
     string_search::StringSearch<CollItemSearch> search;
     for (std::unique_ptr<CollItemSearch> &cis : items_list) {
-      search.add(cis->name, cis.get());
+      const bool has_id_keywords = cis->is_id && !requires_exact_data_name;
+      if (has_id_keywords) {
+        const ID &id = *static_cast<const ID *>(cis->data);
+        search.add(BKE_id_ui_name_search_text(id.id_type(), BKE_id_name(id), id.system_properties),
+                   cis.get());
+      }
+      else {
+        search.add(cis->name, cis.get());
+      }
     }
 
     const Vector<CollItemSearch *> filtered_items = search.query(str);

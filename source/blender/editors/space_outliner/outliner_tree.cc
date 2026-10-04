@@ -25,6 +25,8 @@
 #include "BLI_utildefines.hh"
 
 #include "BKE_collection.hh"
+#include "BKE_id_ui_name.hh"
+#include "BKE_lib_id.hh"
 #include "BKE_layer.hh"
 #include "BKE_main.hh"
 #include "BKE_modifier.hh"
@@ -1031,6 +1033,14 @@ static bool outliner_element_visible_get(const Main &bmain,
   return true;
 }
 
+StringRefNull tree_element_display_name(const TreeElement &element)
+{
+  const TreeStoreElem *store = TREESTORE(&element);
+  const bool has_id_label = store && store->type == TSE_SOME_ID && store->id &&
+                            STREQ(element.name, BKE_id_name(*store->id));
+  return has_id_label ? BKE_id_ui_name_get(*store->id) : StringRefNull(element.name);
+}
+
 static bool outliner_filter_has_name(TreeElement *te, const char *name, int flags)
 {
   /* Use `fnmatch` for shell-style globing.
@@ -1044,7 +1054,12 @@ static bool outliner_filter_has_name(TreeElement *te, const char *name, int flag
     fn_flag |= FNM_CASEFOLD;
   }
 
-  return fnmatch(name, te->name, fn_flag) == 0;
+  const bool matches_source = fnmatch(name, te->name, fn_flag) == 0;
+  if (matches_source) {
+    return true;
+  }
+  const StringRefNull display = tree_element_display_name(*te);
+  return display != te->name && fnmatch(name, display.c_str(), fn_flag) == 0;
 }
 
 static bool outliner_element_is_collection_or_object(TreeElement *te)

@@ -144,6 +144,7 @@ set(SRC
   intern/icons.cc
   intern/icons_rasterize.cc
   intern/id_hash.cc
+  intern/id_ui_name.cc
   intern/idprop.cc
   intern/idprop_create.cc
   intern/idprop_serialize.cc
@@ -425,6 +426,7 @@ set(SRC
   BKE_gtest_setup.hh
   BKE_icons.hh
   BKE_id_hash.hh
+  BKE_id_ui_name.hh
   BKE_idprop.hh
   BKE_idprop_hash.hh
   BKE_idtype.hh
@@ -785,6 +787,7 @@ if(WITH_GTESTS)
     intern/fcurve_test.cc
     intern/file_handler_test.cc
     intern/grease_pencil_test.cc
+    intern/id_ui_name_test.cc
     intern/idprop_serialize_test.cc
     intern/idprop_test.cc
     intern/image_test.cc

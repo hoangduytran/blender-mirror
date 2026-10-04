@@ -41,7 +41,8 @@ void asset_tooltip(const asset_system::AssetRepresentation &asset,
                    const bool include_name)
 {
   if (include_name) {
-    tooltip_text_field_add(tip, asset.get_name(), {}, ui::TIP_STYLE_HEADER, ui::TIP_LC_MAIN);
+    tooltip_text_field_add(
+        tip, asset.get_display_name(), {}, ui::TIP_STYLE_HEADER, ui::TIP_LC_MAIN);
     tooltip_text_field_add(tip, {}, {}, ui::TIP_STYLE_SPACER, ui::TIP_LC_NORMAL, false);
   }
 

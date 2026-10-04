@@ -7,6 +7,7 @@
  */
 
 #include "BLF_api.hh"
+#include "BKE_id_ui_name.hh"
 #include "BLI_vector.hh"
 
 #include "RNA_access.hh"
@@ -34,16 +35,20 @@ void context_path_add_generic(Vector<ContextPathItem> &path,
   char name_buf[128], *name;
   name = RNA_struct_name_get_alloc(&rna_ptr, name_buf, sizeof(name_buf), nullptr);
 
+  const bool has_id_name = RNA_struct_is_ID(&rna_type);
+  const StringRefNull display = has_id_name ? BKE_id_ui_name_get(*static_cast<ID *>(ptr)) :
+                                             StringRefNull(name ? name : "");
+
   /* Use a blank icon by default to check whether to retrieve it automatically from the type. */
   const BIFIconID icon = icon_override == ICON_NONE ? RNA_struct_ui_icon(rna_ptr.type) :
                                                       icon_override;
 
   if (&rna_type == RNA_NodeTree) {
     ID *id = static_cast<ID *>(ptr);
-    path.append({name, icon, ID_REAL_USERS(id), handle_func});
+    path.append({display, icon, ID_REAL_USERS(id), handle_func});
   }
   else {
-    path.append({name, icon, 1, handle_func});
+    path.append({display, icon, 1, handle_func});
   }
   if (name != name_buf) {
     MEM_delete(name);

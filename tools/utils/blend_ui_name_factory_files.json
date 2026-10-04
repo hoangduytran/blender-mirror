@@ -1,0 +1,17 @@
+[
+  "assets/brushes/essentials_brushes-curve_sculpt.blend",
+  "assets/brushes/essentials_brushes-gp_draw.blend",
+  "assets/brushes/essentials_brushes-gp_sculpt.blend",
+  "assets/brushes/essentials_brushes-gp_vertex.blend",
+  "assets/brushes/essentials_brushes-gp_weight.blend",
+  "assets/brushes/essentials_brushes-mesh_sculpt.blend",
+  "assets/brushes/essentials_brushes-mesh_texture.blend",
+  "assets/brushes/essentials_brushes-mesh_vertex.blend",
+  "assets/brushes/essentials_brushes-mesh_weight.blend",
+  "assets/nodes/compositing_nodes_essentials.blend",
+  "assets/nodes/geometry_nodes_dynamics_assets.blend",
+  "assets/nodes/geometry_nodes_essentials.blend",
+  "assets/nodes/principal_components.blend",
+  "assets/nodes/procedural_hair_node_assets.blend",
+  "assets/nodes/shading_nodes_essentials.blend"
+]

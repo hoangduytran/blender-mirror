@@ -13,6 +13,7 @@
 #include "DNA_listBase.h"
 
 #include "BLI_function_ref.hh"
+#include "BLI_string_ref.hh"
 
 #include "RNA_types.hh"
 
@@ -55,6 +56,8 @@ class AbstractTreeElement;
 namespace treehash = bke::outliner::treehash;
 
 struct TreeElement;
+/** Immediate display text; rename, sorting and tree identity keep the stored name. */
+StringRefNull tree_element_display_name(const TreeElement &element);
 
 struct SpaceOutliner_Runtime {
   /** Object to create and manage the tree for a specific display type (View Layers, Scenes,

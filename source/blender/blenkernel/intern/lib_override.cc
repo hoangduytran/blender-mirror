@@ -45,6 +45,7 @@
 #include "BKE_key.hh"
 #include "BKE_layer.hh"
 #include "BKE_lib_id.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_lib_override.hh"
 #include "BKE_lib_query.hh"
 #include "BKE_lib_remap.hh"
@@ -329,6 +330,7 @@ static ID *lib_override_library_create_from(Main *bmain,
     lib_id_copy_ensure_local(bmain, reference_id, local_id, 0);
   }
 
+  BKE_id_ui_name_copy(*local_id, *reference_id);
   BKE_lib_override_library_init(local_id, reference_id);
 
   /* NOTE: From liboverride perspective (and RNA one), shape keys are considered as local embedded
@@ -5531,6 +5533,8 @@ void BKE_lib_override_library_update(Main *bmain, ID *local)
    * list of Main, so we cannot always keep it identical, which is why we need this special
    * manual handling here. */
   STRNCPY(tmp_id->name, local->name);
+  /* Retain this local name's author decision across reference refresh and reload. */
+  BKE_id_ui_name_copy(*tmp_id, *local);
 
   /* Those ugly loop-back pointers again. Luckily we only need to deal with the shape keys here,
    * collections' parents are fully runtime and reconstructed later. */

@@ -12,6 +12,7 @@
 
 #include "BKE_blendfile.hh"
 #include "BKE_icons.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_idtype.hh"
 #include "BKE_lib_id.hh"
 #include "BKE_preview_image.hh"
@@ -137,6 +138,17 @@ StringRefNull AssetRepresentation::get_name() const
     return id->name + 2;
   }
   return std::get<ExternalAsset>(asset_).name;
+}
+
+StringRefNull AssetRepresentation::get_display_name() const
+{
+  const ID *id = this->local_id();
+  const bool has_loaded_id = id != nullptr;
+  if (has_loaded_id) {
+    return BKE_id_ui_name_get(*id);
+  }
+  return BKE_id_ui_name_resolve(
+      short(this->get_id_type()), this->get_name(), this->get_metadata().properties);
 }
 
 ID_Type AssetRepresentation::get_id_type() const

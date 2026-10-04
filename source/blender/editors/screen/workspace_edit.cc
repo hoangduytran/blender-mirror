@@ -21,6 +21,7 @@
 #include "BKE_appdir.hh"
 #include "BKE_blendfile.hh"
 #include "BKE_context.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_layer.hh"
 #include "BKE_lib_id.hh"
 #include "BKE_main.hh"
@@ -242,13 +243,15 @@ WorkSpace *ED_workspace_duplicate(WorkSpace *workspace_old, Main *bmain, wmWindo
 {
   WorkSpaceLayout *layout_active_old = BKE_workspace_active_layout_get(win->workspace_hook);
   WorkSpace *workspace_new = id_cast<WorkSpace *>(BKE_id_copy(bmain, &workspace_old->id));
+  BKE_id_ui_name_clear(workspace_new->id);
 
   /* Try to keep active the layout from the new workspace matching the current active one from
    * the old workspace. */
   WorkSpaceLayout *layout_old = workspace_old->layouts.first();
   WorkSpaceLayout *layout_new = workspace_new->layouts.first();
   for (; layout_old && layout_new; layout_old = layout_old->next, layout_new = layout_new->next) {
-    if (layout_old == layout_active_old) {
+    const bool is_active_layout = layout_old == layout_active_old;
+    if (is_active_layout) {
       win->workspace_hook->temp_layout_store = layout_new;
     }
   }
@@ -429,12 +432,6 @@ static wmOperatorStatus workspace_append_activate_exec(bContext *C, wmOperator *
   }
 
   if (appended_workspace) {
-    /* Translate workspace name, unless it was taken from current blendfile. */
-    if (BLT_translate_new_dataname()) {
-      BKE_libblock_rename(
-          *bmain, appended_workspace->id, CTX_DATA_(BLT_I18NCONTEXT_ID_WORKSPACE, idname));
-    }
-
     /* Set defaults. */
     BLO_update_defaults_workspace(appended_workspace, nullptr);
 
@@ -520,18 +517,16 @@ static void workspace_append_button(ui::Layout &layout,
   const ID *id = id_cast<ID *>(const_cast<WorkSpace *>(workspace));
   const char *filepath = from_main->filepath;
 
-  if (filepath[0] == '\0') {
+  const bool needs_embedded_startup = filepath[0] == '\0';
+  if (needs_embedded_startup) {
     filepath = BLO_EMBEDDED_STARTUP_BLEND;
   }
 
   BLI_assert(STREQ(ot_append->idname, "WORKSPACE_OT_append_activate"));
 
   PointerRNA opptr;
-  opptr = layout.op(ot_append,
-                    CTX_DATA_(BLT_I18NCONTEXT_ID_WORKSPACE, workspace->id.name + 2),
-                    ICON_NONE,
-                    wm::OpCallContext::ExecDefault,
-                    UI_ITEM_NONE);
+  const std::string label = BKE_id_ui_name_get(*id);
+  opptr = layout.op(ot_append, label, ICON_NONE, wm::OpCallContext::ExecDefault, UI_ITEM_NONE);
   RNA_string_set(&opptr, "idname", id->name + 2);
   RNA_string_set(&opptr, "filepath", filepath);
 }

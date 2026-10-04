@@ -1521,6 +1521,10 @@ void file_draw_list(const bContext *C, ARegion *region)
     const rcti tile_draw_rect = tile_draw_rect_get(v2d, layout, i);
 
     file = filelist_file(files, i);
+    /* Keep cached names literal for rename, paths and sorting. Resolve labels on draw so language
+     * changes cannot leave stale translated names in the file cache. */
+    const StringRefNull display_name = file->asset ? file->asset->get_display_name() :
+                                                     StringRefNull(file->name);
     eDirEntry_SelectFlag file_selflag = filelist_entry_select_get(sfile->files, file, CHECK_ALL);
     if (params->highlight_file == i) {
       file_selflag |= FILE_SEL_HIGHLIGHTED;
@@ -1613,7 +1617,7 @@ void file_draw_list(const bContext *C, ARegion *region)
       /* Add dummy draggable button covering the icon and the label. */
       if (do_drag) {
         const uiStyle *style = ui::style_get();
-        const int str_width = ui::fontstyle_string_width(&style->widget, file->name);
+        const int str_width = ui::fontstyle_string_width(&style->widget, display_name.c_str());
         const int drag_width = std::min(
             str_width + icon_ofs,
             int(layout->attribute_columns[COLUMN_NAME].width - ATTRIBUTE_COLUMN_PADDING));
@@ -1711,14 +1715,14 @@ void file_draw_list(const bContext *C, ARegion *region)
       if (layout->text_lines_count == 1) {
         file_draw_string(text_rect.xmin,
                          text_rect.ymax,
-                         file->name,
+                         display_name.c_str(),
                          BLI_rcti_size_x(&text_rect),
                          BLI_rcti_size_y(&text_rect),
                          align,
                          text_col);
       }
       else {
-        file_draw_string_mulitline_clipped(&text_rect, file->name, align, text_col);
+        file_draw_string_mulitline_clipped(&text_rect, display_name.c_str(), align, text_col);
       }
     }
 

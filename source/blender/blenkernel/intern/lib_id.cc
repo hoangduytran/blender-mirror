@@ -49,6 +49,7 @@
 #include "BKE_bpath.hh"
 #include "BKE_context.hh"
 #include "BKE_global.hh"
+#include "BKE_id_ui_name.hh"
 #include "BKE_idprop.hh"
 #include "BKE_idtype.hh"
 #include "BKE_key.hh"
@@ -873,6 +874,8 @@ ID *BKE_id_copy_for_duplicate(Main *bmain,
     }
 
     ID *id_new = BKE_id_copy_ex(bmain, id, nullptr, copy_flags);
+    /* A user duplicate is personal data, including copies into another Main. */
+    BKE_id_ui_name_clear(*id_new);
     /* Copying add one user by default, need to get rid of that one. */
     id_us_min(id_new);
     ID_NEW_SET(id, id_new);
@@ -1786,6 +1789,8 @@ void BKE_libblock_copy_in_lib(Main *bmain,
     ID_NEW_SET(const_cast<ID *>(id), new_id);
   }
 
+  /* Unique naming precedes property copying, so check the copied note only now. */
+  BKE_id_ui_name_copy_finalize(*new_id);
   *new_id_p = new_id;
 }
 
@@ -2006,20 +2011,23 @@ IDNewNameResult BKE_id_new_name_validate(Main &bmain,
   char name[MAX_ID_NAME - 2];
 
   /* If library, don't rename (unless explicitly required), but do ensure proper sorting. */
-  if (!do_linked_data && ID_IS_LINKED(&id)) {
+  const bool should_keep_linked_name = !do_linked_data && ID_IS_LINKED(&id);
+  if (should_keep_linked_name) {
     id_sort_by_name(&lb, &id, nullptr);
 
     return {IDNewNameResult::Action::UNCHANGED, nullptr};
   }
 
   /* If no name given, use name of current ID. */
-  if (newname == nullptr) {
+  const bool should_keep_current_name = newname == nullptr;
+  if (should_keep_current_name) {
     newname = BKE_id_name(id);
   }
   /* Make a copy of given name (newname args can be const). */
   STRNCPY(name, newname);
 
-  if (name[0] == '\0') {
+  const bool needs_default_name = name[0] == '\0';
+  if (needs_default_name) {
     /* Disallow empty names. */
     STRNCPY_UTF8(name, DATA_(BKE_idtype_idcode_to_name(id.id_type())));
   }
@@ -2032,22 +2040,24 @@ IDNewNameResult BKE_id_new_name_validate(Main &bmain,
   /* Store original requested new name, in modes that may solve name conflict by renaming the
    * existing conflicting ID. */
   char orig_name[MAX_ID_NAME - 2];
-  if (ELEM(mode, IDNewNameMode::RenameExistingAlways, IDNewNameMode::RenameExistingSameRoot)) {
+  const bool can_rename_existing = ELEM(
+      mode, IDNewNameMode::RenameExistingAlways, IDNewNameMode::RenameExistingSameRoot);
+  if (can_rename_existing) {
     STRNCPY(orig_name, name);
   }
 
   const bool had_name_collision = BKE_main_namemap_get_unique_name(bmain, id, name);
 
-  if (had_name_collision &&
-      ELEM(mode, IDNewNameMode::RenameExistingAlways, IDNewNameMode::RenameExistingSameRoot))
-  {
+  const bool should_resolve_existing_collision = had_name_collision && can_rename_existing;
+  if (should_resolve_existing_collision) {
     char prev_name[MAX_ID_NAME - 2];
     char prev_name_root[MAX_ID_NAME - 2];
     int prev_number = 0;
     char new_name_root[MAX_ID_NAME - 2];
     int new_number = 0;
     STRNCPY(prev_name, BKE_id_name(id));
-    if (mode == IDNewNameMode::RenameExistingSameRoot) {
+    const bool should_compare_name_roots = mode == IDNewNameMode::RenameExistingSameRoot;
+    if (should_compare_name_roots) {
       BLI_string_split_name_number(BKE_id_name(id), '.', prev_name_root, &prev_number);
       BLI_string_split_name_number(name, '.', new_name_root, &new_number);
     }
@@ -2057,16 +2067,22 @@ IDNewNameResult BKE_id_new_name_validate(Main &bmain,
 
     /* In case of #RenameExistingSameRoot, the existing ID (`id_other`) is only renamed if it has
      * the same 'root' name as the current name of the renamed `id`. */
-    if (mode == IDNewNameMode::RenameExistingAlways ||
-        (mode == IDNewNameMode::RenameExistingSameRoot && STREQ(prev_name_root, new_name_root)))
-    {
+    const bool should_rename_existing = mode == IDNewNameMode::RenameExistingAlways ||
+                                        (should_compare_name_roots &&
+                                         STREQ(prev_name_root, new_name_root));
+    if (should_rename_existing) {
+      const bool is_peer_name_changed = !STREQ(BKE_id_name(*id_other), name);
       BLI_strncpy(id_other->name + 2, name, sizeof(id_other->name) - 2);
+      if (is_peer_name_changed) {
+        BKE_id_ui_name_clear(*id_other);
+      }
       id_sort_by_name(&lb, id_other, nullptr);
 
       const bool is_idname_changed = !STREQ(BKE_id_name(id), orig_name);
       IDNewNameResult result = {IDNewNameResult::Action::UNCHANGED_COLLISION, id_other};
       if (is_idname_changed) {
         BLI_strncpy(id.name + 2, orig_name, sizeof(id.name) - 2);
+        BKE_id_ui_name_clear(id);
         result.action = IDNewNameResult::Action::RENAMED_COLLISION_FORCED;
       }
       id_sort_by_name(&lb, &id, nullptr);
@@ -2084,6 +2100,7 @@ IDNewNameResult BKE_id_new_name_validate(Main &bmain,
   IDNewNameResult result = {IDNewNameResult::Action::UNCHANGED, nullptr};
   if (is_idname_changed) {
     BLI_strncpy(id.name + 2, name, sizeof(id.name) - 2);
+    BKE_id_ui_name_clear(id);
     result.action = had_name_collision ? IDNewNameResult::Action::RENAMED_COLLISION_ADJUSTED :
                                          IDNewNameResult::Action::RENAMED_NO_COLLISION;
   }
@@ -2714,7 +2731,20 @@ void BKE_id_full_name_ui_prefix_get(char name[MAX_ID_FULL_NAME_UI],
   name[i++] = (id->flag & ID_FLAG_FAKEUSER) ? 'F' : ((id->us == 0) ? '0' : ' ');
   name[i++] = ' ';
 
-  BKE_id_full_name_get(name + i, id, separator_char);
+  /* This UI-only helper must not change full names used as lookup keys. */
+  const StringRefNull display = BKE_id_ui_name_get(*id);
+  const bool is_linked = ID_IS_LINKED(id);
+  if (is_linked) {
+    BLI_snprintf_utf8(name + i,
+                      MAX_ID_FULL_NAME_UI - i,
+                      "%s%c[%s]",
+                      display.c_str(),
+                      separator_char ? separator_char : ' ',
+                      BKE_id_name(id->lib->id));
+  }
+  else {
+    BLI_strncpy_utf8(name + i, display.c_str(), MAX_ID_FULL_NAME_UI - i);
+  }
 
   if (r_prefix_len) {
     *r_prefix_len = i;
